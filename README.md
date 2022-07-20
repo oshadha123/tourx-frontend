@@ -1,5 +1,5 @@
 
-<img src="./images/logo.tourx.png" alt="tourx logo" align="right">
+<img src=".assets/logo.png" alt="tourx logo" align="right">
 
 # TourX
 
