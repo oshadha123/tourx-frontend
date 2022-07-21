@@ -19,7 +19,8 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <>
-    <Appbar.Header style={{backgroundColor:"#C3E0E5"}}>
+    {/* previous color #C3E0E5 */}
+    <Appbar.Header style={{backgroundColor:"#6d1b7b"}}>
       <Appbar.BackAction onPress={_goBack} />
       <Appbar.Content title="Explore the places" />
       <TouchableOpacity onPress={_goProfilePage}>
