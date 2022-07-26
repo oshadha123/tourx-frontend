@@ -9,6 +9,7 @@ import ProfilePage from './src/views/screens/ProfilePage';
 import React from 'react'
 import Logout from './src/views/screens/Logout';
 import Header from './src/components/Header';
+import Drawer from './src/components/Drawer'
 import RegisterScreen from './src/views/screens/RegisterScreen';
 // import SideBar from './src/components/SideBar';
 
@@ -19,27 +20,19 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-    {/* <Stack.Screen name="SideBar" component={SideBar} /> */}
-
-      <Stack.Screen name="OnBoardScreen" component={OnBoardScreen} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="Logout" component={Logout} />
-      <Stack.Screen name="Header" component={Header} />
-
-      <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
-
-      <Stack.Screen name="ProfilePage" component={ProfilePage} />
-      
-
-
-
-
-    </Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown:false} }>
+        <Stack.Screen name="Drawer" component={Drawer}/>
+        <Stack.Screen name="OnBoardScreen" component={OnBoardScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="Logout" component={Logout} />
+        <Stack.Screen name="Header" component={Header} />
+        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="ProfilePage" component={ProfilePage} />
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
 
-export default App
+export default App;

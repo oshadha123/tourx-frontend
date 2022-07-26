@@ -4,8 +4,10 @@ import COLORS from '../../consts/colors';
 import { StatusBar } from 'react-native';
 import { Button } from 'react-native-paper';
 
+
 const OnBoardScreen = ({navigation}) => {
   return (
+    
     <View style={{flex:1}}>
         <StatusBar translucent backgroundColor="rgba(0,0,0,0)"/>
         <ImageBackground
@@ -21,8 +23,6 @@ const OnBoardScreen = ({navigation}) => {
 
                 </View>
         </ImageBackground>
-
-
     </View>
   )
 }
