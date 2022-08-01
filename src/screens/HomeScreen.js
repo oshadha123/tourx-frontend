@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import {
   View,
   Text,
@@ -18,9 +18,11 @@ import {windowWidth} from '../utils/Dimensions';
 import {leaderboard, yourTours, sliderData} from '../model/data';
 import CustomSwitch from '../components/CustomSwitch';
 import ListItem from '../components/ListItem';
+import { AuthContext } from '../context/AuthContext';
 
 export default function HomeScreen({navigation}) {
   const [Tab, setTab] = useState(1);
+  const {userInfo}=useContext(AuthContext);
 
   const renderBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
@@ -40,7 +42,7 @@ export default function HomeScreen({navigation}) {
             marginBottom: 20,
           }}>
           <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
-            Hello Ann Sarah,
+            Hello {userInfo.firstName},
           </Text>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <ImageBackground
