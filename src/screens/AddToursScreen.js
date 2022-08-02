@@ -3,23 +3,25 @@ import {useState} from 'react'
 import { View, Text } from 'react-native'
 import ImageView from "react-native-image-viewing";
 
-const AddToursScreen = () => {
-
-  const onRequestClose = () => setIsVisible(false);
+const AddToursScreen = ({navigation}) => {
+  // const [isVisible, setIsVisible] = useState(false);
+  const [visible,setVisible] = useState(true)
+  const onRequestClose = () => setVisible(false);
  
 
   const images = [
     {
-      uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+      uri: "https://t4.ftcdn.net/jpg/03/58/04/63/360_F_358046307_Tdl06yGjgJJvY4GNKNsPO0XZDwD95cLO.jpg",
     },
     {
-      uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+      uri: "https://l13.alamy.com/360/2J782D3/polonnaruwa-ruins-sri-lanka-2J782D3.jpg",
     },
     {
-      uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
+      uri: "https://thumbs.dreamstime.com/b/beautiful-tropical-waterfall-thaliya-wetuna-ella-falls-virtual-reality-waterfall-tropical-forest-thaliya-wetuna-ella-falls-238260922.jpg",
     },
   ];
-  
+  // const onRequestClose = () => setIsVisible(false);
+ 
   // const [visible, setIsVisible] = useState(false);
   return (
     // <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
@@ -29,10 +31,11 @@ const AddToursScreen = () => {
     <ImageView
         images={images}
         imageIndex={0}
-        visible={true}
+        visible={visible}
         animationType={'slide'}
         doubleTapToZoomEnabled={true}
-        // onRequestClose={() => setIsVisible(false)}
+        
+        onRequestClose={onRequestClose}
         /></View>
   )
 }

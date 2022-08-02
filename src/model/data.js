@@ -3,7 +3,7 @@
 export const yourTours = [
   {
     poster: require('../assets/images/1.jpg'),
-    title: 'Waterfall',
+    title: 'Bomburu Ella Waterfall',
     subtitle: 'sub titles',
     isFree: 'No',
     points: '2500',
