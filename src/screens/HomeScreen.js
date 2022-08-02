@@ -19,6 +19,7 @@ import {leaderboard, yourTours, sliderData} from '../model/data';
 import CustomSwitch from '../components/CustomSwitch';
 import ListItem from '../components/ListItem';
 import { AuthContext } from '../context/AuthContext';
+import ImageSwiper from '../components/ImageSwiper';
 
 export default function HomeScreen({navigation}) {
   const [Tab, setTab] = useState(1);
@@ -84,7 +85,7 @@ export default function HomeScreen({navigation}) {
             {/* <Text style={{color: '#0aada8'}}>See all</Text> */}
           </TouchableOpacity>
         </View>
-        
+        <ImageSwiper/>
         {/* <Carousel
           ref={c => {
             this._carousel = c;
