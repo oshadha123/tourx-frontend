@@ -79,29 +79,20 @@ export default function TouristHomeScreen({navigation}) {
             justifyContent: 'space-between',
           }}>
           <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
-            Check out the Leaderboard....!
+            Explore new places to travel...!
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Moments')}>
             {/* <Text style={{color: '#0aada8'}}>See all</Text> */}
           </TouchableOpacity>
         </View>
         <ImageSwiper/>
-        {/* <Carousel
-          ref={c => {
-            this._carousel = c;
-          }}
-          data={sliderData}
-          renderItem={renderBanner}
-          sliderWidth={windowWidth - 40}
-          itemWidth={300}
-          loop={true}
-        /> */}
+        
 
         <View style={{marginVertical: 20}}>
           <CustomSwitch
             selectionMode={1}
-            option1="Leaderboard"
-            option2="Your Tours"
+            option1="Find Tours"
+            option2="Search Tour Guides"
             onSelectSwitch={onSelectSwitch}
           />
         </View>
@@ -133,7 +124,7 @@ export default function TouristHomeScreen({navigation}) {
               isFree={item.isFree}
               
               onPress={() =>
-                navigation.navigate('VirtualTour', {
+                navigation.navigate('SearchTourGuides', {
                   title: item.title,
                   id: item.id,
                 })

@@ -11,7 +11,7 @@ import AddToursScreen from '../screens/AddToursScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 // import TabNavigator from './TabNavigator';
 import TouristTabNavigator from './TouristTabNavigator';
-
+import MapViewScreen from '../screens/Tourist/MapViewScreen'
 const Drawer = createDrawerNavigator();
 
 const AuthStack = () => {
@@ -49,11 +49,11 @@ const AuthStack = () => {
       />
       
       <Drawer.Screen
-        name="Add Tours"
-        component={AddToursScreen}
+        name="MapView"
+        component={MapViewScreen}
         options={{
           drawerIcon: ({color}) => (
-            <Ionicons name="image" size={22} color={color} />
+            <Ionicons name="map" size={22} color={color} />
           ),
         }}
       />

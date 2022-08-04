@@ -51,8 +51,11 @@ const VirtualTourScreen = ({navigation}) => {
     <Card.Cover source={{ uri: 'https://res.cloudinary.com/fleetnation/image/private/c_fit,w_1120/fl_no_overflow,g_south,l_text:style_gothic2:%C2%A9%20DilRuk,o_20,y_10/fl_no_overflow,g_center,l_watermark4,o_25,y_50/v1589507587/scthhzcjawmtdmnmz73z.jpg' }} />
     <Card.Actions>
     
-  <Button icon="virtual-reality" mode="contained" style={{marginLeft:"28%",marginTop:"20%"}} onPress={() => setVisible(true)}>
+  <Button icon="virtual-reality" mode="contained"  onPress={() => setVisible(true)}>
     VR Photo Tour
+  </Button>
+  <Button icon="map" mode="contained" style={{marginLeft:"13%"}} onPress={() => navigation.navigate('MapView')}>
+    See on the Map
   </Button>
     </Card.Actions>
   </Card>

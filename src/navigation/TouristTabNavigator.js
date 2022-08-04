@@ -12,7 +12,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
 import AddToursScreen from '../screens/AddToursScreen';
 import TouristHomeScreen from '../screens/Tourist/TouristHomeScreen';
-import MapView from '../screens/Tourist/MapView';
+import MapViewScreen from '../screens/Tourist/MapViewScreen';
+import SearchTourGuidesScreen from '../screens/Tourist/SearchTourGuidesScreen';
+import SpeechToTextScreen from '../screens/Tourist/SpeechToTextScreen';
+import CheckWeather from '../screens/Tourist/CheckWeather';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +30,13 @@ const HomeStack = () => {
       <Stack.Screen
         name="VirtualTour"
         component={VirtualTourScreen}
+        options={({route}) => ({
+          title: route.params?.title,
+        })}
+      />
+      <Stack.Screen
+        name="SearchTourGuides"
+        component={SearchTourGuidesScreen}
         options={({route}) => ({
           title: route.params?.title,
         })}
@@ -59,22 +69,23 @@ const TabNavigator = () => {
         })}
       />
       <Tab.Screen
-        name="MapView"
-        component={MapView}
+        name="weather"
+        component={CheckWeather}
         options={{
           // tabBarBadge: 5,
           // tabBarBadgeStyle: {backgroundColor: 'red'},
           tabBarIcon: ({color, size}) => (
-            <Feather name="map" color={color} size={size} />
+            <Feather name="sun" color={color} size={size} />
           ),
         }}
       />
+
       <Tab.Screen
-        name="Leaderboard"
-        component={LeaderboardScreen}
+        name="SpeechToText"
+        component={SpeechToTextScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="trophy" color={color} size={size} />
+            <Ionicons name="mic" color={color} size={size} />
           ),
         }}
       />
