@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+
 
 export default function CustomSwitch({
   selectionMode,
@@ -7,6 +9,8 @@ export default function CustomSwitch({
   option2,
   onSelectSwitch,
 }) {
+const {getLeaderboard}=useContext(AuthContext);
+
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
 
   const updateSwitchData = value => {
@@ -27,7 +31,7 @@ export default function CustomSwitch({
       }}>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => updateSwitchData(1)}
+        onPress={() => {updateSwitchData(1);getLeaderboard()}}
         style={{
           flex: 1,
           backgroundColor: getSelectionMode == 1 ? '#AD40AF' : '#e4e4e4',
@@ -46,7 +50,7 @@ export default function CustomSwitch({
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => updateSwitchData(2)}
+        onPress={() => {updateSwitchData(2) }}
         style={{
           flex: 1,
           backgroundColor: getSelectionMode == 2 ? '#AD40AF' : '#e4e4e4',

@@ -17,6 +17,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const CustomDrawer = props => {
   const {logout}=useContext(AuthContext);
+  const {userInfo}=useContext(AuthContext);
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -26,7 +27,7 @@ const CustomDrawer = props => {
           source={require('../assets/images/menu-bg.jpeg')}
           style={{padding: 20}}>
           <Image
-            source={require('../assets/images/user-profile.jpg')}
+            source={{uri:userInfo.profile}}
             style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
           />
           <Text
@@ -36,7 +37,7 @@ const CustomDrawer = props => {
               fontFamily: 'Roboto-Medium',
               marginBottom: 5,
             }}>
-            Ann Sarah
+            {userInfo.firstName}
           </Text>
           <View style={{flexDirection: 'row'}}>
             <Text

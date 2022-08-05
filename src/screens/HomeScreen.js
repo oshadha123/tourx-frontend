@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext,useEffect} from 'react';
 import {
   View,
   Text,
@@ -21,16 +21,25 @@ import ListItem from '../components/ListItem';
 import { AuthContext } from '../context/AuthContext';
 import ImageSwiper from '../components/ImageSwiper';
 
+// import { TourGuideHomeScreenContext } from '../context/TourGuide/TourGuideHomeScreenContext';
+
 export default function HomeScreen({navigation}) {
   const [Tab, setTab] = useState(1);
   const {userInfo}=useContext(AuthContext);
+  const {getLeaderboard}=useContext(AuthContext);
+  const {leaderboardInfo}=useContext(AuthContext);
 
   const renderBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
   };
 
+
   const onSelectSwitch = value => {
     setTab(value);
+    
+
+    // console.log(leaderboardInfo)
+
   };
 
   return (
@@ -47,7 +56,7 @@ export default function HomeScreen({navigation}) {
           </Text>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <ImageBackground
-              source={require('../assets/images/user-profile.jpg')}
+              source={{uri:userInfo.profile}}
               style={{width: 35, height: 35}}
               imageStyle={{borderRadius: 25}}
             />
@@ -106,23 +115,27 @@ export default function HomeScreen({navigation}) {
           />
         </View>
 
-        {Tab == 1 &&
-          leaderboard.map(item => (
+        {
+        
+        Tab == 1 &&
+          leaderboardInfo.map(item => (
             <ListItem
-              key={item.id}
-              photo={item.poster}
-              title={item.title}
-              subTitle={item.subtitle}
-              isFree={item.isFree}
+              key={item.userId}
+              photo={{uri:item.profilePicture}}
+              firstName={item.firstName}
+              lastName={item.lastName}
               points={item.points}
-              onPress={() =>
-                navigation.navigate('VirtualTour', {
-                  title: item.title,
-                  id: item.id,
-                })
-              }
+              // onPress={() =>
+              //   navigation.navigate('VirtualTour', {
+              //     title: item.title,
+              //     id: item.id,
+              //   })
+              // }
             />
-          ))}
+          ))
+          
+          
+          }
         {Tab == 2 &&
           yourTours.map(item => (
             <ListItem

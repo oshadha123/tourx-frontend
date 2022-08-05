@@ -72,13 +72,64 @@ export const AuthProvider = ({children})=>{
 
     }
 
-    useEffect(()=>{
+  
+
+//Tour Guides Auth context functions
+
+const [leaderboardInfo,setleaderboardInfo] = useState(null);
+const tokenConfig = {
+    
+    headers: {
+       Authorization: "Bearer " + userToken
+    }
+ }
+const getLeaderboard = () =>{
+      
+
+    setIsLoading(true);
+    axios.get(`${BASE_URL}/leaderboard`,tokenConfig)
+    .then(res=>{
+        // console.log(res.data);
+        let leaderboardInfo = res.data.data;
+        console.log(leaderboardInfo);
+        
+        setleaderboardInfo(leaderboardInfo);
+        // setUserToken(leaderboardInfo.token)
+        AsyncStorage.setItem('leaderboardInfo',JSON.stringify(leaderboardInfo));
+
+        // AsyncStorage.setItem('userToken',leaderboardInfo.token);
+        // console.log('User info'+leaderboardInfo.token)
+    })
+    .catch(e=>{
+        console.log(`Logging error ${e}`)
+    })
+    // setUserToken('sshydggf');
+    // AsyncStorage.setItem('userToken','sshydggf');
+   
+    setIsLoading(false);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  useEffect(()=>{
         isLoggedIn()
+        
 
     },[])
+
     return(
     
-     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo}}>
+     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo}}>
 
     {children}
 
