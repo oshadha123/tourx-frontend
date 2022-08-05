@@ -64,7 +64,7 @@ const TabNavigator = () => {
           // tabBarBadge: 5,
           // tabBarBadgeStyle: {backgroundColor: 'red'},
           tabBarIcon: ({color, size}) => (
-            <Feather name="image" color={color} size={size} />
+            <Feather name="plus-circle" color={color} size={size} />
           ),
         }}
       />
@@ -73,7 +73,7 @@ const TabNavigator = () => {
         component={LeaderboardScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="trophy" color={color} size={size} />
+            <Ionicons name="image" color={color} size={size} />
           ),
         }}
       />

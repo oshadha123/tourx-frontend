@@ -24,7 +24,7 @@ const CustomDrawer = props => {
         {...props}
         contentContainerStyle={{backgroundColor: '#8200d6'}}>
         <ImageBackground
-          source={require('../assets/images/menu-bg.jpeg')}
+          source={{uri:"https://freerangestock.com/sample/140410/abstract-geometric-background--cold-colors.jpg"}}
           style={{padding: 20}}>
           <Image
             source={{uri:userInfo.profile}}
@@ -32,7 +32,7 @@ const CustomDrawer = props => {
           />
           <Text
             style={{
-              color: '#fff',
+              color: '#000000',
               fontSize: 18,
               fontFamily: 'Roboto-Medium',
               marginBottom: 5,
@@ -42,13 +42,13 @@ const CustomDrawer = props => {
           <View style={{flexDirection: 'row'}}>
             <Text
               style={{
-                color: '#fff',
+                color: '#000000',
                 fontFamily: 'Roboto-Regular',
                 marginRight: 5,
               }}>
-              4800 points
+              4500 points
             </Text>
-            <FontAwesome5 name="heart" size={14} color="#fff" />
+            <FontAwesome5 name="heart" size={20} color="red" />
           </View>
         </ImageBackground>
         <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 10}}>

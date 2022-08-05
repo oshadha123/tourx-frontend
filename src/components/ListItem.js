@@ -49,7 +49,7 @@ export default function ListItem({photo, firstName, subTitle, isFree, points, on
           fontFamily: 'Roboto-Medium',
           fontSize: 14,
         }}>
-          {points}
+          {points} {"pts"}
           {isFree == 'No' && 'View'}
         </Text>
       </TouchableOpacity>

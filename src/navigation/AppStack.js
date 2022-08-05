@@ -47,15 +47,7 @@ const AuthStack = () => {
           ),
         }}
       />
-      <Drawer.Screen
-        name="Leaderboard"
-        component={LeaderboardScreen}
-        options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="trophy" size={22} color={color} />
-          ),
-        }}
-      />
+      
       <Drawer.Screen
         name="Add Tours"
         component={AddToursScreen}
