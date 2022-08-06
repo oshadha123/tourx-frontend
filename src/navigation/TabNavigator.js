@@ -73,7 +73,7 @@ const TabNavigator = () => {
         component={LeaderboardScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="image" color={color} size={size} />
+            <Ionicons name="map" color={color} size={size} />
           ),
         }}
       />
