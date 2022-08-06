@@ -20,6 +20,7 @@ import CustomSwitch from '../components/CustomSwitch';
 import ListItem from '../components/ListItem';
 import { AuthContext } from '../context/AuthContext';
 import ImageSwiper from '../components/ImageSwiper';
+import ListItem2 from '../components/ListItem2';
 
 // import { TourGuideHomeScreenContext } from '../context/TourGuide/TourGuideHomeScreenContext';
 
@@ -28,6 +29,8 @@ export default function HomeScreen({navigation}) {
   const {userInfo}=useContext(AuthContext);
   const {getLeaderboard}=useContext(AuthContext);
   const {leaderboardInfo}=useContext(AuthContext);
+  const {yourToursInfo}=useContext(AuthContext);
+
 
   const renderBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
@@ -116,7 +119,7 @@ export default function HomeScreen({navigation}) {
         </View>
 
         {
-        
+        //leaderboardInfo
         Tab == 1 &&
           leaderboardInfo.map(item => (
             <ListItem
@@ -125,6 +128,7 @@ export default function HomeScreen({navigation}) {
               firstName={item.firstName}
               lastName={item.lastName}
               points={item.points}
+              isFree={'Yes'}
               // onPress={() =>
               //   navigation.navigate('VirtualTour', {
               //     title: item.title,
@@ -135,15 +139,16 @@ export default function HomeScreen({navigation}) {
           ))
           
           
+          
           }
         {Tab == 2 &&
-          yourTours.map(item => (
-            <ListItem
-              key={item.id}
-              photo={item.poster}
-              title={item.title}
-              subTitle={item.subtitle}
-              isFree={item.isFree}
+          yourToursInfo.map(item => (
+            <ListItem2
+              key={item.tourGuideId}
+              photo={{uri:"https://api.travelql.com/images/0aeda8f4-358a-49eb-919a-5790a03ce5d0.webp"}}
+              title={item.attractionName}
+              subTitle={item.attarctionName}
+              isFree={'No'}
               
               onPress={() =>
                 navigation.navigate('VirtualTour', {

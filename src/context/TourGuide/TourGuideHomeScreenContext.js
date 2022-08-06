@@ -1,77 +1,77 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
-import React, { createContext,useState,useEffect } from "react";
-import { BASE_URL } from "../../config";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import axios from "axios";
+// import React, { createContext,useState,useEffect } from "react";
+// import { BASE_URL } from "../../config";
 
-export const TourGuideHomeScreenContext = createContext();
+// export const TourGuideHomeScreenContext = createContext();
 
-export const AuthProvider = ({children})=>{
-    const [isLoading,setIsLoading] = useState(false);
+// export const AuthProvider = ({children})=>{
+//     const [isLoading,setIsLoading] = useState(false);
 
-    // const [userToken,setUserToken] = useState(null);
-    const [leaderboardInfo,setleaderboardInfo] = useState(null);
+//     // const [userToken,setUserToken] = useState(null);
+//     const [leaderboardInfo,setleaderboardInfo] = useState(null);
 
 
-    const getLeaderboard = () =>{
+//     const getLeaderboard = () =>{
       
 
-        setIsLoading(true);
-        axios.get(`${BASE_URL}/leaderboard`)
-        .then(res=>{
-            console.log(res.data);
-            let leaderboardInfo = res.data;
+//         setIsLoading(true);
+//         axios.get(`${BASE_URL}/leaderboard`)
+//         .then(res=>{
+//             console.log(res.data);
+//             let leaderboardInfo = res.data;
             
-            setleaderboardInfo(leaderboardInfo);
-            // setUserToken(leaderboardInfo.token)
-            AsyncStorage.setItem('leaderboardInfo',JSON.stringify(leaderboardInfo));
+//             setleaderboardInfo(leaderboardInfo);
+//             // setUserToken(leaderboardInfo.token)
+//             AsyncStorage.setItem('leaderboardInfo',JSON.stringify(leaderboardInfo));
 
-            // AsyncStorage.setItem('userToken',leaderboardInfo.token);
-            // console.log('User info'+leaderboardInfo.token)
-        })
-        .catch(e=>{
-            console.log(`Logging error ${e}`)
-        })
-        // setUserToken('sshydggf');
-        // AsyncStorage.setItem('userToken','sshydggf');
+//             // AsyncStorage.setItem('userToken',leaderboardInfo.token);
+//             // console.log('User info'+leaderboardInfo.token)
+//         })
+//         .catch(e=>{
+//             console.log(`Logging error ${e}`)
+//         })
+//         // setUserToken('sshydggf');
+//         // AsyncStorage.setItem('userToken','sshydggf');
        
-        setIsLoading(false);
-    }
+//         setIsLoading(false);
+//     }
 
     
-    const isleaderboard = async() =>{
-        try{
-            setIsLoading(true);
-        let leaderboardInfo = await AsyncStorage.getItem('leaderboardInfo');
+//     const isleaderboard = async() =>{
+//         try{
+//             setIsLoading(true);
+//         let leaderboardInfo = await AsyncStorage.getItem('leaderboardInfo');
 
-        // let userToken = await AsyncStorage.getItem('userToken');
-        leaderboardInfo = JSON.parse(leaderboardInfo);
-        if(leaderboardInfo){
-            // setUserToken(userToken);
-            setleaderboardInfo(leaderboardInfo);
+//         // let userToken = await AsyncStorage.getItem('userToken');
+//         leaderboardInfo = JSON.parse(leaderboardInfo);
+//         if(leaderboardInfo){
+//             // setUserToken(userToken);
+//             setleaderboardInfo(leaderboardInfo);
             
-        }
+//         }
        
-        setIsLoading(false);
-        }catch(e){
-          console.log(`isLogged in error ${e}`);
-        }
+//         setIsLoading(false);
+//         }catch(e){
+//           console.log(`isLogged in error ${e}`);
+//         }
 
-    }
+//     }
     
 
-    useEffect(()=>{
-        isleaderboard()
+//     useEffect(()=>{
+//         isleaderboard()
 
-    },[])
-    return(
+//     },[])
+//     return(
     
-     <AuthContext.Provider value={{getLeaderboard,isLoading,leaderboardInfo}}>
+//      <AuthContext.Provider value={{getLeaderboard,isLoading,leaderboardInfo}}>
 
-    {children}
+//     {children}
 
-     </AuthContext.Provider>
+//      </AuthContext.Provider>
 
 
 
-    );
-}
+//     );
+// }

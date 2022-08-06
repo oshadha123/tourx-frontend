@@ -1,8 +1,11 @@
-import React from 'react';
+import React,{useContext}from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import { windowWidth } from '../utils/Dimensions';
+import { AuthContext } from '../context/AuthContext';
 
-export default function ListItem({photo, firstName, subTitle, isFree, points, onPress,lastName,attractionName}) {
+export default function ListItem2({photo, firstName, subTitle, isFree, points, onPress,lastName,attractionName,title}) {
+const {userInfo}=useContext(AuthContext);
+
   return (
     <View style={{
       flexDirection:'row',
@@ -22,7 +25,7 @@ export default function ListItem({photo, firstName, subTitle, isFree, points, on
               fontFamily: 'Roboto-Medium',
               fontSize: 14,
             }}>
-            {subTitle}
+            {title}
           </Text>
           <Text
             numberOfLines={1}
@@ -30,10 +33,10 @@ export default function ListItem({photo, firstName, subTitle, isFree, points, on
               color: '#333',
               fontFamily: 'Roboto-Medium',
               fontSize: 14,
-              textTransform: 'uppercase',
+              textTransform: 'lowercase',
             }}>
-            {firstName} {lastName}
             
+            {"Tour created by "}{userInfo.firstName}
           </Text>
         </View>
       </View>
@@ -50,7 +53,7 @@ export default function ListItem({photo, firstName, subTitle, isFree, points, on
           fontFamily: 'Roboto-Medium',
           fontSize: 14,
         }}>
-          {points} {'pts'}
+          
           {isFree == 'No' && 'View'}
         </Text>
       </TouchableOpacity>

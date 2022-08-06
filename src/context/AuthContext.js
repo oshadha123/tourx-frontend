@@ -10,7 +10,7 @@ export const AuthProvider = ({children})=>{
 
     const [userToken,setUserToken] = useState(null);
     const [userInfo,setUserInfo] = useState(null);
-
+    const [userId,setUserId]=useState(null);
 
     const login = (email,password) =>{
         console.log(email)
@@ -28,6 +28,7 @@ export const AuthProvider = ({children})=>{
             let userInfo = res.data;
             
             setUserInfo(userInfo);
+            setUserId(userInfo.userId);
             setUserToken(userInfo.token)
             AsyncStorage.setItem('userInfo',JSON.stringify(userInfo));
 
@@ -109,6 +110,41 @@ const getLeaderboard = () =>{
     setIsLoading(false);
 }
 
+// let userId=userInfo.userId;
+const [yourToursInfo,setyourToursInfo]=useState(null);
+const getYourTours = () =>{
+   let userId=userInfo.userId;
+console.log(userInfo.userId)
+    setIsLoading(true);
+    
+    axios.post(`${BASE_URL}/yourtours`,{
+      
+        
+     userId
+
+    })
+    .then(res=>{
+        console.log(res.data);
+        let yourToursInfo = res.data.data;
+        console.log(yourToursInfo);
+        setyourToursInfo(yourToursInfo);
+        // setUserToken(yourToursInfo.token)
+        AsyncStorage.setItem('yourToursInfo',JSON.stringify(yourToursInfo));
+
+        // AsyncStorage.setItem('userToken',yourToursInfo.token);
+        // console.log('User info'+yourToursInfo.token)
+    })
+    .catch(e=>{
+        console.log(`Logging error ${e}`)
+    })
+    // setUserToken('sshydggf');
+    // AsyncStorage.setItem('userToken','sshydggf');
+   
+    setIsLoading(false);
+}
+
+
+
 
 
 
@@ -129,7 +165,7 @@ const getLeaderboard = () =>{
 
     return(
     
-     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo}}>
+     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo}}>
 
     {children}
 

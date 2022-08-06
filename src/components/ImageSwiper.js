@@ -58,30 +58,30 @@ export default function ImageSwiper() {
         <View
           style={styles.slide}
           title={
-            <Text numberOfLines={1} style={styles.text}>waterfall__1</Text>
+            <Text numberOfLines={1} style={styles.text}>Bomburu Ella Waterfall</Text>
           }
         >
-          <Image style={styles.image} source={{uri:"https://swall.teahub.io/photos/small/80-807509_high-quality-natural-beauty.jpg"}} />
+          <Image style={styles.image} source={{uri:"https://api.travelql.com/images/0aeda8f4-358a-49eb-919a-5790a03ce5d0.webp"}} />
         </View>
         <View
           style={styles.slide}
-          title={<Text numberOfLines={1} style={styles.text}>waterfall__2</Text>}
+          title={<Text numberOfLines={1} style={styles.text}>Sigiriya</Text>}
         >
-          <Image style={styles.image} source={{uri:"https://i.pinimg.com/originals/b7/f5/7a/b7f57aa715f2ab0f60895c03e482e530.jpg"}} />
+          <Image style={styles.image} source={{uri:"https://www.experiencetravelgroup.com/reposit/20160330103043.jpg"}} />
         </View>
         <View
           style={styles.slide}
-          title={<Text numberOfLines={1} style={styles.text}>road__1</Text>}
+          title={<Text numberOfLines={1} style={styles.text}>Galle Fort</Text>}
         >
-          <Image style={styles.image} source={{uri:"https://i.pinimg.com/originals/49/73/5b/49735b38c27ca67787e201a8f4b0fd6d.jpg"}} />
+          <Image style={styles.image} source={{uri:"https://static.saltinourhair.com/wp-content/uploads/2016/11/23154307/galle-dutch-fort-sri-lanka-header.jpg"}} />
         </View>
         <View
           style={styles.slide}
           title={
-            <Text numberOfLines={1} style={styles.text}>river__1</Text>
+            <Text numberOfLines={1} style={styles.text}>Ella</Text>
           }
         >
-          <Image style={styles.image} source={{uri:"https://wallpaperaccess.com/full/31193.jpg"}} />
+          <Image style={styles.image} source={{uri:"https://destinationlesstravel.com/wp-content/uploads/2020/04/Ella-train.jpg"}} />
         </View>
       </Swiper>
     );

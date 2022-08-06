@@ -10,6 +10,7 @@ export default function CustomSwitch({
   onSelectSwitch,
 }) {
 const {getLeaderboard}=useContext(AuthContext);
+const {getYourTours}=useContext(AuthContext);
 
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
 
@@ -50,7 +51,7 @@ const {getLeaderboard}=useContext(AuthContext);
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => {updateSwitchData(2) }}
+        onPress={() => {updateSwitchData(2);getYourTours() }}
         style={{
           flex: 1,
           backgroundColor: getSelectionMode == 2 ? '#9A52C7' : '#e4e4e4',
