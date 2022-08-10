@@ -19,7 +19,7 @@ const EditProfile = () => {
       }).then(image => {
         console.log(image);
         setImage(image.path);
-        this.bs.current.snapTo(1);
+        bs.current.snapTo(1);
       });
     }
   
@@ -32,7 +32,7 @@ const EditProfile = () => {
       }).then(image => {
         console.log(image);
         setImage(image.path);
-        this.bs.current.snapTo(1);
+        bs.current.snapTo(1);
       });
     }
   
@@ -50,7 +50,7 @@ const EditProfile = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.panelButton}
-          onPress={() => this.bs.current.snapTo(1)}>
+          onPress={() => bs.current.snapTo(1)}>
           <Text style={styles.panelButtonTitle}>Cancel</Text>
         </TouchableOpacity>
       </View>
@@ -70,19 +70,19 @@ const EditProfile = () => {
     return (
       <View style={styles.container}>
         <BottomSheet
-          ref={this.bs}
+          ref={bs}
           snapPoints={[330, 0]}
-          renderContent={this.renderInner}
-          renderHeader={this.renderHeader}
+          renderContent={renderInner}
+          renderHeader={renderHeader}
           initialSnap={1}
-          callbackNode={this.fall}
+          callbackNode={fall}
           enabledGestureInteraction={true}
         />
         <Animated.View style={{margin: 20,
-          opacity: Animated.add(0.1, Animated.multiply(this.fall, 1.0)),
+          opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
       }}>
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
+            <TouchableOpacity onPress={() => bs.current.snapTo(0)}>
               <View
                 style={{
                   marginTop: 50,

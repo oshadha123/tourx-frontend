@@ -4,17 +4,31 @@ import MapView,{Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 // const GOOGLE_API_KEY = 'AIzaSyBWzrDQpNPhMLPdSi6DLijIqYOSiAk8S4M'
 const GOOGLE_API_KEY = 'AIzaSyB3KwXlc9rPfWHXn-c88rWz3xrQSkry3rI'
+import Geolocation from '@react-native-community/geolocation';
+
+let current_latitude=null;
+let current_longitude=null;
+Geolocation.getCurrentPosition(info =>{
+  console.log(info.coords.latitude)
+  
+  current_latitude=info.coords.latitude;
+  current_longitude=info.coords.longitude;
+  
+});
 
 
-const App = () => {
+// const lat=5.954920;
+const App = ({route}) => {
+  const [info,setInfo]=useState([])
+  const {title,id,path,description,city,latitude,longitude}=route.params;
   const [coordinates] = useState([
     {
-      latitude: 5.954920,
-      longitude: 80.554955,
+      latitude:  current_latitude,
+      longitude: current_longitude,
     },
     {
-      latitude: 6.927079,
-      longitude: 79.861244,
+      latitude: latitude,
+      longitude: longitude,
     },
   ]);
   return (

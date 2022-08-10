@@ -11,15 +11,19 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.7",
+    "@react-native-community/geolocation": "^2.1.0",
+    "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/drawer": "^6.4.3",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
+    "@react-navigation/stack": "^6.2.2",
     "axios": "^0.27.2",
     "react": "18.0.0",
     "react-native": "0.69.3",
     "react-native-date-picker": "^4.2.5",
     "react-native-gesture-handler": "^2.5.0",
+    "react-native-image-crop-picker": "^0.38.0",
     "react-native-image-viewing": "^0.2.2",
     "react-native-maps": "^1.1.0",
     "react-native-maps-directions": "^1.9.0",
@@ -31,11 +35,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^9.2.0",
-    "@react-native-community/masked-view": "^0.1.11",
-    "@react-navigation/stack": "^6.2.2",
-    "react-native-image-crop-picker": "^0.38.0",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22"
-
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

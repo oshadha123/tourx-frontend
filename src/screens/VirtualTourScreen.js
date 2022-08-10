@@ -5,8 +5,8 @@ import ImageView from "react-native-image-viewing";
 import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
 import { Avatar, Button, Card, Title, Paragraph,IconButton} from 'react-native-paper';
-const VirtualTourScreen = ({navigation}) => {
-  
+const VirtualTourScreen = ({route,navigation}) => {
+  const {title,id,path,description,city,latitude,longitude}=route.params;
   const [visible,setVisible] = useState(false)
   const onRequestClose = () => setVisible(false);
  
@@ -43,18 +43,21 @@ const VirtualTourScreen = ({navigation}) => {
         onRequestClose={onRequestClose}
         />
       <Card style={{height:"100%"}}>
-    <Card.Title title="Bomburu Ella waterfall" subtitle="Nuwara Eliya" left={LeftContent} />
+    <Card.Title title={title} subtitle={city} left={LeftContent} />
     <Card.Content>
       {/* <Title>Bomburu Ella waterfall</Title> */}
-      <Paragraph>Bomburu Ella, also known as Perawella Falls, is a waterfall at Uva-Paranagama Divisional Secretariat of Sri Lanka. It is located near the border of Nuwara Eliya and Badulla districts, approximately 15 km from Welimada town. Bomburu Ella is the widest waterfall in Sri Lanka and consists of several small waterfalls grouped together. The source of the falls is a lake located in the central highlands of Sri Lanka.</Paragraph>
+      <Paragraph>{description}</Paragraph>
     </Card.Content>
-    <Card.Cover source={{ uri: 'https://res.cloudinary.com/fleetnation/image/private/c_fit,w_1120/fl_no_overflow,g_south,l_text:style_gothic2:%C2%A9%20DilRuk,o_20,y_10/fl_no_overflow,g_center,l_watermark4,o_25,y_50/v1589507587/scthhzcjawmtdmnmz73z.jpg' }} />
+    <Card.Cover source={{ uri: path }} />
     <Card.Actions>
     
   <Button icon="virtual-reality" mode="contained"  onPress={() => setVisible(true)}>
     VR Photo Tour
   </Button>
-  <Button icon="map" mode="contained" style={{marginLeft:"13%"}} onPress={() => navigation.navigate('MapView')}>
+  <Button icon="map" mode="contained" style={{marginLeft:"13%"}} onPress={() => navigation.navigate('MapView',{
+    latitude:latitude,
+    longitude:longitude,
+  })}>
     See on the Map
   </Button>
     </Card.Actions>

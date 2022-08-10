@@ -11,7 +11,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
 import AddToursScreen from '../screens/AddToursScreen';
-
+import EditProfile from '../screens/EditProfile';
+import MapViewScreen from '../screens/Tourist/MapViewScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +31,18 @@ const HomeStack = () => {
           title: route.params?.title,
         })}
       />
+       <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MapView"
+        component={MapViewScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
+    
   );
 };
 
