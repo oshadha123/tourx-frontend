@@ -7,10 +7,11 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 // import Carousel from 'react-native-snap-carousel';
 import Feather from 'react-native-vector-icons/Feather';
-
+// import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader';
 
 import BannerSlider from '../components/BannerSlider';
 import {windowWidth} from '../utils/Dimensions';
@@ -21,16 +22,18 @@ import ListItem from '../components/ListItem';
 import { AuthContext } from '../context/AuthContext';
 import ImageSwiper from '../components/ImageSwiper';
 import ListItem2 from '../components/ListItem2';
-
+// import { CirclesLoader, PulseLoader, TextLoader, DotsLoader,BubblesLoader} from 'react-native-indicator';
 // import { TourGuideHomeScreenContext } from '../context/TourGuide/TourGuideHomeScreenContext';
 
 export default function HomeScreen({navigation}) {
   const [Tab, setTab] = useState(1);
   const {userInfo}=useContext(AuthContext);
   const {getLeaderboard}=useContext(AuthContext);
+  const {getYourTours}=useContext(AuthContext);
+
   const {leaderboardInfo}=useContext(AuthContext);
   const {yourToursInfo}=useContext(AuthContext);
-
+  // const [isLoading,setIsLoading]=useState(false);
 
   const renderBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
@@ -44,6 +47,28 @@ export default function HomeScreen({navigation}) {
     // console.log(leaderboardInfo)
 
   };
+
+  useEffect(()=>{
+    
+    getLeaderboard()
+    getYourTours()
+
+},[])
+  
+  if(!leaderboardInfo || !yourToursInfo){
+     
+    return(
+    
+    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+    
+        <ActivityIndicator size='large' color="#0000ff"/>
+        {/* <Bars size={10} color="#FDAAFF" /> */}
+    
+           
+    </View>
+    );
+
+}
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
@@ -144,8 +169,8 @@ export default function HomeScreen({navigation}) {
         {Tab == 2 &&
           yourToursInfo.map(item => (
             <ListItem2
-              key={item.tourGuideId}
-              photo={{uri:"https://api.travelql.com/images/0aeda8f4-358a-49eb-919a-5790a03ce5d0.webp"}}
+              key={item.attractionId}
+              photo={{uri:item.path}}
               title={item.attractionName}
               subTitle={item.attarctionName}
               isFree={'No'}

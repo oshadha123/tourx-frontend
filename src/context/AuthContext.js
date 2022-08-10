@@ -146,6 +146,10 @@ console.log(userInfo.userId)
 
 
 
+//Tourist Auth context functions
+
+
+
 
 
 
