@@ -30,7 +30,12 @@
     "react-native-svg": "^12.4.3",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-swiper": "^1.6.0",
-    "react-native-vector-icons": "^9.2.0"
+    "react-native-vector-icons": "^9.2.0",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/stack": "^6.2.2",
+    "react-native-image-crop-picker": "^0.38.0",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
