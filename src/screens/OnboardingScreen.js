@@ -1,17 +1,20 @@
 import React from 'react'
-import { SafeAreaView, View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, ImageBackground } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Gaming from '../assets/images/misc/travel.svg';
 
 const OnboardingScreen = ({navigation}) => {
   return (
+    <ImageBackground source={{uri:"https://img.freepik.com/free-vector/abstract-blue-geometric-shapes-background_1035-17545.jpg?w=2000"}}
+    style={{flex:1}}
+    >
     <SafeAreaView
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#aebaf8',
+        // backgroundColor: '#aebaf8',
       }}>
       <View style={{marginTop: 20}}>
         <Text
@@ -55,6 +58,7 @@ const OnboardingScreen = ({navigation}) => {
         <MaterialIcons name="arrow-forward-ios" size={22} color="#fff" />
       </TouchableOpacity>
     </SafeAreaView>
+    </ImageBackground>
   );
 };
 
