@@ -47,7 +47,7 @@ export default function TouristHomeScreen({navigation}) {
           </Text>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <ImageBackground
-              source={require('../../assets/images/user-profile.jpg')}
+              source={{uri:userInfo.profilePicture}}
               style={{width: 35, height: 35}}
               imageStyle={{borderRadius: 25}}
             />

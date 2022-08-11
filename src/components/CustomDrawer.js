@@ -46,7 +46,7 @@ const CustomDrawer = props => {
                 fontFamily: 'Roboto-Regular',
                 marginRight: 5,
               }}>
-              4500 points
+              {userInfo.points}
             </Text>
             <FontAwesome5 name="heart" size={20} color="red" />
           </View>

@@ -182,8 +182,8 @@ export default function HomeScreen({navigation}) {
                   path:item.path,
                   latitude:item.latitude,
                   longitude:item.longitude,
-                  description: "Bomburu Ella, also known as Perawella Falls, is a waterfall at Uva-Paranagama Divisional Secretariat of Sri Lanka. It is located near the border of Nuwara Eliya and Badulla districts, approximately 15 km from Welimada town. Bomburu Ella is the widest waterfall in Sri Lanka and consists of several small waterfalls grouped together. The source of the falls is a lake located in the central highlands of Sri Lanka.",
-                  city:"Nuwara Eliya",
+                  description: item.description,
+                  city:item.villageName,
                 })
               }
             />

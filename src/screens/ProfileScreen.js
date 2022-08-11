@@ -1,12 +1,14 @@
- import React from 'react';
+ import React,{useContext} from 'react';
  import {View, StyleSheet, Text, Image, Dimensions, TouchableOpacity} from 'react-native';
  import Animated from 'react-native-reanimated';
  import BottomSheet from 'reanimated-bottom-sheet';
  import ImagePicker from 'react-native-image-crop-picker';
  import FontAwesome from 'react-native-vector-icons/FontAwesome';
- 
+ import { AuthContext } from '../context/AuthContext';
+
  const ProfileScreen = ({navigation}) => {
- 
+ const {userInfo}=useContext(AuthContext);
+  
    bs = React.createRef();
    fall = new Animated.Value(1);
  
@@ -18,7 +20,7 @@
        compressImageQuality: 0.7
      }).then(image => {
        console.log(image);
-       this.bs.current.snapTo(1);
+       bs.current.snapTo(1);
      });
    }
  
@@ -30,7 +32,7 @@
        compressImageQuality: 0.7
      }).then(image => {
        console.log(image);
-       this.bs.current.snapTo(1);
+       bs.current.snapTo(1);
      });
    }
  
@@ -47,7 +49,7 @@
        <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
          <Text style={styles.panelButtonTitle}>Choose from files</Text>
        </TouchableOpacity>
-       <TouchableOpacity style={styles.panelButton} onPress={() => this.bs.current.snapTo(1)}>
+       <TouchableOpacity style={styles.panelButton} onPress={() => bs.current.snapTo(1)}>
          <Text style={styles.panelButtonTitle}>Cancel</Text>
        </TouchableOpacity>
      </View>
@@ -65,24 +67,24 @@
    return (
      <View style={styles.screen}>
        <BottomSheet
-         ref={this.bs}
+         ref={bs}
          snapPoints={[330, 0]}
-         renderContent={this.renderInner}
-         renderHeader={this.renderHeader}
+         renderContent={renderInner}
+         renderHeader={renderHeader}
          initialSnap={1}
-         callbackNode={this.fall}
+         callbackNode={fall}
          enabledGestureInteraction={true}
        />
-       <Animated.View style={{opacity: Animated.add(0.1, Animated.multiply(this.fall, 1.0))}}>
-         <Image source={{uri: 'https://res.cloudinary.com/tourx/image/upload/v1659638143/DSC00001_kmpizx.jpg'}}
+       <Animated.View style={{opacity: Animated.add(0.1, Animated.multiply(fall, 1.0))}}>
+         <Image source={{uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png'}}
          style={styles.header} resizeMode='cover'
          />
          <View style={styles.meInfor}></View>
-         <Image source={{uri: 'https://res.cloudinary.com/tourx/image/upload/v1659729302/m_k23t6c.png'}}
+         <Image source={{uri: userInfo.profilePicture}}
          style={styles.avatar} resizeMode='cover'
          />
          <View>
-             <Text style={styles.headerText}>Oshadha Marasinghe</Text>
+             <Text style={styles.headerText}>{userInfo.firstName} {userInfo.lastName}</Text>
          </View>
          <View>
            <Text style={styles.bio}>An enthusiastic guide who will take you to your dream destination.</Text>
@@ -90,18 +92,18 @@
          <View style={{alignItems: 'center', marginTop: 10}}>
           <View style={styles.container}>
               <FontAwesome name="phone" color='black' size={16} />
-              <Text style={styles.textStyle}>071 7854874</Text>
+              <Text style={styles.textStyle}>{userInfo.contact}</Text>
           </View>
           <View style={styles.container}>
               <FontAwesome name="star" color='black' size={16} />
-              <Text style={styles.textStyle}>750 Points</Text>
+              <Text style={styles.textStyle}>{userInfo.points}</Text>
           </View>
          </View>
          <View style={styles.buttonBack}>
             <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate("EditProfile")}>
                 <Text style={styles.panelButtonTitle}>Edit Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.panelButton} onPress={() => this.bs.current.snapTo(0)}>
+            <TouchableOpacity style={styles.panelButton} onPress={() => bs.current.snapTo(0)}>
                 <Text style={styles.panelButtonTitle}>Upload Photos</Text>
             </TouchableOpacity>
          </View>
