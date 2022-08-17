@@ -74,7 +74,7 @@ const LoginScreen = ({navigation}) => {
           }
           inputType="password"
           fieldButtonLabel={"Forgot?"}
-          fieldButtonFunction={() => {}}
+          fieldButtonFunction={() => navigation.navigate('ForgetPassword')}
           value={password}
           onChangeText={text => setPassword(text)}
         />
