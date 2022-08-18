@@ -2,6 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext,useState,useEffect } from "react";
 import { BASE_URL } from "../config";
+import { Modal, ModalFooter, ModalButton, ModalContent } from 'react-native-modals';
+
+import ShowToast from "../components/ShowToast";
 
 export const AuthContext = createContext();
 
@@ -11,12 +14,16 @@ export const AuthProvider = ({children})=>{
     const [userToken,setUserToken] = useState(null);
     const [userInfo,setUserInfo] = useState(null);
     const [userId,setUserId]=useState(null);
-
+    const [error,setError]=useState(0);
+    const [success,setSuccess]=useState(0);
+    const [comp,setComp]=useState('');
+    //Login page
     const login = (email,password) =>{
         console.log(email)
         console.log(password)
 
         setIsLoading(true);
+        
         axios.post(`${BASE_URL}/login`,{
             
          email,
@@ -27,13 +34,63 @@ export const AuthProvider = ({children})=>{
             console.log(res.data);
             let userInfo = res.data;
             
+            
+            setSuccess(userInfo.success);
+            if(res.data.success==1){
             setUserInfo(userInfo);
             setUserId(userInfo.userId);
-            setUserToken(userInfo.token)
+            setUserToken(userInfo.token);
             AsyncStorage.setItem('userInfo',JSON.stringify(userInfo));
 
             AsyncStorage.setItem('userToken',userInfo.token);
+            }else{
+                setError(1);
+                setComp(ShowToast);
+            }
             console.log('User info'+userInfo.token)
+        })
+        .catch(e=>{
+            setError(1);
+            setSuccess(0);
+            console.log(`Logging error ${e}`)
+        })
+        // setUserToken('sshydggf');
+        // AsyncStorage.setItem('userToken','sshydggf');
+       
+        setIsLoading(false);
+    }
+
+    // Register page
+
+    const register = (firstName,lastName,email,password,profilePic,roleId) =>{
+        console.log(firstName)
+        console.log(lastName)
+        console.log(email)
+        console.log(profilePic)
+        console.log(roleId)
+        
+        setIsLoading(true);
+        axios.post(`${BASE_URL}/register`,{
+
+         firstName,
+         lastName,
+         email,
+         password,
+         profilePic,
+         roleId
+
+        })
+        .then(res=>{
+            console.log(res.data);
+            // let userInfo = res.data;
+            
+            // setUserInfo(userInfo);
+            // setUserId(userInfo.userId);
+            // setUserToken(userInfo.token)
+            // AsyncStorage.setItem('userInfo',JSON.stringify(userInfo));
+
+            // AsyncStorage.setItem('userToken',userInfo.token);
+            // console.log('User info'+userInfo.token)
         })
         .catch(e=>{
             console.log(`Logging error ${e}`)
@@ -44,9 +101,40 @@ export const AuthProvider = ({children})=>{
         setIsLoading(false);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const logout=()=>{
         setIsLoading(true);
         setUserToken(null);
+        setSuccess(0);
+        setError(0);
+        setComp('');
         AsyncStorage.removeItem('userInfo');
 
         AsyncStorage.removeItem('userToken');
@@ -57,7 +145,6 @@ export const AuthProvider = ({children})=>{
         try{
             setIsLoading(true);
         let userInfo = await AsyncStorage.getItem('userInfo');
-
         let userToken = await AsyncStorage.getItem('userToken');
         userInfo = JSON.parse(userInfo);
         if(userInfo){
@@ -169,7 +256,7 @@ console.log(userInfo.userId)
 
     return(
     
-     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo}}>
+     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo,register,error,success,comp}}>
 
     {children}
 

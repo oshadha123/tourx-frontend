@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, ImageBackground, StatusBar } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Gaming from '../assets/images/misc/travel.svg';
@@ -9,6 +9,10 @@ const OnboardingScreen = ({navigation}) => {
     <ImageBackground source={{uri:"https://img.freepik.com/free-vector/abstract-blue-geometric-shapes-background_1035-17545.jpg?w=2000"}}
     style={{flex:1}}
     >
+      <StatusBar
+      backgroundColor={"transparent"}
+      translucent={true}
+      />
     <SafeAreaView
       style={{
         flex: 1,

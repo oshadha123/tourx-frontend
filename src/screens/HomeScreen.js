@@ -15,7 +15,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import BannerSlider from '../components/BannerSlider';
 import {windowWidth} from '../utils/Dimensions';
-
+import Toast from 'react-native-toast-message';
 import {leaderboard, yourTours, sliderData} from '../model/data';
 import CustomSwitch from '../components/CustomSwitch';
 import ListItem from '../components/ListItem';
@@ -24,8 +24,15 @@ import ImageSwiper from '../components/ImageSwiper';
 import ListItem2 from '../components/ListItem2';
 // import { CirclesLoader, PulseLoader, TextLoader, DotsLoader,BubblesLoader} from 'react-native-indicator';
 // import { TourGuideHomeScreenContext } from '../context/TourGuide/TourGuideHomeScreenContext';
-
+import { Appbar } from 'react-native-paper';
 export default function HomeScreen({navigation}) {
+  
+  const [viewSearch,setViewSearch]=useState(false);
+  const _handleSearch = () => {
+    if(viewSearch==false){setViewSearch(true)} 
+    else{setViewSearch(false)}
+  };
+
   const [Tab, setTab] = useState(1);
   const {userInfo}=useContext(AuthContext);
   const {getLeaderboard}=useContext(AuthContext);
@@ -47,9 +54,20 @@ export default function HomeScreen({navigation}) {
     // console.log(leaderboardInfo)
 
   };
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      position:'top',
+      visibilityTime:4000,
+      topOffset:10,
+      text1: 'Hello',
+      text2: `Welcome back, ${userInfo.firstName}`,
+    });
+  }
 
   useEffect(()=>{
     
+    showToast()
     getLeaderboard()
     getYourTours()
 
@@ -72,12 +90,20 @@ export default function HomeScreen({navigation}) {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <Appbar.Header style={{backgroundColor:"#9A52C7"}} >
+      {/* <Appbar.BackAction onPress={_goBack} /> */}
+      <Appbar.Content title="Home" />
+      <Appbar.Action icon="magnify" onPress={_handleSearch} />
+      {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
+    </Appbar.Header>
       <ScrollView style={{padding: 20}}>
+        <View style={{zIndex:1}}><Toast/></View>
+      
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: 20,
+            marginBottom: 10,
           }}>
           <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
             Hello {userInfo.firstName},
@@ -90,32 +116,34 @@ export default function HomeScreen({navigation}) {
             />
           </TouchableOpacity>
         </View>
-
-        <View
+        
+        {viewSearch==1?(
+          
+          <View
           style={{
             flexDirection: 'row',
             borderColor: '#C6C6C6',
             borderWidth: 1,
             borderRadius: 8,
             paddingHorizontal: 10,
-            paddingVertical: 8,
+            paddingVertical: 3,
           }}>
-          <Feather
+          {/* <Feather
             name="search"
             size={20}
             color="#C6C6C6"
             style={{marginRight: 5}}
-          />
+          /> */}
           <TextInput placeholder="Search" />
-        </View>
+        </View>):<></>}
 
         <View
           style={{
-            marginVertical: 15,
+            // marginVertical: 1,
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
+          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium',color:"#000",fontStyle:"italic"}}>
             Check out the Leaderboard....!
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Moments')}>

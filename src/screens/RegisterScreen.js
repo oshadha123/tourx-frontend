@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,17 +14,30 @@ import InputField from '../components/InputField';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Button } from 'react-native-paper';
 
 import RegistrationSVG from '../assets/images/misc/registration.svg';
 import GoogleSVG from '../assets/images/misc/google.svg';
 import FacebookSVG from '../assets/images/misc/facebook.svg';
 import TwitterSVG from '../assets/images/misc/twitter.svg';
 import CustomButton from '../components/CustomButton';
+import DropDownList from '../components/DropDownList';
+import { AuthContext } from '../context/AuthContext';
 
 const RegisterScreen = ({navigation}) => {
+  const {register}=useContext(AuthContext);
+
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Date of Birth');
+  const [firstName,setFirstName] = useState(null);
+  const [lastName,setLastName] = useState(null);
+  const [email,setEmail] = useState(null);
+  const [profilePic,setProfilePic] = useState("hjdjjd.jpg");
+
+
+  const [password,setPassword] = useState(null);
+  const [roleId,setRoleId]=useState(2);
 
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
@@ -33,8 +46,8 @@ const RegisterScreen = ({navigation}) => {
         style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
           <RegistrationSVG
-            height={300}
-            width={300}
+            height={150}
+            width={250}
             style={{transform: [{rotate: '-5deg'}]}}
           />
         </View>
@@ -45,7 +58,7 @@ const RegisterScreen = ({navigation}) => {
             fontSize: 28,
             fontWeight: '500',
             color: '#333',
-            marginBottom: 30,
+            marginBottom: 20,
           }}>
           Register
         </Text>
@@ -54,9 +67,12 @@ const RegisterScreen = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: 30,
+            marginBottom: 10,
           }}>
-          <TouchableOpacity
+            <Button style={{paddingHorizontal:50, borderRadius: 10,paddingVertical:10,backgroundColor:"#DB4437"}} icon="google" mode="contained" onPress={() => console.log('Pressed')}>
+                 Continue with Google
+            </Button>
+          {/* <TouchableOpacity
             onPress={() => {}}
             style={{
               borderColor: '#ddd',
@@ -88,15 +104,31 @@ const RegisterScreen = ({navigation}) => {
               paddingVertical: 10,
             }}>
             <TwitterSVG height={24} width={24} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <Text style={{textAlign: 'center', color: '#666', marginBottom: 30}}>
+        <Text style={{textAlign: 'center', color: '#666', marginBottom: 10}}>
           Or, register with email ...
         </Text>
 
         <InputField
-          label={'Full Name'}
+          label={'First Name'}
+          icon={
+            <Ionicons
+              name="person-outline"
+              size={20}
+              color="#666"
+              style={{marginRight: 5}}
+            />
+            
+
+          }
+
+          value={firstName}
+          onChangeText={text => setFirstName(text)}
+        />
+        <InputField
+          label={'Last Name'}
           icon={
             <Ionicons
               name="person-outline"
@@ -105,6 +137,8 @@ const RegisterScreen = ({navigation}) => {
               style={{marginRight: 5}}
             />
           }
+          value={lastName}
+          onChangeText={text => setLastName(text)}
         />
 
         <InputField
@@ -118,6 +152,8 @@ const RegisterScreen = ({navigation}) => {
             />
           }
           keyboardType="email-address"
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
 
         <InputField
@@ -131,6 +167,8 @@ const RegisterScreen = ({navigation}) => {
             />
           }
           inputType="password"
+          value={password}
+          onChangeText={text => setPassword(text)}
         />
 
         <InputField
@@ -145,6 +183,7 @@ const RegisterScreen = ({navigation}) => {
           }
           inputType="password"
         />
+        <DropDownList/>
 
         {/* <View
           style={{
@@ -184,7 +223,7 @@ const RegisterScreen = ({navigation}) => {
           }}
         /> */}
 
-        <CustomButton label={'Register'} onPress={() => {}} />
+        <CustomButton label={'Register'} onPress={() => {register(firstName,lastName,email,password,profilePic,roleId);navigation.navigate('Login')}} />
 
         <View
           style={{

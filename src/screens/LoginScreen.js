@@ -1,37 +1,37 @@
-import React,{useContext, useState} from 'react';
+import React,{useContext, useState,useEffect} from 'react';
 import {
   SafeAreaView,
   View,
   Text,
   TextInput,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import Modal_View from '../components/Modal_View';
 import LoginSVG from '../assets/images/misc/login.svg';
 import GoogleSVG from '../assets/images/misc/google.svg';
 import FacebookSVG from '../assets/images/misc/facebook.svg';
 import TwitterSVG from '../assets/images/misc/twitter.svg';
-
 import CustomButton from '../components/CustomButton';
 import InputField from '../components/InputField';
 import { AuthContext } from '../context/AuthContext';
+import { Button } from 'react-native-paper';
+const LoginScreen = ({navigation},props) => {
 
-const LoginScreen = ({navigation}) => {
   const [email,setEmail] = useState(null);
   const [password,setPassword] = useState(null);
-
-  const {login}=useContext(AuthContext);
-
+  const {login,comp}=useContext(AuthContext);
+ 
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
       <View style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
           <LoginSVG
-            height={300}
-            width={300}
+            height={250}
+            width={250}
             style={{transform: [{rotate: '-5deg'}]}}
           />
         </View>
@@ -80,18 +80,24 @@ const LoginScreen = ({navigation}) => {
         />
         
         <CustomButton label={"Login"} onPress={() => {login(email,password)}} />
-
-        <Text style={{textAlign: 'center', color: '#9A52C7', marginBottom: 30}}>
-          Or, login with ...
+       
+        {comp}
+        <Text style={{textAlign: 'center', color: '#9A52C7', marginBottom: 10}}>
+          OR
         </Text>
 
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
+            alignItems:'center',
             marginBottom: 30,
+    
           }}>
-          <TouchableOpacity
+            <Button style={{paddingHorizontal:50, borderRadius: 10,paddingVertical:10,backgroundColor:"#DB4437"}} icon="google" mode="contained" onPress={() => console.log('Pressed')}>
+                 Continue with Google
+            </Button>
+          {/* <TouchableOpacity
             onPress={() => {}}
             style={{
               borderColor: '#ddd',
@@ -123,7 +129,7 @@ const LoginScreen = ({navigation}) => {
               paddingVertical: 10,
             }}>
             <TwitterSVG height={24} width={24} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <View
