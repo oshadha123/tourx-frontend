@@ -145,7 +145,26 @@ const LoginScreen = ({navigation},props) => {
         <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
         <Text style={{color: '#AD40AF', fontWeight: '700'}}>{"Forgot your password?"}</Text>
         </TouchableOpacity>        
-        <CustomButton label={"Login"} onPress={() => {login(values.email,values.password)}} />
+        {/* <CustomButton label={"Login"} onPress={() => {login(values.email,values.password)}} /> */}
+        <TouchableOpacity
+      onPress={() => {login(values.email,values.password)}}
+      disabled={!isValid || values.email === ''}
+      style={{
+        backgroundColor: '#9A52C7',
+        padding: 20,
+        borderRadius: 10,
+        marginBottom: 20,
+      }}>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontWeight: '700',
+          fontSize: 16,
+          color: '#fff',
+        }}>
+        {"Login"}
+      </Text>
+    </TouchableOpacity>
         </>
         )}
         </Formik>
