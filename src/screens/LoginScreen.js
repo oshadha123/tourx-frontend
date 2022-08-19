@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Modal,
+  StyleSheet,
 } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -19,6 +20,19 @@ import CustomButton from '../components/CustomButton';
 import InputField from '../components/InputField';
 import { AuthContext } from '../context/AuthContext';
 import { Button } from 'react-native-paper';
+import { Formik } from 'formik'
+import * as yup from 'yup'
+
+const loginValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Please enter valid email")
+    .required('Email Address is Required'),
+  password: yup
+    .string()
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Password is required'),
+})
 const LoginScreen = ({navigation},props) => {
 
   const [email,setEmail] = useState(null);
@@ -47,40 +61,94 @@ const LoginScreen = ({navigation},props) => {
           Login
         </Text>
          {/* <Text>{test}</Text> */}
-        <InputField
-          label={'Email ID'}
-          icon={
-            <MaterialIcons
+
+         <Formik
+            validateOnMount={true}
+            validationSchema={loginValidationSchema}
+            initialValues={{ email: '', password: '' }}
+            onSubmit={values => console.log(values)}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              isValid,
+            }) => (
+            <>
+          <View
+         style={{
+          flexDirection: 'row',
+          borderBottomColor: '#ccc',
+          borderBottomWidth: 1,
+          paddingBottom: 8,
+          marginBottom: 25,}}
+         >
+          <MaterialIcons
             name="alternate-email"
             size={20}
             color="#9A52C7"
             style={{marginRight: 5}}
           />
-          }
+        <TextInput
+          name="email"
+          // label={'Email ID'}
+          placeholder={'Email ID'}
+          style={{flex: 1, paddingVertical: 0}}
           keyboardType="email-address"
-          value={email}
-          onChangeText={text => setEmail(text)}
+          value={values.email}
+          // value={email}
+          // onChangeText={text => setEmail(text)}
+          onChangeText={handleChange('email')}
+          onBlur={handleBlur('email')}
         />
-
-<InputField
-          label={'Password'}
-          icon={
-            <Ionicons
+        
+          {(errors.email && touched.email) &&
+                  <Text style={styles.errorText}>{errors.email}</Text>
+           }
+           </View>
+        <View
+         style={{
+          flexDirection: 'row',
+          borderBottomColor: '#ccc',
+          borderBottomWidth: 1,
+          paddingBottom: 8,
+          marginBottom: 25,}}
+         > 
+         <Ionicons
             name="ios-lock-closed-outline"
             size={20}
             color="#9A52C7"
             style={{marginRight: 5}}
-          />
-          }
+          />       
+       <TextInput
+          name="password"
+          placeholder={'Password'}
+          style={{flex: 1, paddingVertical: 0}}
           inputType="password"
+          secureTextEntry={true}
           fieldButtonLabel={"Forgot?"}
           fieldButtonFunction={() => navigation.navigate('ForgetPassword')}
-          value={password}
-          onChangeText={text => setPassword(text)}
+          // value={password}
+          // onChangeText={text => setPassword(text)}
+          value={values.password}
+          onChangeText={handleChange('password')}
+          onBlur={handleBlur('password')}
         />
-        
-        <CustomButton label={"Login"} onPress={() => {login(email,password)}} />
-       
+          
+        {(errors.password && touched.password) &&
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                }
+                </View>
+        <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
+        <Text style={{color: '#AD40AF', fontWeight: '700'}}>{"Forgot your password?"}</Text>
+        </TouchableOpacity>        
+        <CustomButton label={"Login"} onPress={() => {login(values.email,values.password)}} />
+        </>
+        )}
+        </Formik>
         {comp}
         <Text style={{textAlign: 'center', color: '#9A52C7', marginBottom: 10}}>
           OR
@@ -97,6 +165,8 @@ const LoginScreen = ({navigation},props) => {
             <Button style={{paddingHorizontal:50, borderRadius: 10,paddingVertical:10,backgroundColor:"#DB4437"}} icon="google" mode="contained" onPress={() => console.log('Pressed')}>
                  Continue with Google
             </Button>
+
+            
           {/* <TouchableOpacity
             onPress={() => {}}
             style={{
@@ -148,4 +218,33 @@ const LoginScreen = ({navigation},props) => {
   );
 };
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginContainer: {
+    width: '80%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 10,
+    elevation: 10,
+    backgroundColor: '#e6e6e6'
+  },
+  textInput: {
+    height: 40,
+    width: '100%',
+    margin: 10,
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 10,
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
+  },
+})
 export default LoginScreen;
