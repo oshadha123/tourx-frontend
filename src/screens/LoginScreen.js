@@ -143,7 +143,7 @@ const LoginScreen = ({navigation},props) => {
                 }
                 </View>
         <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
-        <Text style={{color: '#AD40AF', fontWeight: '700'}}>{"Forgot your password?"}</Text>
+        <Text style={{color: '#AD40AF', fontWeight: '700',paddingBottom:30}}>{"Forgot your password?"}</Text>
         </TouchableOpacity>        
         {/* <CustomButton label={"Login"} onPress={() => {login(values.email,values.password)}} /> */}
         <TouchableOpacity
