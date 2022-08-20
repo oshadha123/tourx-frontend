@@ -27,6 +27,8 @@ import { AuthContext } from '../context/AuthContext';
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import Modal_View from '../components/Modal_View'
+import { Dropdown } from 'react-native-element-dropdown';
+
 const loginValidationSchema = yup.object().shape({
   email: yup
     .string()
@@ -52,8 +54,12 @@ const RegisterScreen = ({navigation}) => {
   const [confirmPassword,setConfirmPassword]=useState(null);
   const [profilePic,setProfilePic] = useState("hjdjjd.jpg");
   const [password,setPassword] = useState(null);
-  const [roleId,setRoleId]=useState(2);
+ //const [roleId,setRoleId]=useState(2);
   const [modal,setModal]=useState(false);
+
+  const [roleId,setRoleId]=useState(null);
+
+  const roles = [{ label: 'Tour Guide', value: '1' },{ label: 'Tourist', value: '2' }];
 
   const renderModal=()=>{
     if(modal==true){
@@ -268,8 +274,60 @@ const RegisterScreen = ({navigation}) => {
           onChangeText={text => setConfirmPassword(text)}
           inputType="password"
         />
-        <DropDownList/>
-        {/* <CustomButton label={'Register'} disabled={!isValid || values.email === ''} onPress={() => {register(firstName,lastName,values.email,values.password,profilePic,roleId);navigation.navigate('Login')}} /> */}
+
+<Dropdown
+          style={{
+            height: 40,
+            backgroundColor: 'rgba(52, 52, 52, 0.0)',
+            paddingBottom: 8,
+            marginBottom: 20,
+            paddingLeft: 0,
+            shadowOffset: {
+              width: 0,
+              height: 1,
+            },
+            borderBottomWidth: 1,
+            borderBottomColor: '#ccc',
+            marginBottom: 40,
+          }}
+          placeholderStyle={{
+            textAlign: 'left',
+            fontSize: 15,
+            color: '#999999'
+          }}
+          selectedTextStyle={{
+            fontSize: 15,
+            color: 'black'
+          }}
+          iconStyle={{
+            width: 20,
+            height: 20,
+            alignContent: 'flex-start'
+          }}
+          data={roles}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={'Select User Role'}
+          value={roles.value}
+          onChange={item => {
+            setRoleId(item.value);
+            console.log(roleId);
+          }}
+          renderLeftIcon={() => (
+            <MaterialIcons
+            name="person-add"
+                size={20}
+                color="#666"
+                style={{
+                  marginRight: 10,
+                }}
+            />
+          )}
+        />
+
+        {/*<DropDownList/>
+         <CustomButton label={'Register'} disabled={!isValid || values.email === ''} onPress={() => {register(firstName,lastName,values.email,values.password,profilePic,roleId);navigation.navigate('Login')}} /> */}
         <TouchableOpacity
       onPress={() => {if(values.password!=confirmPassword){setModal(true)}else{register(values.first_name,values.last_name,values.email,values.password,profilePic,roleId);navigation.navigate('Login');setModal(false)}}}
       disabled={ !isValid || values.email === ''}

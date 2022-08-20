@@ -27,6 +27,7 @@
     "react": "18.0.0",
     "react-native": "0.69.3",
     "react-native-date-picker": "^4.2.5",
+    "react-native-element-dropdown": "^2.2.0",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-image-crop-picker": "^0.38.0",
     "react-native-image-viewing": "^0.2.2",
