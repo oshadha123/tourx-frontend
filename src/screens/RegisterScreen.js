@@ -17,7 +17,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Button } from 'react-native-paper';
 
-import RegistrationSVG from '../assets/images/misc/registration.svg';
+import RegistrationSVG from '../assets/images/misc/registration2.svg';
 import GoogleSVG from '../assets/images/misc/google.svg';
 import FacebookSVG from '../assets/images/misc/facebook.svg';
 import TwitterSVG from '../assets/images/misc/twitter.svg';
@@ -54,12 +54,14 @@ const RegisterScreen = ({navigation}) => {
   const [confirmPassword,setConfirmPassword]=useState(null);
   const [profilePic,setProfilePic] = useState("hjdjjd.jpg");
   const [password,setPassword] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  const [value, setValue] = useState(null);
  //const [roleId,setRoleId]=useState(2);
   const [modal,setModal]=useState(false);
 
   const [roleId,setRoleId]=useState(null);
 
-  const roles = [{ label: 'Tour Guide', value: '1' },{ label: 'Tourist', value: '2' }];
+  const roles = [{ label: 'Tour Guide', value: 2 },{ label: 'Tourist', value: 3 }];
 
   const renderModal=()=>{
     if(modal==true){
@@ -74,13 +76,13 @@ const RegisterScreen = ({navigation}) => {
  
 
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor:'#fff'}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
           <RegistrationSVG
-            height={150}
+            height={250}
             width={250}
             style={{transform: [{rotate: '-5deg'}]}}
           />
@@ -290,6 +292,8 @@ const RegisterScreen = ({navigation}) => {
             borderBottomColor: '#ccc',
             marginBottom: 40,
           }}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
           placeholderStyle={{
             textAlign: 'left',
             fontSize: 15,
@@ -309,16 +313,18 @@ const RegisterScreen = ({navigation}) => {
           labelField="label"
           valueField="value"
           placeholder={'Select User Role'}
-          value={roles.value}
+          value={value}
           onChange={item => {
             setRoleId(item.value);
-            console.log(roleId);
+            setValue(item.value);
+            setIsFocus(false);
+            console.log(item.value);
           }}
           renderLeftIcon={() => (
             <MaterialIcons
             name="person-add"
                 size={20}
-                color="#666"
+                color="#9A52C7"
                 style={{
                   marginRight: 10,
                 }}
@@ -329,8 +335,8 @@ const RegisterScreen = ({navigation}) => {
         {/*<DropDownList/>
          <CustomButton label={'Register'} disabled={!isValid || values.email === ''} onPress={() => {register(firstName,lastName,values.email,values.password,profilePic,roleId);navigation.navigate('Login')}} /> */}
         <TouchableOpacity
-      onPress={() => {if(values.password!=confirmPassword){setModal(true)}else{register(values.first_name,values.last_name,values.email,values.password,profilePic,roleId);navigation.navigate('Login');setModal(false)}}}
-      disabled={ !isValid || values.email === ''}
+      onPress={() => {if(values.password!=confirmPassword){setModal(true)}else{register(values.first_name,values.last_name,values.email,values.password,profilePic,roleId);navigation.navigate('EmailVerification');setModal(false)}}}
+      disabled={ !isValid || values.email === ''|| roleId==null}
       style={{
         backgroundColor: '#9A52C7',
         padding: 20,

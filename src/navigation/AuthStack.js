@@ -9,6 +9,7 @@ import AddToursScreen from '../screens/AddToursScreen';
 import ForgetPassword from '../screens/ForgetPassword';
 import EnterOtp from '../screens/EnterOtp';
 import ResetPassword from '../screens/ResetPassword';
+import EmailVerification from '../screens/EmailVerification';
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
@@ -22,6 +23,8 @@ const AuthStack = () => {
       <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
       <Stack.Screen name="EnterOtp" component={EnterOtp} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      <Stack.Screen name="EmailVerification" component={EmailVerification} />
+
 
     </Stack.Navigator>
   );

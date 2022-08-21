@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useState,useContext } from "react";
 import {SafeAreaView, View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 import EnterOTP from '../assets/images/misc/enterotp.svg';
+import { BASE_URL } from "../config";
 
-const EnterOtp = ({navigation}) => {
+import axios from "axios";
+
+import { AuthContext } from '../context/AuthContext';
+
+const EmailVerification = ({navigation}) => {
+    const[verifyCode,setVerifyCode]=useState('');
+   const {email}=useContext(AuthContext);
+
+    const verify=(email,otp)=>{
+        console.log(email);
+        console.log(otp);
+
+        axios.patch(`${BASE_URL}/verify`,{
+            
+            email,
+            otp
+   
+           })
+           .then(res=>{
+               console.log(res.data);
+               
+           })
+           .catch(e=>{
+            
+               console.log(`Logging error ${e}`)
+           })
+
+    }
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor:'#fff'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
       <View style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
         <EnterOTP
@@ -34,6 +62,7 @@ const EnterOtp = ({navigation}) => {
             codeInputHighlightStyle={styles.underlineStyleHighLighted}
             onCodeFilled = {(code => {
               console.log(`Code is ${code}, you are good to go!`)
+              setVerifyCode(code);
             })}
           />
         </View>
@@ -49,7 +78,7 @@ const EnterOtp = ({navigation}) => {
           Please enter the 6 digit OTP code which was sent to your email.
         </Text>
         <View>
-          <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate("ResetPassword")}>
+          <TouchableOpacity style={styles.panelButton} onPress={() => {navigation.navigate("Login");verify(email,verifyCode)}}>
               <Text style={styles.panelButtonTitle}>Submit</Text>
           </TouchableOpacity>
        </View>
@@ -87,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EnterOtp;
+export default EmailVerification;

@@ -77,9 +77,9 @@ export default function HomeScreen({navigation}) {
      
     return(
     
-    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+    <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#fff'}}>
     
-        <ActivityIndicator size='large' color="#0000ff"/>
+        <ActivityIndicator size='large' color="#9A52C7"/>
         {/* <Bars size={10} color="#FDAAFF" /> */}
     
            
@@ -110,7 +110,7 @@ export default function HomeScreen({navigation}) {
           </Text>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <ImageBackground
-              source={{uri:userInfo.profile}}
+              source={{uri:userInfo.profilePicture}}
               style={{width: 35, height: 35}}
               imageStyle={{borderRadius: 25}}
             />

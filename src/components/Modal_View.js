@@ -30,7 +30,7 @@ const SpeechToTextScreen = ({navigation}) => {
     }
   >
     <ModalContent>
-      <Text>Passwords don't match...☹️</Text>
+      <Text>Please make sure your passwords match...☹️</Text>
     </ModalContent>
   </Modal>
 </View>

@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, ImageBackground, StatusBar } from 'react-native';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Gaming from '../assets/images/misc/travel.svg';
+import Gaming from '../assets/images/misc/travel2.svg';
 
 const OnboardingScreen = ({navigation}) => {
   return (
@@ -35,7 +35,7 @@ const OnboardingScreen = ({navigation}) => {
         <Gaming
           width={300}
           height={300}
-          style={{transform: [{rotate: '-15deg'}]}}
+          // style={{transform: [{rotate: '-15deg'}]}}
         />
       </View>
       <TouchableOpacity

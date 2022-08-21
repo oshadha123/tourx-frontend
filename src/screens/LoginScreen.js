@@ -12,7 +12,7 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Modal_View from '../components/Modal_View';
-import LoginSVG from '../assets/images/misc/login.svg';
+import LoginSVG from '../assets/images/misc/login3.svg';
 import GoogleSVG from '../assets/images/misc/google.svg';
 import FacebookSVG from '../assets/images/misc/facebook.svg';
 import TwitterSVG from '../assets/images/misc/twitter.svg';
@@ -40,7 +40,7 @@ const LoginScreen = ({navigation},props) => {
   const {login,comp}=useContext(AuthContext);
  
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor:'#fff'}}>
       <View style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
           <LoginSVG

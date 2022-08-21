@@ -14,9 +14,9 @@ const AppNav = () => {
 
         return(
         
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#fff'}}>
         
-            <ActivityIndicator size={'large'}/>
+            <ActivityIndicator size={'large'} color="#9A52C7"/>
         
 
         </View>

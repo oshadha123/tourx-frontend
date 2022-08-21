@@ -6,7 +6,7 @@ import ForgetPwSVG from '../assets/images/misc/forgotpw.svg';
 
 const ForgetPassword = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor:'#fff'}}>
       <View style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
         <ForgetPwSVG

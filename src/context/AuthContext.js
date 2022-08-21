@@ -17,6 +17,7 @@ export const AuthProvider = ({children})=>{
     const [error,setError]=useState(0);
     const [success,setSuccess]=useState(0);
     const [comp,setComp]=useState('');
+    const [email,setEmail]=useState('');
     //Login page
     const login = (email,password) =>{
         console.log(email)
@@ -68,7 +69,7 @@ export const AuthProvider = ({children})=>{
         console.log(email)
         console.log(profilePic)
         console.log(roleId)
-        
+        setEmail(email);
         setIsLoading(true);
         axios.post(`${BASE_URL}/register`,{
 
@@ -256,7 +257,7 @@ console.log(userInfo.userId)
 
     return(
     
-     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo,register,error,success,comp}}>
+     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo,register,error,success,comp,email}}>
 
     {children}
 

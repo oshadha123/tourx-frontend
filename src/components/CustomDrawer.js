@@ -27,7 +27,7 @@ const CustomDrawer = props => {
           source={{uri:"https://freerangestock.com/sample/140410/abstract-geometric-background--cold-colors.jpg"}}
           style={{padding: 20}}>
           <Image
-            source={{uri:userInfo.profile}}
+            source={{uri:userInfo.profilePicture}}
             style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
           />
           <Text

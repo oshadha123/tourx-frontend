@@ -6,7 +6,7 @@ import ResetPwSVG from '../assets/images/misc/resetpw.svg';
 
 const ResetPassword = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor:'#fff'}}>
       <View style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center'}}>
         <ResetPwSVG
