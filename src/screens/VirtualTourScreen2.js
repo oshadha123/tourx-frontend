@@ -5,7 +5,7 @@ import ImageView from "react-native-image-viewing";
 import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
 import { Avatar, Button, Card, Title, Paragraph,IconButton} from 'react-native-paper';
-const VirtualTourScreen = ({route,navigation}) => {
+const VirtualTourScreen2 = ({route,navigation}) => {
   const {title,id,path,description,city,latitude,longitude}=route.params;
   const [visible,setVisible] = useState(false)
   const onRequestClose = () => setVisible(false);
@@ -14,19 +14,19 @@ const VirtualTourScreen = ({route,navigation}) => {
   const LeftContent = props => <Avatar.Icon {...props} icon="camera" />
   const images = [
   	{
-      uri: "https://www.lakpura.com/images/LK94008486-01-E.JPG?",
+      uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Horton_Plains_National_Park_in_Sri_Lanka.jpg/1280px-Horton_Plains_National_Park_in_Sri_Lanka.jpg",
     },
     {
-      uri: "https://www.lakpura.com/images/LK94008486-03-E.JPG?",
+      uri: "https://h8r3x6j3.rocketcdn.me/wp-content/uploads/2020/01/worlds-end-horton-plains-1.jpg",
     },
     {
-      uri: "https://www.lakpura.com/images/LK94008486-02-E.JPG?",
+      uri: "https://www.timetravelturtle.com/wp-content/uploads/2015/01/Sri-Lanka-2014-679_feat.jpg",
     },
 	  {
-      uri: "https://www.lakpura.com/images/LK94008486-05-E.JPG?",
+      uri: "https://www.srilankaeconomytours.com/wp-content/uploads/2016/11/horton-plains-national-park.jpg",
     },
 	  {
-      uri: "https://www.lakpura.com/images/LK94008486-06-E.JPG?",
+      uri: "https://cdn.shopify.com/s/files/1/1762/3971/products/LK7301A000-01-E-1280-720.jpg?v=1624074587",
     },
   ];
 
@@ -74,4 +74,4 @@ const VirtualTourScreen = ({route,navigation}) => {
   )
 }
 
-export default VirtualTourScreen
+export default VirtualTourScreen2

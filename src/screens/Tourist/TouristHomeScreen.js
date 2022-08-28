@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext,useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,23 +7,37 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 // import Carousel from 'react-native-snap-carousel';
 import Feather from 'react-native-vector-icons/Feather';
 
-
 import BannerSlider from '../../components/BannerSlider';
-import {windowWidth} from '../../utils/Dimensions';
-
-import {leaderboard, yourTours, sliderData} from '../../model/data';
-import CustomSwitch from '../../components/CustomSwitch';
+import { windowWidth } from '../../utils/Dimensions';
+import Toast from 'react-native-toast-message';
+import CustomSwitch2 from '../../components/CustomSwitch2';
 import ListItem from '../../components/ListItem';
 import { AuthContext } from '../../context/AuthContext';
 import ImageSwiper from '../../components/ImageSwiper';
+//import ListItem2 from '../../components/ListItem2';
+import { Appbar } from 'react-native-paper';
+import ListItem3 from '../../components/ListItem3';
 
 export default function TouristHomeScreen({navigation}) {
+
+  const [viewSearch,setViewSearch]=useState(false);
+  const _handleSearch = () => {
+    if(viewSearch==false){setViewSearch(true)} 
+    else{setViewSearch(false)}
+  };
+
   const [Tab, setTab] = useState(1);
   const {userInfo}=useContext(AuthContext);
+  const {getLeaderboard2}=useContext(AuthContext);
+  const {getFindTours}=useContext(AuthContext);
+
+  const {leaderboardInfo2}=useContext(AuthContext);
+  const {findToursInfo}=useContext(AuthContext);
 
   const renderBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
@@ -33,9 +47,50 @@ export default function TouristHomeScreen({navigation}) {
     setTab(value);
   };
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      position:'top',
+      visibilityTime:4000,
+      topOffset:10,
+      text1: 'Hello',
+      text2: `Welcome back, ${userInfo.firstName}`,
+    });
+  }
+
+  useEffect(()=>{
+    
+    showToast()
+    getLeaderboard2()
+    getFindTours()
+
+},[])
+  
+  if(!leaderboardInfo2 || !findToursInfo){
+     
+    return(
+    
+    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+    
+        <ActivityIndicator size='large' color="#0000ff"/>
+        {/* <Bars size={10} color="#FDAAFF" /> */}
+    
+           
+    </View>
+    );
+
+}
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <Appbar.Header style={{backgroundColor:"#9A52C7"}} >
+      {/* <Appbar.BackAction onPress={_goBack} /> */}
+      <Appbar.Content title="Home" />
+      <Appbar.Action icon="magnify" onPress={_handleSearch} />
+      {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
+      </Appbar.Header>      
       <ScrollView style={{padding: 20}}>
+      <View style={{zIndex:1}}><Toast/></View>
         <View
           style={{
             flexDirection: 'row',
@@ -54,31 +109,33 @@ export default function TouristHomeScreen({navigation}) {
           </TouchableOpacity>
         </View>
 
-        <View
+        {viewSearch==1?(
+
+          <View
           style={{
             flexDirection: 'row',
             borderColor: '#C6C6C6',
             borderWidth: 1,
             borderRadius: 8,
             paddingHorizontal: 10,
-            paddingVertical: 8,
+            paddingVertical: 3,
           }}>
-          <Feather
+          {/* <Feather
             name="search"
             size={20}
             color="#C6C6C6"
             style={{marginRight: 5}}
-          />
+          /> */}
           <TextInput placeholder="Search" />
-        </View>
+          </View>):<></>}
 
         <View
           style={{
-            marginVertical: 15,
+            // marginVertical: 15,
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium'}}>
+          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium',color:"#000",fontStyle:"italic"}}>
             Explore new places to travel...!
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Moments')}>
@@ -89,7 +146,7 @@ export default function TouristHomeScreen({navigation}) {
         
 
         <View style={{marginVertical: 20}}>
-          <CustomSwitch
+          <CustomSwitch2
             selectionMode={1}
             option1="Find Tours"
             option2="Search Tour Guides"
@@ -98,37 +155,42 @@ export default function TouristHomeScreen({navigation}) {
         </View>
 
         {Tab == 1 &&
-          leaderboard.map(item => (
-            <ListItem
-              key={item.id}
-              photo={item.poster}
-              title={item.title}
-              subTitle={item.subtitle}
-              isFree={item.isFree}
-              points={item.points}
+          findToursInfo.map(item => (
+            <ListItem3
+            key={item.attractionId}
+            photo={{uri:item.path}}
+            title={item.attractionName}
+            subTitle={item.attarctionName}
+            isFree={'No'}
+              
               onPress={() =>
-                navigation.navigate('VirtualTour', {
-                  title: item.title,
+                navigation.navigate('VirtualTour2', {
+                  title: item.attractionName,
                   id: item.id,
+                  path:item.path,
+                  latitude:item.latitude,
+                  longitude:item.longitude,
+                  description: item.description,
+                  city:item.villageName,
                 })
               }
             />
           ))}
         {Tab == 2 &&
-          yourTours.map(item => (
+          leaderboardInfo2.map(item => (
             <ListItem
-              key={item.id}
-              photo={item.poster}
-              title={item.title}
-              subTitle={item.subtitle}
-              isFree={item.isFree}
-              
-              onPress={() =>
-                navigation.navigate('SearchTourGuides', {
-                  title: item.title,
-                  id: item.id,
-                })
-              }
+              key={item.userId}
+              photo={{uri:item.profilePicture}}
+              firstName={item.firstName}
+              lastName={item.lastName}
+              points={item.points}
+              isFree={'Yes'}
+              // onPress={() =>
+              //   navigation.navigate('VirtualTour', {
+              //     title: item.title,
+              //     id: item.id,
+              //   })
+              // }
             />
           ))}
       </ScrollView>

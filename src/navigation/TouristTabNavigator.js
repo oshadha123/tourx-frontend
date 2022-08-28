@@ -6,6 +6,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import HomeScreen from '../screens/HomeScreen';
 
 import VirtualTourScreen from '../screens/VirtualTourScreen';
+import VirtualTourScreen2 from '../screens/VirtualTourScreen2';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -16,6 +17,8 @@ import MapViewScreen from '../screens/Tourist/MapViewScreen';
 import SearchTourGuidesScreen from '../screens/Tourist/SearchTourGuidesScreen';
 import SpeechToTextScreen from '../screens/Tourist/SpeechToTextScreen';
 import CheckWeather from '../screens/Tourist/CheckWeather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -28,8 +31,8 @@ const HomeStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="VirtualTour"
-        component={VirtualTourScreen}
+        name="VirtualTour2"
+        component={VirtualTourScreen2}
         options={({route}) => ({
           title: route.params?.title,
         })}
@@ -75,7 +78,7 @@ const TabNavigator = () => {
           // tabBarBadge: 5,
           // tabBarBadgeStyle: {backgroundColor: 'red'},
           tabBarIcon: ({color, size}) => (
-            <Feather name="sun" color={color} size={size} />
+            <Ionicons name="rainy" color={color} size={size} />
           ),
         }}
       />
@@ -85,7 +88,11 @@ const TabNavigator = () => {
         component={SpeechToTextScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="mic" color={color} size={size} />
+            <MaterialIcons
+            name="translate"
+            size={size}
+            color={color}
+          />
           ),
         }}
       />

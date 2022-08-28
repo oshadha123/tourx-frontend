@@ -236,7 +236,69 @@ console.log(userInfo.userId)
 
 //Tourist Auth context functions
 
+const [leaderboardInfo2,setleaderboardInfo2] = useState(null);
+const tokenConfig2 = {
+    
+    headers: {
+       Authorization: "Bearer " + userToken
+    }
+ }
+const getLeaderboard2 = () =>{
+      
 
+    setIsLoading(true);
+    axios.get(`${BASE_URL}/tourguide`,tokenConfig2)
+    .then(res=>{
+        // console.log(res.data);
+        let leaderboardInfo2 = res.data.data;
+        console.log(leaderboardInfo2);
+        
+        setleaderboardInfo2(leaderboardInfo2);
+        // setUserToken(leaderboardInfo.token)
+        AsyncStorage.setItem('leaderboardInfo2',JSON.stringify(leaderboardInfo2));
+
+        // AsyncStorage.setItem('userToken',leaderboardInfo.token);
+        // console.log('User info'+leaderboardInfo.token)
+    })
+    .catch(e=>{
+        console.log(`Logging error ${e}`)
+    })
+    // setUserToken('sshydggf');
+    // AsyncStorage.setItem('userToken','sshydggf');
+   
+    setIsLoading(false);
+}
+
+// let userId=userInfo.userId;
+const [findToursInfo,setfindToursInfo]=useState(null);
+const getFindTours = () =>{
+
+    
+   let userId=userInfo.userId;
+    console.log(userInfo.userId)
+    setIsLoading(true);
+
+
+    axios.get(`${BASE_URL}/tour`, tokenConfig2)
+    .then(res=>{
+        console.log(res.data);
+        let findToursInfo = res.data.data;
+        console.log(findToursInfo);
+        setfindToursInfo(findToursInfo);
+        // setUserToken(findToursInfo.token)
+        AsyncStorage.setItem('findToursInfo',JSON.stringify(findToursInfo));
+
+        // AsyncStorage.setItem('userToken',findToursInfo.token);
+        // console.log('User info'+findToursInfo.token)
+    })
+    .catch(e=>{
+        console.log(`Logging error ${e}`)
+    })
+    // setUserToken('sshydggf');
+    // AsyncStorage.setItem('userToken','sshydggf');
+   
+    setIsLoading(false);
+}
 
 
 
@@ -257,7 +319,7 @@ console.log(userInfo.userId)
 
     return(
     
-     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo,register,error,success,comp,email}}>
+     <AuthContext.Provider value={{login,logout,isLoading,userToken,userInfo,getLeaderboard,leaderboardInfo,getYourTours,yourToursInfo,register,error,success,comp,email,getLeaderboard2,leaderboardInfo2,getFindTours,findToursInfo}}>
 
     {children}
 
