@@ -1,129 +1,186 @@
-import React from 'react';
-import {
-	StyleSheet,
-	View,
-	Animated,
-} from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#fff',
-	},
-	group: {
-		width: 100,
-		height: 150,
-		justifyContent: 'center',
-		alignItems: 'center',
-		flexDirection: 'row',
-	},
-	diamond: {
-		width: 50,
-		height: 50,
-		backgroundColor: '#9A52C7',
-	},
-	groupColumn: {
-		flexDirection: 'column',
-	},
-	groupRow: {
-		flexDirection: 'row',
-	},
-});
-// @flow
+ import React from "react";
+ import {
+   StyleSheet,
+   View,
+   Text,
+   TouchableOpacity,
+   Platform,
+   PermissionsAndroid
+ } from "react-native";
+ import MapView, {
+   Marker,
+   AnimatedRegion,
+   Polyline,
+   PROVIDER_GOOGLE
+ } from "react-native-maps";
+ import haversine from "haversine";
+//  import Geolocation from '@react-native-community/geolocation';
+//  navigator.geolocation = require('@react-native-community/geolocation');
 
+//  let LATITUDE = null;
+//  let LONGITUDE = null;
+ const LATITUDE_DELTA = 0.009;
+ const LONGITUDE_DELTA = 0.009;
+//  let LATITUDE = 5.954920;
+//  let LONGITUDE = 80.554955;
 
-
-const ObjectAnimated = ({ value, opacity, y }) => (
-	<Animated.View
-		style={[styles.diamond, {
-			opacity: value.interpolate({
-				inputRange: [0, 1, 2, 3, 4, 5, 6, 7],
-				outputRange: opacity,
-			}),
-			transform: [{
-				rotateY: value.interpolate({
-					inputRange: [0, 1, 2, 3, 4, 5, 6, 7],
-					outputRange: y,
-				}),
-			}],
-		}]}
-	/>
-);
-
-
-
-class Diamond extends React.Component {
-	constructor(props) {
-		super(props);
-		this.animatedValue = new Animated.Value(0);
-	}
-
-	UNSAFE_componentWillMount() {
-		this.animate();
-	}
-
-	setTimingAnimated(originalValue, newValue, duration) {
-		return Animated.timing(originalValue, {
-			toValue: newValue,
-			duration,
-			useNativeDriver: true,
-		});
-	}
-
-	animate() {
-		Animated.sequence([
-			this.setTimingAnimated(this.animatedValue, 0, 2),
-			this.setTimingAnimated(this.animatedValue, 1, 2),
-			this.setTimingAnimated(this.animatedValue, 2, 2),
-			this.setTimingAnimated(this.animatedValue, 3, 2),
-			this.setTimingAnimated(this.animatedValue, 4, 2),
-			this.setTimingAnimated(this.animatedValue, 5, 2),
-			this.setTimingAnimated(this.animatedValue, 6, 2),
-			this.setTimingAnimated(this.animatedValue, 7, 2),
-		]).start(() => {
-			this.animatedValue.setValue(0);
-			this.animate();
-		});
-	}
-
-	render() {
-		const { active } = this.props;
-		return active ? (
-			<View style={styles.container}>
-				<View style={[styles.groupColumn, {
-					transform: [{ rotateZ: '45deg' }],
-				}]}
-				>
-					<View style={styles.groupRow}>
-						<ObjectAnimated
-							value={this.animatedValue}
-							opacity={[1, 0, 0, 0, 1, 1, 1, 1]}
-							y={['180deg', '0deg', '0deg', '0deg', '0deg', '0deg', '0deg', '0deg']}
-						/>
-						<ObjectAnimated
-							value={this.animatedValue}
-							opacity={[1, 1, 0, 0, 0, 1, 1, 1]}
-							y={['0deg', '0deg', '180deg', '0deg', '0deg', '0deg', '0deg', '0deg']}
-						/>
-					</View>
-					<View style={styles.groupRow}>
-						<ObjectAnimated
-							value={this.animatedValue}
-							opacity={[1, 1, 1, 1, 0, 0, 0, 1]}
-							y={['0deg', '0deg', '0deg', '0deg', '180deg', '0deg', '0deg', '0deg']}
-						/>
-						<ObjectAnimated
-							value={this.animatedValue}
-							opacity={[1, 1, 1, 0, 0, 0, 1, 1]}
-							y={['0deg', '0deg', '0deg', '180deg', '0deg', '0deg', '0deg', '0deg']}
-						/>
-					</View>
-				</View>
-			</View>
-		) : <React.Fragment />;
-	}
-}
-
-export default Diamond;
+let current_latitude=null;
+let current_longitude=null;
+// Geolocation.getCurrentPosition(info =>{
+//   console.log(info.coords.latitude)
+  
+//   current_latitude=info.coords.latitude;
+//   current_longitude=info.coords.longitude;
+  
+// });
+ class AnimatedMarkers extends React.Component {
+   constructor(props) {
+	 super(props);
+ 
+	 this.state = {
+	   latitude: current_latitude,
+	   longitude: current_longitude,
+	   routeCoordinates: [],
+	   distanceTravelled: 0,
+	   prevLatLng: {},
+	   coordinate: new AnimatedRegion({
+		 latitude: current_latitude,
+		 longitude: current_longitude,
+		 latitudeDelta: 0,
+		 longitudeDelta: 0
+	   })
+	 };
+   }
+ 
+   componentDidMount() {
+	 const { coordinate } = this.state;
+ 
+	 this.watchID = navigator.geolocation.watchPosition(
+	   position => {
+		 const { routeCoordinates, distanceTravelled } = this.state;
+		 const { latitude, longitude } = position.coords;
+ 
+		 const newCoordinate = {
+		   latitude,
+		   longitude
+		 };
+ 
+		 if (Platform.OS === "android") {
+		   if (this.marker) {
+			 this.marker._component.animateMarkerToCoordinate(
+			   newCoordinate,
+			   500
+			 );
+		   }
+		 } else {
+		   coordinate.timing(newCoordinate).start();
+		 }
+ 
+		 this.setState({
+		   latitude,
+		   longitude,
+		   routeCoordinates: routeCoordinates.concat([newCoordinate]),
+		   distanceTravelled:
+			 distanceTravelled + this.calcDistance(newCoordinate),
+		   prevLatLng: newCoordinate
+		 });
+	   },
+	   error => console.log(error),
+	   {
+		 enableHighAccuracy: true,
+		 timeout: 20000,
+		 maximumAge: 1000,
+		 distanceFilter: 10
+	   }
+	 );
+   }
+ 
+   componentWillUnmount() {
+	 navigator.geolocation.clearWatch(this.watchID);
+   }
+ 
+   getMapRegion = () => ({
+	 latitude: this.state.latitude,
+	 longitude: this.state.longitude,
+	 latitudeDelta: LATITUDE_DELTA,
+	 longitudeDelta: LONGITUDE_DELTA
+   });
+ 
+   calcDistance = newLatLng => {
+	 const { prevLatLng } = this.state;
+	 return haversine(prevLatLng, newLatLng) || 0;
+   };
+ 
+   render() {
+	 return (
+	   <View style={styles.container}>
+		 <MapView
+		   style={styles.map}
+		   provider={PROVIDER_GOOGLE}
+		   showUserLocation
+		   followUserLocation
+		   loadingEnabled
+		   region={this.getMapRegion()}
+		 >
+		   <Polyline coordinates={this.state.routeCoordinates} strokeWidth={5} />
+		   <Marker.Animated
+			 ref={marker => {
+			   this.marker = marker;
+			 }}
+			 coordinate={this.state.coordinate}
+		   />
+		 </MapView>
+		 <View style={styles.buttonContainer}>
+		   <TouchableOpacity style={[styles.bubble, styles.button]}>
+			 <Text style={styles.bottomBarContent}>
+			   {parseFloat(this.state.distanceTravelled).toFixed(2)} km
+			 </Text>
+		   </TouchableOpacity>
+		 </View>
+	   </View>
+	 );
+   }
+ }
+ 
+ const styles = StyleSheet.create({
+   container: {
+	 ...StyleSheet.absoluteFillObject,
+	 justifyContent: "flex-end",
+	 alignItems: "center"
+   },
+   map: {
+	 ...StyleSheet.absoluteFillObject
+   },
+   bubble: {
+	 flex: 1,
+	 backgroundColor: "rgba(255,255,255,0.7)",
+	 paddingHorizontal: 18,
+	 paddingVertical: 12,
+	 borderRadius: 20
+   },
+   latlng: {
+	 width: 200,
+	 alignItems: "stretch"
+   },
+   button: {
+	 width: 80,
+	 paddingHorizontal: 12,
+	 alignItems: "center",
+	 marginHorizontal: 10
+   },
+   buttonContainer: {
+	 flexDirection: "row",
+	 marginVertical: 20,
+	 backgroundColor: "transparent"
+   }
+ });
+ 
+ export default AnimatedMarkers;

@@ -2,8 +2,7 @@ import React,{useState} from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import MapView,{Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-// const GOOGLE_API_KEY = 'AIzaSyBWzrDQpNPhMLPdSi6DLijIqYOSiAk8S4M'
-const GOOGLE_API_KEY = 'AIzaSyB3KwXlc9rPfWHXn-c88rWz3xrQSkry3rI'
+const GOOGLE_API_KEY = 'Your_api_key'
 import Geolocation from '@react-native-community/geolocation';
 
 let current_latitude=null;
