@@ -1,5 +1,5 @@
 
-<img src="https://drive.google.com/file/d/1T5aS2KndP8-3hsOTgfoxZvsdOsi0Y52i/view?usp=sharing" alt="tourx logo" align="right">
+<img src="https://res.cloudinary.com/tourx/image/upload/v1662298253/tourx_equkdk.png" heigh="150px" width="150px" alt="tourx logo" align="right">
 
 # TourX
 
