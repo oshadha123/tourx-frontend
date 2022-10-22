@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
-import { View, Text } from 'react-native'
+import { View, Text,Linking } from 'react-native'
 import ImageView from "react-native-image-viewing";
 import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
@@ -60,12 +60,15 @@ const VirtualTourScreen = ({route,navigation}) => {
   <Button icon="virtual-reality" mode="contained"  onPress={() => setVisible(true)}>
     VR Photo Tour
   </Button>
+  
+ 
   <Button icon="map" mode="contained" style={{marginLeft:"13%"}} onPress={() => navigation.navigate('MapView',{
     latitude:latitude,
     longitude:longitude,
   })}>
     See on the Map
   </Button>
+  <Button icon="map" mode="contained"  onPress={ ()=> Linking.openURL('https://kuula.co/share/collection/7lG5x?thumbs=-1&chromeless=1') } ></Button>
     </Card.Actions>
   </Card>
  

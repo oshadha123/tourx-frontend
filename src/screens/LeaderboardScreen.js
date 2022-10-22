@@ -22,38 +22,37 @@
    PROVIDER_GOOGLE
  } from "react-native-maps";
  import haversine from "haversine";
-//  import Geolocation from '@react-native-community/geolocation';
-//  navigator.geolocation = require('@react-native-community/geolocation');
-
-//  let LATITUDE = null;
-//  let LONGITUDE = null;
+import Geolocation from '@react-native-community/geolocation';
+ 
+ // const LATITUDE = 29.95539;
+ // const LONGITUDE = 78.07513;
  const LATITUDE_DELTA = 0.009;
  const LONGITUDE_DELTA = 0.009;
-//  let LATITUDE = 5.954920;
-//  let LONGITUDE = 80.554955;
-
-let current_latitude=null;
-let current_longitude=null;
-// Geolocation.getCurrentPosition(info =>{
-//   console.log(info.coords.latitude)
-  
-//   current_latitude=info.coords.latitude;
-//   current_longitude=info.coords.longitude;
-  
-// });
+//  const LATITUDE = 37.78825;
+//  const LONGITUDE = -122.4324;
+let LATITUDE=null;
+let LONGITUDE=null;
+ Geolocation.getCurrentPosition(info =>{
+	console.log(info.coords.latitude)
+	
+	LATITUDE=info.coords.latitude;
+	LONGITUDE=info.coords.longitude;
+	
+  });
+ 
  class AnimatedMarkers extends React.Component {
    constructor(props) {
 	 super(props);
  
 	 this.state = {
-	   latitude: current_latitude,
-	   longitude: current_longitude,
+	   latitude: LATITUDE,
+	   longitude: LONGITUDE,
 	   routeCoordinates: [],
 	   distanceTravelled: 0,
 	   prevLatLng: {},
 	   coordinate: new AnimatedRegion({
-		 latitude: current_latitude,
-		 longitude: current_longitude,
+		 latitude: LATITUDE,
+		 longitude: LONGITUDE,
 		 latitudeDelta: 0,
 		 longitudeDelta: 0
 	   })
@@ -63,8 +62,9 @@ let current_longitude=null;
    componentDidMount() {
 	 const { coordinate } = this.state;
  
-	 this.watchID = navigator.geolocation.watchPosition(
+	 this.watchID = Geolocation.getCurrentPosition(
 	   position => {
+		// console.log(position);
 		 const { routeCoordinates, distanceTravelled } = this.state;
 		 const { latitude, longitude } = position.coords;
  
@@ -103,9 +103,9 @@ let current_longitude=null;
 	 );
    }
  
-   componentWillUnmount() {
-	 navigator.geolocation.clearWatch(this.watchID);
-   }
+//    componentWillUnmount() {
+// 	 navigator.geolocation.clearWatch(this.watchID);
+//    }
  
    getMapRegion = () => ({
 	 latitude: this.state.latitude,
@@ -161,7 +161,7 @@ let current_longitude=null;
    },
    bubble: {
 	 flex: 1,
-	 backgroundColor: "rgba(255,255,255,0.7)",
+	 backgroundColor: "#000",
 	 paddingHorizontal: 18,
 	 paddingVertical: 12,
 	 borderRadius: 20

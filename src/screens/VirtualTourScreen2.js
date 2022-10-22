@@ -56,16 +56,23 @@ const VirtualTourScreen2 = ({route,navigation}) => {
     </Card.Content>
     <Card.Cover source={{ uri: path }} />
     <Card.Actions>
-    
-  <Button icon="virtual-reality" mode="contained"  onPress={() => setVisible(true)}>
+    <View style={{flex:1}}>
+  <Button icon="virtual-reality" mode="contained" style={{margin:"5%"}}  onPress={() => setVisible(true)}>
     VR Photo Tour
   </Button>
-  <Button icon="map" mode="contained" style={{marginLeft:"13%"}} onPress={() => navigation.navigate('MapView',{
+  <Button icon="map" mode="contained" style={{margin:"5%"}} onPress={() => navigation.navigate('MapView',{
     latitude:latitude,
     longitude:longitude,
   })}>
     See on the Map
   </Button>
+  <Button icon="cloud" mode="contained" style={{marginLeft:"5%",marginRight:"5%"}} onPress={() => navigation.navigate('VisitWeather',{
+    latitude:latitude,
+    longitude:longitude,
+  })}>
+    Weather
+  </Button>
+  </View>
     </Card.Actions>
   </Card>
  

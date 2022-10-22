@@ -40,7 +40,9 @@ const WeatherIcon = weatherType => {
 let temp;
 let wind;
 // let city;
-const CheckWeather = () => {
+const CheckWeather = ({route}) => {
+    const {latitude,longitude}=route.params;
+    console.log(latitude)
   const [city,setCity]=useState('');
   const [temp,setTemp]=useState(0.0);
   const [windy,setWindy]=useState(0.0);
@@ -53,8 +55,8 @@ getLocation().then((location) => {
 getWeather({
 
 	key: "081f5a841fb90fdd362ebd75807fce8e",
-	lat: location.coords.latitude,
-	lon: location.coords.longitude,
+	lat: latitude,
+	lon: longitude,
 	unit: "metric"
 
 }).then(() => {
@@ -86,6 +88,8 @@ const date = new Date();
 let day = date.getDate();
 let month = date.getMonth() + 1;
 let year = date.getFullYear();
+
+
   const Locations = [
     {
       id: 1,

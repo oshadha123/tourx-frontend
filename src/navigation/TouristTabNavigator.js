@@ -18,7 +18,7 @@ import SearchTourGuidesScreen from '../screens/Tourist/SearchTourGuidesScreen';
 import SpeechToTextScreen from '../screens/Tourist/SpeechToTextScreen';
 import CheckWeather from '../screens/Tourist/CheckWeather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import VisitWeather from '../../src/screens/Tourist/VisitWeather';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +43,11 @@ const HomeStack = () => {
         options={({route}) => ({
           title: route.params?.title,
         })}
+      />
+      <Stack.Screen
+        name="VisitWeather"
+        component={VisitWeather}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );
