@@ -12,6 +12,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 // import TabNavigator from './TabNavigator';
 import TouristTabNavigator from './TouristTabNavigator';
 import MapViewScreen from '../screens/Tourist/MapViewScreen'
+import Foursquare from '../screens/Tourist/Foursquare';
 const Drawer = createDrawerNavigator();
 
 const AuthStack = () => {
@@ -57,7 +58,17 @@ const AuthStack = () => {
           ),
         }}
       />
-      <Drawer.Screen
+  
+        <Drawer.Screen
+        name="Places"
+        component={Foursquare}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="location" size={22} color={color} />
+          ),
+        }}
+      />
+         <Drawer.Screen
         name="Settings"
         component={SettingsScreen}
         options={{

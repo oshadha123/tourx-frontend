@@ -13,6 +13,7 @@ import LeaderboardScreen from '../screens/LeaderboardScreen';
 import AddToursScreen from '../screens/AddToursScreen';
 import EditProfile from '../screens/EditProfile';
 import MapViewScreen from '../screens/Tourist/MapViewScreen';
+import Foursquare from '../screens/Tourist/Foursquare';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,13 @@ const HomeStack = () => {
       <Stack.Screen
         name="VirtualTour"
         component={VirtualTourScreen}
+        options={({route}) => ({
+          title: route.params?.title,
+        })}
+      />
+        <Stack.Screen
+        name="Foursquare"
+        component={Foursquare}
         options={({route}) => ({
           title: route.params?.title,
         })}
