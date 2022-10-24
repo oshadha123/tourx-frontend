@@ -13,6 +13,8 @@ import SettingsScreen from '../screens/SettingsScreen';
 import TouristTabNavigator from './TouristTabNavigator';
 import MapViewScreen from '../screens/Tourist/MapViewScreen'
 import Foursquare from '../screens/Tourist/Foursquare';
+import BuyPremium from '../screens/Tourist/BuyPremium';
+
 const Drawer = createDrawerNavigator();
 
 const AuthStack = () => {
@@ -68,6 +70,17 @@ const AuthStack = () => {
           ),
         }}
       />
+
+      <Drawer.Screen
+              name="Buy Premium"
+              component={BuyPremium}
+              options={{
+                drawerIcon: ({color}) => (
+                  <Ionicons name="card" size={22} color={color} />
+                ),
+              }}
+            />
+
          <Drawer.Screen
         name="Settings"
         component={SettingsScreen}

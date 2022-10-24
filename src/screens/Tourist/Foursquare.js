@@ -5,6 +5,12 @@ import Geolocation from '@react-native-community/geolocation';
 import { Avatar, Button, Card, Title, Paragraph,Appbar } from 'react-native-paper';
 import PlaceSwiper from '../../components/PlaceSwiper';
 import ImageView from "react-native-image-viewing";
+import ImageSwiper1 from '../../components/ImageSwiper1';
+import ImageSwiper2 from '../../components/ImageSwiper2';
+import ImageSwiper3 from '../../components/ImageSwiper3';
+import ImageSwiper4 from '../../components/ImageSwiper4';
+import ImageSwiper5 from '../../components/ImageSwiper5';
+import ImageSwiper6 from '../../components/ImageSwiper6';
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
@@ -21,6 +27,10 @@ const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
 const Foursquare = ({navigation}) => {
+
+  // useEffect(()=>{
+  //  getData()
+  // },[])
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -44,7 +54,7 @@ const Foursquare = ({navigation}) => {
         }
       };
     //   const [inf,setInf]=useState(null);
-      useEffect(()=>{
+      // useEffect(()=>{
         const getData = async () => {
         
         const response = await fetch(`https://api.foursquare.com/v3/places/search?ll=${current_latitude}%2C${current_longitude}`, options)
@@ -108,39 +118,45 @@ const Foursquare = ({navigation}) => {
 
         console.log(data)
      
-      },[])
-
+      // },[])
+   
       const renderItem = () => {
+
+        if(data!=null && pic!== null) {
+        
         console.log("url"+data['results'][0]['categories'][0]['icon']['prefix']+'.png')
         console.log("name"+data['results'][0]['categories'][0]['name'])
         var i =0;
-        var j=0;
-        var k=0;
-        var p=0;
-        var w=0;
-        var t=0;
+        var j=1;
+        var k=2;
+        var p=3;
+        var w=4;
+        var t=5;
         var d=0;
-        var latitude=data['results'][0]['geocodes']['main']['latitude'];
-        var longitude=data['results'][0]['geocodes']['main']['longitude'];
-        const render = () => (
+        // var latitude=data['results'][0]['geocodes']['main']['latitude'];
+        // var longitude=data['results'][0]['geocodes']['main']['longitude'];
+        // if(data!==null){
+        const render = (p) => (
+          <ScrollView>
           <Card>
-            {/* <Card.Cover source={{ uri: pic[j++]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <Card.Cover source={{ uri: pic[i]['prefix']+"960x591"+pic[i]['suffix']}} /> */}
+            {/* <ImageSwiper1/> */}
             <Card.Content>
             <Title>
-            <Paragraph>{data['results'][p++]['name']}</Paragraph>
+            <Paragraph>{data['results'][i]['name']}</Paragraph>
             </Title>
             <Title>
-            <Paragraph>{data['results'][i++]['categories'][0]['name']}</Paragraph>
+            <Paragraph>{data['results'][i]['categories'][0]['name']}</Paragraph>
             </Title>
             <Title>
-            <Paragraph>{data['results'][w++]['location']['formatted_address']}</Paragraph>
+            <Paragraph>{data['results'][i]['location']['formatted_address']}</Paragraph>
             </Title>
             <Title>
-            <Paragraph>{data['results'][k++]['distance']} meters away..</Paragraph>
+            <Paragraph>{data['results'][i]['distance']} meters away..</Paragraph>
             </Title>
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView',{
-              latitude:data['results'][t++]['geocodes']['main']['latitude'],
-              longitude:data['results'][d++]['geocodes']['main']['longitude'],
+              latitude:data['results'][i]['geocodes']['main']['latitude'],
+              longitude:data['results'][i]['geocodes']['main']['longitude'],
             })}>
               See on the Map
             </Button>
@@ -151,24 +167,186 @@ const Foursquare = ({navigation}) => {
             {/* <PlaceSwiper/> */}
          
         </Card>
+        <Card>
+            {/* <Card.Cover source={{ uri: pic[j]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <ImageSwiper2/> */}
+            <Card.Content>
+            <Title>
+            <Paragraph>{data['results'][j]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][j]['categories'][0]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][j]['location']['formatted_address']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][j]['distance']} meters away..</Paragraph>
+            </Title>
+            <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView1',{
+              latitude:data['results'][j]['geocodes']['main']['latitude'],
+              longitude:data['results'][j]['geocodes']['main']['longitude'],
+            })}>
+              See on the Map
+            </Button>
+            {/* </Title> */}
+            </Card.Content>
+            {/* <Card.Cover source={{ uri: 'https://assets.mspimages.in/wp-content/uploads/2022/05/pubg-mobile-has-earned-krafton-8-billion.jpg' }} /> */}
+            {/* <Card.Cover source={{ uri: pic[j++]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <PlaceSwiper/> */}
+         
+        </Card>
+        <Card>
+            {/* <Card.Cover source={{ uri: pic[k]['prefix']+"960x591"+pic[k]['suffix']}} /> */}
+            {/* <ImageSwiper3/> */}
+            <Card.Content>
+            <Title>
+            <Paragraph>{data['results'][k]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][k]['categories'][0]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][k]['location']['formatted_address']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][k]['distance']} meters away..</Paragraph>
+            </Title>
+            <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView2',{
+              latitude:data['results'][k]['geocodes']['main']['latitude'],
+              longitude:data['results'][k]['geocodes']['main']['longitude'],
+            })}>
+              See on the Map
+            </Button>
+            {/* </Title> */}
+            </Card.Content>
+            {/* <Card.Cover source={{ uri: 'https://assets.mspimages.in/wp-content/uploads/2022/05/pubg-mobile-has-earned-krafton-8-billion.jpg' }} /> */}
+            {/* <Card.Cover source={{ uri: pic[j++]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <PlaceSwiper/> */}
+         
+        </Card>
+        <Card>
+            {/* <Card.Cover source={{ uri: pic[p]['prefix']+"960x591"+pic[p]['suffix']}} /> */}
+            {/* <ImageSwiper4/> */}
+            <Card.Content>
+            <Title>
+            <Paragraph>{data['results'][p]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][p]['categories'][0]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][p]['location']['formatted_address']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][p]['distance']} meters away..</Paragraph>
+            </Title>
+            <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView3',{
+              latitude:data['results'][p]['geocodes']['main']['latitude'],
+              longitude:data['results'][p]['geocodes']['main']['longitude'],
+            })}>
+              See on the Map
+            </Button>
+            {/* </Title> */}
+            </Card.Content>
+            {/* <Card.Cover source={{ uri: 'https://assets.mspimages.in/wp-content/uploads/2022/05/pubg-mobile-has-earned-krafton-8-billion.jpg' }} /> */}
+            {/* <Card.Cover source={{ uri: pic[j++]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <PlaceSwiper/> */}
+         
+        </Card>
+        <Card>
+            {/* <Card.Cover source={{ uri: pic[w]['prefix']+"960x591"+pic[w]['suffix']}} /> */}
+            {/* <ImageSwiper5/> */}
+            <Card.Content>
+            <Title>
+            <Paragraph>{data['results'][w]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][w]['categories'][0]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][w]['location']['formatted_address']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][w]['distance']} meters away..</Paragraph>
+            </Title>
+            <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView4',{
+              latitude:data['results'][w]['geocodes']['main']['latitude'],
+              longitude:data['results'][w]['geocodes']['main']['longitude'],
+            })}>
+              See on the Map
+            </Button>
+            {/* </Title> */}
+            </Card.Content>
+            {/* <Card.Cover source={{ uri: 'https://assets.mspimages.in/wp-content/uploads/2022/05/pubg-mobile-has-earned-krafton-8-billion.jpg' }} /> */}
+            {/* <Card.Cover source={{ uri: pic[j++]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <PlaceSwiper/> */}
+         
+        </Card>
+        <Card>
+            {/* <Card.Cover source={{ uri: pic[t]['prefix']+"960x591"+pic[t]['suffix']}} /> */}
+            {/* <ImageSwiper6/> */}
+            <Card.Content>
+            <Title>
+            <Paragraph>{data['results'][t]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][t]['categories'][0]['name']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][t]['location']['formatted_address']}</Paragraph>
+            </Title>
+            <Title>
+            <Paragraph>{data['results'][t]['distance']} meters away..</Paragraph>
+            </Title>
+            <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView5',{
+              latitude:data['results'][t]['geocodes']['main']['latitude'],
+              longitude:data['results'][t]['geocodes']['main']['longitude'],
+            })}>
+              See on the Map
+            </Button>
+            {/* </Title> */}
+            </Card.Content>
+            {/* <Card.Cover source={{ uri: 'https://assets.mspimages.in/wp-content/uploads/2022/05/pubg-mobile-has-earned-krafton-8-billion.jpg' }} /> */}
+            {/* <Card.Cover source={{ uri: pic[j++]['prefix']+"960x591"+pic[j]['suffix']}} /> */}
+            {/* <PlaceSwiper/> */}
+         
+        </Card>
+        </ScrollView>
+        
 
         );
       
-
+          
           return(
             <>
 
 {/* <Paragraph>{data['results'][i]['name']}</Paragraph> */}
-               <FlatList
+               {/* <FlatList
                data={data['results'][i]['name']}
                renderItem={render}
-               />
+               /> */}
+               {render(p)}
 
       </>
           
           );
+              }else{
+                console.log("noooooooo")
+                // useEffect(()=>{
+                  getData()
+                  // getData2()
+                  // getData3()
+                  // getData4()
+                  // getData5()
+                  // getData6()
+                // },[100])
+              }
           
-        
+              // }else{
+              //   console.log("no")
+              // }
+
       };
       
   return (
@@ -202,13 +380,14 @@ const Foursquare = ({navigation}) => {
         }
       >
         {/* <Text>Pull down to see RefreshControl indicator</Text> */}
-      {renderItem()}
+      {/* {renderItem()} */}
 
       </ScrollView>
 
    {/* <Text style={{color:'#000'}}>{JSON.stringify(pic[0]['prefix']+"100x100"+pic[0]['suffix'])}</Text> */}
       {/* <Text style={{color:'#000'}}>{JSON.stringify(data['results'][0]['categories'][0]['icon']['prefix'])}</Text> */}
-      {/* {renderItem()} */}
+      
+      {renderItem()}
    {/* <Text style={{color:'#000'}}>{JSON.stringify(data)}</Text> */}
 
   </>

@@ -19,6 +19,12 @@ import SpeechToTextScreen from '../screens/Tourist/SpeechToTextScreen';
 import CheckWeather from '../screens/Tourist/CheckWeather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import VisitWeather from '../../src/screens/Tourist/VisitWeather';
+import MapViewScreen1 from '../screens/Tourist/MapViewScreen';
+import MapViewScreen2 from '../screens/Tourist/MapViewScreen';
+import MapViewScreen3 from '../screens/Tourist/MapViewScreen';
+import MapViewScreen4 from '../screens/Tourist/MapViewScreen';
+import MapViewScreen5 from '../screens/Tourist/MapViewScreen';
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +54,51 @@ const HomeStack = () => {
         name="VisitWeather"
         component={VisitWeather}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MapView1"
+        component={MapViewScreen1}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="map" size={22} color={color} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="MapView2"
+        component={MapViewScreen2}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="map" size={22} color={color} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="MapView3"
+        component={MapViewScreen3}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="map" size={22} color={color} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="MapView4"
+        component={MapViewScreen4}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="map" size={22} color={color} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="MapView5"
+        component={MapViewScreen5}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="map" size={22} color={color} />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
