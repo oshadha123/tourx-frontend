@@ -19,7 +19,8 @@ const VirtualTourScreen2 = ({route,navigation}) => {
   const starImgCorner = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartOutline_qkghr6.png';
   const [currentImageIndex, setImageIndex] = useState(0);
   const LeftContent = props => <Avatar.Icon {...props} icon="camera" />
- 
+  const RightContent = props => <CustomRatingBar/>
+
   const CustomRatingBar = () => {
     return(
       <View style={styles.customRatingBarStyle}>
@@ -29,7 +30,7 @@ const VirtualTourScreen2 = ({route,navigation}) => {
               <TouchableOpacity
                 activeOpacity={0.7}
                 key={item}
-                onPress={() => setDefaultRating(item)}
+                onPress={() => {setDefaultRating(item); alert(defaultRating)}}
               >
                 <Image
                   style={styles.starImageStyle}
@@ -84,8 +85,7 @@ const VirtualTourScreen2 = ({route,navigation}) => {
         onRequestClose={onRequestClose}
         />
       <Card style={{height:"100%"}}>
-      <Card.Title title={title} subtitle={city} left={LeftContent}/>
-      <CustomRatingBar/>
+      <Card.Title title={title} subtitle={city} left={LeftContent} right={RightContent}/>
     <Card.Content>
       {/* <Title>Bomburu Ella waterfall</Title> */}
       <Paragraph>{description}</Paragraph>
