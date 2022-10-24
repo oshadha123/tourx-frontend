@@ -9,6 +9,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
 import AddToursScreen from '../screens/AddToursScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import BuyPremium from '../screens/BuyPremium';
 
 import TabNavigator from './TabNavigator';
 
@@ -57,6 +58,17 @@ const AuthStack = () => {
           ),
         }}
       />
+
+      <Drawer.Screen
+              name="Buy Premium"
+              component={BuyPremium}
+              options={{
+                drawerIcon: ({color}) => (
+                  <Ionicons name="card" size={22} color={color} />
+                ),
+              }}
+            />
+
       <Drawer.Screen
         name="Settings"
         component={SettingsScreen}
