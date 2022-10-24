@@ -252,7 +252,6 @@ const getLeaderboard2 = () =>{
         // console.log(res.data);
         let leaderboardInfo2 = res.data.data;
         console.log(leaderboardInfo2);
-        
         setleaderboardInfo2(leaderboardInfo2);
         // setUserToken(leaderboardInfo.token)
         AsyncStorage.setItem('leaderboardInfo2',JSON.stringify(leaderboardInfo2));

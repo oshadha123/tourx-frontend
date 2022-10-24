@@ -22,6 +22,7 @@ import ImageSwiper from '../../components/ImageSwiper';
 //import ListItem2 from '../../components/ListItem2';
 import { Appbar } from 'react-native-paper';
 import ListItem3 from '../../components/ListItem3';
+import ListItem4 from '../../components/ListItem4';
 
 export default function TouristHomeScreen({navigation}) {
 
@@ -160,7 +161,7 @@ export default function TouristHomeScreen({navigation}) {
             key={item.attractionId}
             photo={{uri:item.path}}
             title={item.attractionName}
-            subTitle={item.attarctionName}
+            subTitle={'Tour created by ' + item.firstName}
             isFree={'No'}
               
               onPress={() =>
@@ -177,22 +178,46 @@ export default function TouristHomeScreen({navigation}) {
             />
           ))}
         {Tab == 2 &&
-          leaderboardInfo2.map(item => (
-            <ListItem
-              key={item.userId}
-              photo={{uri:item.profilePicture}}
-              firstName={item.firstName}
-              lastName={item.lastName}
-              points={item.points}
-              isFree={'Yes'}
-              // onPress={() =>
-              //   navigation.navigate('VirtualTour', {
-              //     title: item.title,
-              //     id: item.id,
-              //   })
-              // }
-            />
-          ))}
+          leaderboardInfo2.map(item => {
+            if(item.package === 'Premium'){
+              return(
+                <ListItem4
+                  key={item.userId}
+                  photo={{uri:item.profilePicture}}
+                  firstName={item.firstName}
+                  lastName={item.lastName}
+                  points={item.points}
+                  isFree={'Yes'}
+                  
+                  // onPress={() =>
+                  //   navigation.navigate('VirtualTour', {
+                  //     title: item.title,
+                  //     id: item.id,
+                  //   })
+                  // }
+                />
+              )
+            }
+            else{
+              return(
+                <ListItem
+                  key={item.userId}
+                  photo={{uri:item.profilePicture}}
+                  firstName={item.firstName}
+                  lastName={item.lastName}
+                  points={item.points}
+                  isFree={'Yes'}
+                  
+                  // onPress={() =>
+                  //   navigation.navigate('VirtualTour', {
+                  //     title: item.title,
+                  //     id: item.id,
+                  //   })
+                  // }
+                />
+              )
+            }
+            })}
       </ScrollView>
       
     </SafeAreaView>

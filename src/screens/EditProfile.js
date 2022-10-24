@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, TouchableOpacity, ImageBackground, TextInput, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,34 +6,141 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import ImagePicker from 'react-native-image-crop-picker';
 import InputField from '../components/InputField';
+import { AuthContext } from '../context/AuthContext';
+import { BASE_URL } from "../config";
 
-const EditProfile = () => {
-    const [image, setImage] = useState('https://res.cloudinary.com/tourx/image/upload/v1659729302/m_k23t6c.png');
+import axios from "axios";
+
+const EditProfile = ({navigation}) => {
+    const {userInfo}=useContext(AuthContext);
+    const {userToken}=useContext(AuthContext);
+    const token = {
+    
+      headers: {
+         authorization: "Bearer " + userToken
+      }
+   }
+
+    const[proPicture, setImage]=useState(userInfo.profilePicture);
+    const[fName, setFName]=useState(userInfo.firstName);
+    const[lName, setLName]=useState(userInfo.lastName);
+    const[contact, setContact]=useState(userInfo.contact);
+    const[bio, setBio]=useState(userInfo.bio);
+    
+
+    const update=(profilePicture,firstName,lastName,contactNumber,bio)=>{
+      console.log(profilePicture);
+      console.log(firstName);
+      console.log(lastName);
+      console.log(contactNumber);
+      console.log(bio);
+
+      axios.patch(`${BASE_URL}/profile`, {
+        
+        "change": {
+          profilePicture,
+          firstName,
+          lastName,
+          bio
+        }
+
+         }, token)
+         .then(res=>{
+             console.log(res.data);
+             
+         })
+         .catch(e=>{
+          
+             console.log(`Updating error ${e}`)
+         })
+
+      if(userInfo.contact == null) {
+        axios.post(`${BASE_URL}/contact`, {
+         
+          "contact": 
+            [contactNumber]
+   
+           }, token)
+           .then(res=>{
+               console.log(res.data);
+               navigation.navigate("ProfileScreen");
+           })
+           .catch(e=>{
+            
+               console.log(`Updating error ${e}`)
+           })
+      } else{
+        axios.patch(`${BASE_URL}/contact`, {
+         
+          "contact": 
+            [contactNumber]
+   
+           }, token)
+           .then(res=>{
+               console.log(res.data);
+               navigation.navigate("ProfileScreen");
+           })
+           .catch(e=>{
+            
+               console.log(`Updating error ${e}`)
+           })        
+      };
+
+    }
   
     const takePhotoFromCamera = () => {
       ImagePicker.openCamera({
-        compressImageMaxWidth: 300,
-        compressImageMaxHeight: 300,
+        width: 500,
+        height: 500,
         cropping: true,
         compressImageQuality: 0.7
       }).then(image => {
-        console.log(image);
         setImage(image.path);
+        const uri = image.path;
+        const type = image.mime;
+        const name = image.path.split(".")[1];
+        const source = {uri,type,name}
+        handleUpload(source);
         bs.current.snapTo(1);
       });
     }
   
     const choosePhotoFromLibrary = () => {
       ImagePicker.openPicker({
-        width: 300,
-        height: 300,
+        width: 500,
+        height: 500,
         cropping: true,
         compressImageQuality: 0.7
       }).then(image => {
-        console.log(image);
         setImage(image.path);
+        const uri = image.path;
+        const type = image.mime;
+        const name = image.path.split(".")[1];
+        const source = {uri,type,name}
+        handleUpload(source);
         bs.current.snapTo(1);
       });
+    }
+
+    const handleUpload = (image) => {
+      const data = new FormData()
+      data.append('file',image)
+      data.append('upload_preset','tourxApp')
+      data.append('cloud_name','tourx')
+
+      fetch("https://api.cloudinary.com/v1_1/tourx/image/upload", {
+
+        method: 'POST',
+        body: data
+
+      }).then(res => res.json()).
+      then(data=>{
+        setImage(data.url);
+      })
+      .catch(e=>{
+            
+        console.log(`Uploading error ${e}`)
+    }) 
     }
   
     renderInner = () => (
@@ -93,9 +200,7 @@ const EditProfile = () => {
                   alignItems: 'center',
                 }}>
                 <ImageBackground
-                  source={{
-                    uri: image,
-                  }}
+                  source={{uri: userInfo.profilePicture}}
                   style={{height: 100, width: 100, marginBottom: 30}}
                   imageStyle={{borderRadius: 15}}>
                   <View
@@ -124,7 +229,7 @@ const EditProfile = () => {
           </View>
           <View style={{paddingTop: 30}}></View>
           <InputField
-            label={'Full Name'}
+            label={userInfo.firstName}
             icon={
                 <Ionicons
                     name="person-outline"
@@ -133,10 +238,27 @@ const EditProfile = () => {
                     style={{marginRight: 5}}
                 />
                 }
+            onChangeText={(fname => {
+              setFName(fname);
+            })}
+          />
+          <InputField
+            label={userInfo.lastName}
+            icon={
+                <Ionicons
+                    name="person-outline"
+                    size={20}
+                    color="#666"
+                    style={{marginRight: 5}}
+                />
+                }
+            onChangeText={(lname => {
+              setLName(lname);
+            })}
           />
           <InputField
             keyboardType="numeric"
-            label={'Phone Number'}
+            label={userInfo.contact}
             icon={
                 <Ionicons
                     name="call"
@@ -145,9 +267,13 @@ const EditProfile = () => {
                     style={{marginRight: 5}}
                 />
                 }
+            onChangeText={(phone => {
+              setContact(phone);
+            })}
           />
           <InputField
-            label={'Bio'}
+            label={userInfo.bio}
+            multiline={true}
             icon={
                 <Ionicons
                     name="create"
@@ -156,9 +282,12 @@ const EditProfile = () => {
                     style={{marginRight: 5}}
                 />
                 }
+            onChangeText={(bioo => {
+              setBio(bioo);
+            })}
           />
-          <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
-            <Text style={styles.panelButtonTitle}>Submit</Text>
+          <TouchableOpacity style={styles.commandButton} onPress={() => {update(proPicture, fName, lName, contact, bio)}}>
+            <Text style={styles.panelButtonTitle}>Update</Text>
           </TouchableOpacity>
         </Animated.View>
       </View>

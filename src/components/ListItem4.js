@@ -1,11 +1,9 @@
-import React,{useContext}from 'react';
+import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import { windowWidth } from '../utils/Dimensions';
-import { AuthContext } from '../context/AuthContext';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function ListItem3({key, photo, subTitle, isFree, onPress, title}) {
-  const {findToursInfo}=useContext(AuthContext);
-
+export default function ListItem4({photo, firstName, subTitle, isFree, points, onPress, lastName}) {
   return (
     <View style={{
       flexDirection:'row',
@@ -14,7 +12,6 @@ export default function ListItem3({key, photo, subTitle, isFree, onPress, title}
       marginBottom: 20,
     }}>
       <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
-      {key}
         <Image
           source={photo}
           style={{width: 55, height: 55, borderRadius: 10, marginRight: 8}}
@@ -26,7 +23,7 @@ export default function ListItem3({key, photo, subTitle, isFree, onPress, title}
               fontFamily: 'Roboto-Medium',
               fontSize: 14,
             }}>
-            {title}
+            {subTitle}
           </Text>
           <Text
             numberOfLines={1}
@@ -34,25 +31,34 @@ export default function ListItem3({key, photo, subTitle, isFree, onPress, title}
               color: '#333',
               fontFamily: 'Roboto-Medium',
               fontSize: 14,
-            }}>  
-            {subTitle}
+              textTransform: 'uppercase',
+            }}>
+            {firstName} {lastName}
           </Text>
         </View>
       </View>
-
+      
       <TouchableOpacity onPress={onPress} style={{
         backgroundColor:'#9A52C7',
         padding:10,
         width: 100,
         borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
       }}>
+        <Ionicons
+          name="star"
+          size={20}
+          color="yellow"
+          style={{marginRight: 7}}
+        />
         <Text style={{
           color: '#fff',
           textAlign: 'center',
           fontFamily: 'Roboto-Medium',
           fontSize: 14,
         }}>
-          
+          {points} {'pts'}
           {isFree == 'No' && 'View'}
         </Text>
       </TouchableOpacity>

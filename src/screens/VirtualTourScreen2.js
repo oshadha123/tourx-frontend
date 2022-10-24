@@ -1,17 +1,52 @@
 import React from 'react'
 import {useState} from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import ImageView from "react-native-image-viewing";
 import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
 import { Avatar, Button, Card, Title, Paragraph,IconButton} from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 const VirtualTourScreen2 = ({route,navigation}) => {
   const {title,id,path,description,city,latitude,longitude}=route.params;
   const [visible,setVisible] = useState(false)
   const onRequestClose = () => setVisible(false);
- 
+  const [isClick, setClick] = useState(false);
+  const [defaultRating, setDefaultRating] = useState();
+  const [maxRating, setMaxRating] = useState([0]);
+
+  const starImgFilled = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartFilled_oqcs1v.png';
+  const starImgCorner = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartOutline_qkghr6.png';
   const [currentImageIndex, setImageIndex] = useState(0);
   const LeftContent = props => <Avatar.Icon {...props} icon="camera" />
+ 
+  const CustomRatingBar = () => {
+    return(
+      <View style={styles.customRatingBarStyle}>
+        {
+          maxRating.map((item, key) => {
+            return(
+              <TouchableOpacity
+                activeOpacity={0.7}
+                key={item}
+                onPress={() => setDefaultRating(item)}
+              >
+                <Image
+                  style={styles.starImageStyle}
+                  source={
+                    item <= defaultRating 
+                    ? {uri: starImgFilled} 
+                    : {uri: starImgCorner}
+                  }
+                />
+              </TouchableOpacity>
+            )
+          })
+        }
+      </View>
+    )
+  }
+ 
   const images = [
   	{
       uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Horton_Plains_National_Park_in_Sri_Lanka.jpg/1280px-Horton_Plains_National_Park_in_Sri_Lanka.jpg",
@@ -49,7 +84,8 @@ const VirtualTourScreen2 = ({route,navigation}) => {
         onRequestClose={onRequestClose}
         />
       <Card style={{height:"100%"}}>
-    <Card.Title title={title} subtitle={city} left={LeftContent} />
+      <Card.Title title={title} subtitle={city} left={LeftContent}/>
+      <CustomRatingBar/>
     <Card.Content>
       {/* <Title>Bomburu Ella waterfall</Title> */}
       <Paragraph>{description}</Paragraph>
@@ -80,5 +116,20 @@ const VirtualTourScreen2 = ({route,navigation}) => {
   </View>
   )
 }
+
+const styles = StyleSheet.create({
+  customRatingBarStyle: {
+    flexDirection: "row",
+    justifyContent: 'flex-end',
+    marginTop: 10,
+    marginRight: 50,
+    marginBottom: 20
+  },
+  starImageStyle: {
+    width: 40,
+    height: 40,
+    resizeMode: 'cover'
+  }
+});
 
 export default VirtualTourScreen2

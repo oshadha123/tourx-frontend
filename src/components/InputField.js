@@ -10,6 +10,7 @@ export default function InputField({
   fieldButtonFunction,
   value,
   onChangeText,
+  multiline,
 }) {
   return (
     <View
@@ -37,6 +38,7 @@ export default function InputField({
           style={{flex: 1, paddingVertical: 0}}
           value={value}
           onChangeText={onChangeText}
+          multiline={multiline}
         />
       )}
       <TouchableOpacity onPress={fieldButtonFunction}>

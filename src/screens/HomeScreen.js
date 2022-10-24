@@ -195,27 +195,31 @@ export default function HomeScreen({navigation}) {
           
           }
         {Tab == 2 &&
-          yourToursInfo.map(item => (
-            <ListItem2
-              key={item.attractionId}
-              photo={{uri:item.path}}
-              title={item.attractionName}
-              subTitle={item.attarctionName}
-              isFree={'No'}
-              
-              onPress={() =>
-                navigation.navigate('VirtualTour', {
-                  title: item.attractionName,
-                  id: item.id,
-                  path:item.path,
-                  latitude:item.latitude,
-                  longitude:item.longitude,
-                  description: item.description,
-                  city:item.villageName,
-                })
-              }
-            />
-          ))}
+          yourToursInfo.map(item => {
+            if(item.guideId == userInfo.userId){
+              return(
+                <ListItem2
+                  key={item.attractionId}
+                  photo={{uri:item.path}}
+                  title={item.attractionName}
+                  subTitle={item.attarctionName}
+                  isFree={'No'}
+                  
+                  onPress={() =>
+                    navigation.navigate('VirtualTour', {
+                      title: item.attractionName,
+                      id: item.id,
+                      path:item.path,
+                      latitude:item.latitude,
+                      longitude:item.longitude,
+                      description: item.description,
+                      city:item.villageName,
+                    })
+                  }
+                />
+              )
+            }
+          })}
       </ScrollView>
       
     </SafeAreaView>
