@@ -6,19 +6,22 @@ import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
 import { Avatar, Button, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const VirtualTourScreen2 = ({ route, navigation }) => {
   const { title, id, path, description, city, latitude, longitude } = route.params;
   const [visible, setVisible] = useState(false)
   const onRequestClose = () => setVisible(false);
   const [isClick, setClick] = useState(false);
-  const [defaultRating, setDefaultRating] = useState();
-  const [maxRating, setMaxRating] = useState([0]);
+  // const [defaultRating, setDefaultRating] = useState();
+  // const [maxRating, setMaxRating] = useState([0]);
+  const [isToggled, setIsToggled] = useState(false);
 
-  const starImgFilled = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartFilled_oqcs1v.png';
-  const starImgCorner = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartOutline_qkghr6.png';
+  // const starImgFilled = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartFilled_oqcs1v.png';
+  // const starImgCorner = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartOutline_qkghr6.png';
   const [currentImageIndex, setImageIndex] = useState(0);
-  const LeftContent = props => <Avatar.Icon {...props} icon="camera" theme={{ colors: { primary: '#06BEE1' } }}/>
+  const LeftContent = props => <Avatar.Icon {...props} icon="camera" theme={{ colors: { primary: '#06BEE1' } }} />
   const RightContent = props => <CustomRatingBar />
 
   const CustomRatingBar = () => {
@@ -26,24 +29,30 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
 
       <View style={styles.customRatingBarStyle}>
         {
-          maxRating.map((item, key) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.7}
-                key={item}
-                onPress={() => { setDefaultRating(item); alert(defaultRating) }}
-              >
-                <Image
-                  style={styles.starImageStyle}
-                  source={
-                    item <= defaultRating
-                      ? { uri: starImgFilled }
-                      : { uri: starImgCorner }
-                  }
-                />
-              </TouchableOpacity>
-            )
-          })
+          // maxRating.map((item, key) => {
+          //   return (
+          //     <TouchableOpacity
+          //       activeOpacity={0.7}
+          //       key={item}
+          //       onPress={() => { setDefaultRating(item); alert(defaultRating) }}
+          //     >
+          //       <Image
+          //         style={styles.starImageStyle}
+          //         source={
+          //           item <= defaultRating
+          //             ? { uri: starImgFilled }
+          //             : { uri: starImgCorner }
+          //         }
+          //       />
+          //     </TouchableOpacity>
+          //   )
+          // })
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => setIsToggled(!isToggled)}
+          >
+            {isToggled ? <MaterialIcons name="favorite-border" size={40} color="#1768AC" /> : <MaterialIcons name="favorite" size={40} color="#e34965" />}
+          </TouchableOpacity>
         }
       </View>
     )
@@ -109,9 +118,9 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
               })} theme={{ colors: { primary: '#06BEE1' } }}>
                 Weather
               </Button>
-              {title=="Sigiriya"?<Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%"}} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hb?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
+              {title == "Sigiriya" ? <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hb?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
                 VR Photo Tour
-              </Button>: <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hW?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
+              </Button> : <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hW?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
                 VR Photo Tour
               </Button>}
             </View>

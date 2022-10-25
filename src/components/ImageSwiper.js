@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window')
 
 const styles = {
   wrapper: {
-    height:150,
+    height:200,
     
   },
   slide: {
@@ -19,6 +19,7 @@ const styles = {
     color: 'black',
     fontSize: 15,
     fontWeight: 'bold',
+    top: 7,
     bottom:7
     // borderBottom:10
   },
@@ -61,7 +62,7 @@ export default function ImageSwiper() {
             <Text numberOfLines={1} style={styles.text}>Bomburu Ella Waterfall</Text>
           }
         >
-          <Image style={styles.image} source={{uri:"https://api.travelql.com/images/0aeda8f4-358a-49eb-919a-5790a03ce5d0.webp"}} />
+          <Image style={styles.image} source={{uri:"https://www.lakpura.com/images/LK94008486-02-E.JPG"}} />
         </View>
         <View
           style={styles.slide}
@@ -82,6 +83,14 @@ export default function ImageSwiper() {
           }
         >
           <Image style={styles.image} source={{uri:"https://destinationlesstravel.com/wp-content/uploads/2020/04/Ella-train.jpg"}} />
+        </View>
+        <View
+          style={styles.slide}
+          title={
+            <Text numberOfLines={1} style={styles.text}>Dambulla</Text>
+          }
+        >
+          <Image style={styles.image} source={{uri:"https://nexttravelsrilanka.com/wp-content/uploads/2021/04/The-golden-Buddha-statue-and-the-temple-complex-a-marvel-from-the-Wonderful-Ancient-City-of-Dambulla.jpg"}} />
         </View>
       </Swiper>
     );

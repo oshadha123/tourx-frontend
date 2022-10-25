@@ -136,7 +136,7 @@ export default function TouristHomeScreen({navigation}) {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium',color:"#000",fontStyle:"italic"}}>
+          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium',color:"#000",fontStyle:"italic",paddingBottom:10}}>
             Explore new places to travel...!
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Moments')}>
@@ -146,7 +146,7 @@ export default function TouristHomeScreen({navigation}) {
         <ImageSwiper/>
         
 
-        <View style={{marginVertical: 20}}>
+        <View style={{marginVertical: 20, paddingTop: 30}}>
           <CustomSwitch2
             selectionMode={1}
             option1="Find Tours"

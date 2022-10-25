@@ -224,12 +224,12 @@ const LoginScreen = ({navigation},props) => {
             marginBottom: 30,
             paddingTop: 10,
             paddingBottom: 10,
-            borderRadius: 5,
+            borderRadius: 8,
             backgroundColor:"#06BEE1"
           }}>
-          <Text>New to the app?</Text>
+          <Text style={{ color: '#1768AC', fontWeight: '700' }}>New to the app?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Register')} style={{}}>
-            <Text style={{color: '#1768AC', fontWeight: '700'}}> Register</Text>
+            <Text style={{color: 'black', fontWeight: '700'}}> Register</Text>
           </TouchableOpacity>
         </View>
       </View>

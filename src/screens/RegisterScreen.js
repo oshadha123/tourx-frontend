@@ -373,12 +373,12 @@ const RegisterScreen = ({ navigation }) => {
             marginBottom: 30,
             paddingTop: 10,
             paddingBottom: 10,
-            borderRadius: 5,
+            borderRadius: 8,
             backgroundColor: "#06BEE1"
           }}>
-          <Text>Already registered?</Text>
+          <Text style={{ color: '#1768AC', fontWeight: '700' }}>Already registered?</Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={{ color: '#1768AC', fontWeight: '700' }}> Login</Text>
+            <Text style={{ color: 'black', fontWeight: '700' }}> Login</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

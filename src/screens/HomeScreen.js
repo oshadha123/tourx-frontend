@@ -143,7 +143,7 @@ export default function HomeScreen({navigation}) {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium',color:"#000",fontStyle:"italic"}}>
+          <Text style={{fontSize: 18, fontFamily: 'Roboto-Medium',color:"#000",fontStyle:"italic",paddingBottom:10}}>
             Check out the Leaderboard....!
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Moments')}>
@@ -162,7 +162,7 @@ export default function HomeScreen({navigation}) {
           loop={true}
         /> */}
 
-        <View style={{marginVertical: 20}}>
+        <View style={{marginVertical: 20, paddingTop: 30}}>
           <CustomSwitch
             selectionMode={1}
             option1="Leaderboard"
