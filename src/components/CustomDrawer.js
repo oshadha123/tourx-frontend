@@ -56,7 +56,7 @@ const CustomDrawer = props => {
         </View>
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
-        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+        {/* <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="share-social-outline" size={22} />
             <Text
@@ -64,19 +64,21 @@ const CustomDrawer = props => {
                 fontSize: 15,
                 fontFamily: 'Roboto-Medium',
                 marginLeft: 5,
+                color: '#1768AC',
               }}>
               Share Images
             </Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {logout()}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Ionicons name="exit-outline" size={22} />
+        </TouchableOpacity> */}
+        <TouchableOpacity onPress={() => {logout()}} style={{paddingVertical: 15, backgroundColor:"#E26D5C", borderRadius: 5}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <Ionicons name="exit-outline" size={22} color="white"/>
             <Text
               style={{
                 fontSize: 15,
                 fontFamily: 'Roboto-Medium',
                 marginLeft: 5,
+                color: 'white',
               }}>
               Sign Out
             </Text>

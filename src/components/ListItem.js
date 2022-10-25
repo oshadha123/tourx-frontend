@@ -39,7 +39,7 @@ export default function ListItem({photo, firstName, subTitle, isFree, points, on
       </View>
 
       <TouchableOpacity onPress={onPress} style={{
-        backgroundColor:'#9A52C7',
+        backgroundColor:'#1768AC',
         padding:10,
         width: 100,
         borderRadius: 10,

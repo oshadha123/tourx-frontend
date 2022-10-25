@@ -37,15 +37,15 @@ const AddToursScreen = () => {
             <ProgressSteps
                 topOffset={0}
                 marginBottom={40}
-                activeStepIconBorderColor='#9A52C7'
+                activeStepIconBorderColor='#1768AC'
                 progressBarColor='#ebebe4'
-                completedProgressBarColor='#9A52C7'
-                activeStepIconColor='#9A52C7'
-                completedStepIconColor='#9A52C7'
+                completedProgressBarColor='#1768AC'
+                activeStepIconColor='#1768AC'
+                completedStepIconColor='#1768AC'
                 disabledStepIconColor='#ebebe4'
                 labelColor='gray'
                 labelFontSize={13}
-                activeLabelColor='#9A52C7'
+                activeLabelColor='#1768AC'
                 activeLabelFontSize={13}
                 completedLabelColor='black'
                 activeStepNumColor='white'
@@ -85,7 +85,7 @@ const AddToursScreen = () => {
                     scrollable={false}
                     onNext={consoleWrite}
                     nextBtnStyle={{        
-                        backgroundColor: '#9A52C7',
+                        backgroundColor: '#1768AC',
                         padding: 20,
                         borderRadius: 10,
                         marginBottom: -100,
@@ -93,7 +93,7 @@ const AddToursScreen = () => {
                     }}
                     nextBtnTextStyle={styles.nextBtnTextStyle}
                     previousBtnStyle={{
-                        backgroundColor: '#9A52C7',
+                        backgroundColor: '#1768AC',
                         padding: 20,
                         borderRadius: 10,
                         marginBottom: -100,
@@ -229,7 +229,7 @@ const AddToursScreen = () => {
 
 const styles = StyleSheet.create({
     nextBtnStyle: {
-        backgroundColor: '#9A52C7',
+        backgroundColor: '#1768AC',
         padding: 20,
         borderRadius: 10,
         marginBottom: 184,
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     previousBtnStyle: {
-        backgroundColor: '#9A52C7',
+        backgroundColor: '#1768AC',
         padding: 20,
         borderRadius: 10,
         marginBottom: 184,

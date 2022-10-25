@@ -104,7 +104,7 @@ const SpeechToTextScreen = ({navigation}) => {
               name="mic-circle-outline"
               size={150}
               textAlign="center"
-              color={'#9A52C7'}
+              color={'#1768AC'}
             />
           </TouchableOpacity>
         </View>
@@ -120,6 +120,7 @@ const SpeechToTextScreen = ({navigation}) => {
             <Text
               style={{
                 flex: 1,
+                color: 'black'
               }}>
               Translate from:
             </Text>
@@ -128,6 +129,7 @@ const SpeechToTextScreen = ({navigation}) => {
               onValueChange={currentLanguage => setSrcLang(currentLanguage)}
               style={{
                 flex: 1,
+                color: 'black'
               }}>
               <Picker.Item label="English" value="en" />
               <Picker.Item label="Hindi" value="hi" />
@@ -145,6 +147,7 @@ const SpeechToTextScreen = ({navigation}) => {
             <Text
               style={{
                 flex: 1,
+                color: 'black'
               }}>
               Translate to:
             </Text>
@@ -153,6 +156,7 @@ const SpeechToTextScreen = ({navigation}) => {
               onValueChange={currentLanguage => setLanguage(currentLanguage)}
               style={{
                 flex: 1,
+                color: 'black'
               }}>
               <Picker.Item label="Sinhalese" value="si" />
               <Picker.Item label="Tamil" value="ta" />

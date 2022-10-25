@@ -55,7 +55,7 @@ const LoginScreen = ({navigation},props) => {
             fontFamily: 'Roboto-Medium',
             fontSize: 28,
             fontWeight: '500',
-            color: '#333',
+            color: '#1768AC',
             marginBottom: 30,
           }}>
           Login
@@ -81,7 +81,7 @@ const LoginScreen = ({navigation},props) => {
           <View
          style={{
           flexDirection: 'row',
-          borderBottomColor: '#ccc',
+          borderBottomColor: '#1768AC',
           borderBottomWidth: 1,
           paddingBottom: 8,
           marginBottom: 25,}}
@@ -89,14 +89,15 @@ const LoginScreen = ({navigation},props) => {
           <MaterialIcons
             name="alternate-email"
             size={20}
-            color="#9A52C7"
+            color="#1768AC"
             style={{marginRight: 5}}
           />
         <TextInput
           name="email"
           // label={'Email ID'}
           placeholder={'Email ID'}
-          style={{flex: 1, paddingVertical: 0}}
+          placeholderTextColor="grey"
+          style={{flex: 1, paddingVertical: 0, color: 'grey'}}
           keyboardType="email-address"
           value={values.email}
           // value={email}
@@ -112,7 +113,7 @@ const LoginScreen = ({navigation},props) => {
         <View
          style={{
           flexDirection: 'row',
-          borderBottomColor: '#ccc',
+          borderBottomColor: '#1768AC',
           borderBottomWidth: 1,
           paddingBottom: 8,
           marginBottom: 25,}}
@@ -120,13 +121,14 @@ const LoginScreen = ({navigation},props) => {
          <Ionicons
             name="ios-lock-closed-outline"
             size={20}
-            color="#9A52C7"
+            color="#1768AC"
             style={{marginRight: 5}}
           />       
        <TextInput
           name="password"
           placeholder={'Password'}
-          style={{flex: 1, paddingVertical: 0}}
+          placeholderTextColor="grey"
+          style={{flex: 1, paddingVertical: 0, color: 'grey'}}
           inputType="password"
           secureTextEntry={true}
           fieldButtonLabel={"Forgot?"}
@@ -143,14 +145,14 @@ const LoginScreen = ({navigation},props) => {
                 }
                 </View>
         <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
-        <Text style={{color: '#AD40AF', fontWeight: '700',paddingBottom:30}}>{"Forgot your password?"}</Text>
+        <Text style={{color: '#1768AC', fontWeight: '700',paddingBottom:30}}>{"Forgot your password?"}</Text>
         </TouchableOpacity>        
         {/* <CustomButton label={"Login"} onPress={() => {login(values.email,values.password)}} /> */}
         <TouchableOpacity
       onPress={() => {login(values.email,values.password)}}
       disabled={!isValid || values.email === ''}
       style={{
-        backgroundColor: '#9A52C7',
+        backgroundColor: '#1768AC',
         padding: 20,
         borderRadius: 10,
         marginBottom: 20,
@@ -169,9 +171,6 @@ const LoginScreen = ({navigation},props) => {
         )}
         </Formik>
         {comp}
-        <Text style={{textAlign: 'center', color: '#9A52C7', marginBottom: 10}}>
-          OR
-        </Text>
 
         <View
           style={{
@@ -181,9 +180,6 @@ const LoginScreen = ({navigation},props) => {
             marginBottom: 30,
     
           }}>
-            <Button style={{paddingHorizontal:50, borderRadius: 10,paddingVertical:10,backgroundColor:"#DB4437"}} icon="google" mode="contained" onPress={() => console.log('Pressed')}>
-                 Continue with Google
-            </Button>
 
             
           {/* <TouchableOpacity
@@ -226,10 +222,14 @@ const LoginScreen = ({navigation},props) => {
             flexDirection: 'row',
             justifyContent: 'center',
             marginBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
+            borderRadius: 5,
+            backgroundColor:"#06BEE1"
           }}>
           <Text>New to the app?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={{color: '#9A52C7', fontWeight: '700'}}> Register</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')} style={{}}>
+            <Text style={{color: '#1768AC', fontWeight: '700'}}> Register</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -90,7 +90,7 @@ const EmailVerification = ({navigation}) => {
 
 const styles = StyleSheet.create({
   panelButton: {
-    backgroundColor: '#9A52C7',
+    backgroundColor: '#1768AC',
     padding: 20,
     borderRadius: 10,
     marginBottom: 30,

@@ -12,7 +12,7 @@ import ImageSwiper4 from '../../components/ImageSwiper4';
 import ImageSwiper5 from '../../components/ImageSwiper5';
 import ImageSwiper6 from '../../components/ImageSwiper6';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+const LeftContent = props => <Avatar.Icon {...props} icon="folder" theme={{ colors: { primary: '#06BEE1' } }}/>
 
 let current_latitude=null;
 let current_longitude=null;
@@ -157,7 +157,7 @@ const Foursquare = ({navigation}) => {
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView',{
               latitude:data['results'][i]['geocodes']['main']['latitude'],
               longitude:data['results'][i]['geocodes']['main']['longitude'],
-            })}>
+            })} theme={{ colors: { primary: '#06BEE1' } }}>
               See on the Map
             </Button>
             {/* </Title> */}
@@ -186,7 +186,7 @@ const Foursquare = ({navigation}) => {
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView1',{
               latitude:data['results'][j]['geocodes']['main']['latitude'],
               longitude:data['results'][j]['geocodes']['main']['longitude'],
-            })}>
+            })} theme={{ colors: { primary: '#06BEE1' } }}>
               See on the Map
             </Button>
             {/* </Title> */}
@@ -215,7 +215,7 @@ const Foursquare = ({navigation}) => {
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView2',{
               latitude:data['results'][k]['geocodes']['main']['latitude'],
               longitude:data['results'][k]['geocodes']['main']['longitude'],
-            })}>
+            })} theme={{ colors: { primary: '#06BEE1' } }}>
               See on the Map
             </Button>
             {/* </Title> */}
@@ -244,7 +244,7 @@ const Foursquare = ({navigation}) => {
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView3',{
               latitude:data['results'][p]['geocodes']['main']['latitude'],
               longitude:data['results'][p]['geocodes']['main']['longitude'],
-            })}>
+            })} theme={{ colors: { primary: '#06BEE1' } }}>
               See on the Map
             </Button>
             {/* </Title> */}
@@ -273,7 +273,7 @@ const Foursquare = ({navigation}) => {
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView4',{
               latitude:data['results'][w]['geocodes']['main']['latitude'],
               longitude:data['results'][w]['geocodes']['main']['longitude'],
-            })}>
+            })} theme={{ colors: { primary: '#06BEE1' } }}>
               See on the Map
             </Button>
             {/* </Title> */}
@@ -302,7 +302,7 @@ const Foursquare = ({navigation}) => {
             <Button icon="map" mode="contained" onPress={() => navigation.navigate('MapView5',{
               latitude:data['results'][t]['geocodes']['main']['latitude'],
               longitude:data['results'][t]['geocodes']['main']['longitude'],
-            })}>
+            })} theme={{ colors: { primary: '#06BEE1' } }}>
               See on the Map
             </Button>
             {/* </Title> */}
@@ -366,7 +366,7 @@ const Foursquare = ({navigation}) => {
   //   </Card.Actions>
   // </Card>
   <>
-  <Appbar.Header>
+  <Appbar.Header theme={{ colors: { primary: '#06BEE1' } }}>
     <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
     <Appbar.Content title="Check nearby places" />
   </Appbar.Header>

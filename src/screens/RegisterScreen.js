@@ -1,4 +1,4 @@
-import React, {useState,useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -41,50 +41,50 @@ const loginValidationSchema = yup.object().shape({
   first_name: yup
     .string().required(),
   last_name: yup
-    .string().required(),    
+    .string().required(),
 })
-const RegisterScreen = ({navigation}) => {
-  const {register}=useContext(AuthContext);
+const RegisterScreen = ({ navigation }) => {
+  const { register } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Date of Birth');
-  const [firstName,setFirstName] = useState(null);
-  const [lastName,setLastName] = useState(null);
-  const [email,setEmail] = useState(null);
-  const [confirmPassword,setConfirmPassword]=useState(null);
-  const [profilePic,setProfilePic] = useState("hjdjjd.jpg");
-  const [password,setPassword] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [profilePic, setProfilePic] = useState("hjdjjd.jpg");
+  const [password, setPassword] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState(null);
- //const [roleId,setRoleId]=useState(2);
-  const [modal,setModal]=useState(false);
+  //const [roleId,setRoleId]=useState(2);
+  const [modal, setModal] = useState(false);
 
-  const [roleId,setRoleId]=useState(null);
+  const [roleId, setRoleId] = useState(null);
 
-  const roles = [{ label: 'Tour Guide', value: 2 },{ label: 'Tourist', value: 3 }];
+  const roles = [{ label: 'Tour Guide', value: 2 }, { label: 'Tourist', value: 3 }];
 
-  const renderModal=()=>{
-    if(modal==true){
-      return(<Modal_View/>);
+  const renderModal = () => {
+    if (modal == true) {
+      return (<Modal_View />);
     }
-   
-  }
-//  useEffect(()=>{
-//     renderModal()
 
-//  })
- 
+  }
+  //  useEffect(()=>{
+  //     renderModal()
+
+  //  })
+
 
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center',backgroundColor:'#fff'}}>
+    <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff' }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{paddingHorizontal: 25}}>
-        <View style={{alignItems: 'center'}}>
+        style={{ paddingHorizontal: 25 }}>
+        <View style={{ alignItems: 'center' }}>
           <RegistrationSVG
             height={250}
             width={250}
-            style={{transform: [{rotate: '-5deg'}]}}
+            style={{ transform: [{ rotate: '-5deg' }] }}
           />
         </View>
 
@@ -99,269 +99,271 @@ const RegisterScreen = ({navigation}) => {
           Register
         </Text>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginBottom: 10,
-          }}>
-            <Button style={{paddingHorizontal:50, borderRadius: 10,paddingVertical:10,backgroundColor:"#DB4437"}} icon="google" mode="contained" onPress={() => console.log('Pressed')}>
-                 Continue with Google
-            </Button>
-          
-        </View>
-
-        <Text style={{textAlign: 'center', color: '#666', marginBottom: 10}}>
-          Or, register with email ...
-        </Text>
         <Formik
-            validateOnMount={true}
-            validationSchema={loginValidationSchema}
-            initialValues={{ email: '', password: '',first_name: '',last_name:'' }}
-            onSubmit={values => console.log(values)}
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-              isValid,
-            }) => (
+          validateOnMount={true}
+          validationSchema={loginValidationSchema}
+          initialValues={{ email: '', password: '', first_name: '', last_name: '' }}
+          onSubmit={values => console.log(values)}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+            isValid,
+          }) => (
             <>
-        <View
-        style={{
-          flexDirection: 'row',
-          borderBottomColor: '#ccc',
-          borderBottomWidth: 1,
-          paddingBottom: 8,
-          marginBottom: 25,}}
-          
-        >    
-        <Ionicons
-              name="person-outline"
-              size={20}
-              color="#9A52C7"
-              style={{marginRight: 5}}
-        />
-        <TextInput
-          name='first_name'
-          placeholder={'First Name'}
-          style={{flex: 1, paddingVertical: 0}}
-          value={values.first_name}
-          onChangeText={handleChange('first_name')}
-          onBlur={handleBlur('first_name')}
-        />
-        {(errors.first_name && touched.first_name) &&
+              <View
+                style={{
+                  flexDirection: 'row',
+                  borderBottomColor: '#ccc',
+                  borderBottomWidth: 1,
+                  paddingBottom: 8,
+                  marginBottom: 25,
+                }}
+
+              >
+                <Ionicons
+                  name="person-outline"
+                  size={20}
+                  color="#1768AC"
+                  style={{ marginRight: 5 }}
+                />
+                <TextInput
+                  name='first_name'
+                  placeholder={'First Name'}
+                  placeholderTextColor="grey"
+                  style={{ flex: 1, paddingVertical: 0, color: 'black' }}
+                  value={values.first_name}
+                  onChangeText={handleChange('first_name')}
+                  onBlur={handleBlur('first_name')}
+                />
+                {(errors.first_name && touched.first_name) &&
                   <Text style={styles.errorText}>{errors.first_name}</Text>
                 }
-        </View>
-        {/* <InputField
+              </View>
+              {/* <InputField
           label={'Last Name'}
           icon={
             <Ionicons
               name="person-outline"
               size={20}
-              color="#9A52C7"
+              color="#1768AC"
               style={{marginRight: 5}}
             />
           }
           value={lastName}
           onChangeText={text => setLastName(text)}
         /> */}
-        <View
-        style={{
-          flexDirection: 'row',
-          borderBottomColor: '#ccc',
-          borderBottomWidth: 1,
-          paddingBottom: 8,
-          marginBottom: 25,}}
-          
-        >    
-        <Ionicons
-              name="person-outline"
-              size={20}
-              color="#9A52C7"
-              style={{marginRight: 5}}
-        />
-        <TextInput
-          name='last_name'
-          placeholder={'Last Name'}
-          style={{flex: 1, paddingVertical: 0}}
-          value={values.last_name}
-          onChangeText={handleChange('last_name')}
-          onBlur={handleBlur('last_name')}
-        />
-        {(errors.last_name && touched.last_name) &&
+              <View
+                style={{
+                  flexDirection: 'row',
+                  borderBottomColor: '#ccc',
+                  borderBottomWidth: 1,
+                  paddingBottom: 8,
+                  marginBottom: 25,
+                }}
+
+              >
+                <Ionicons
+                  name="person-outline"
+                  size={20}
+                  color="#1768AC"
+                  style={{ marginRight: 5 }}
+                />
+                <TextInput
+                  name='last_name'
+                  placeholder={'Last Name'}
+                  placeholderTextColor="grey"
+                  style={{ flex: 1, paddingVertical: 0, color: 'black' }}
+                  value={values.last_name}
+                  onChangeText={handleChange('last_name')}
+                  onBlur={handleBlur('last_name')}
+                />
+                {(errors.last_name && touched.last_name) &&
                   <Text style={styles.errorText}>{errors.last_name}</Text>
                 }
-        </View>
-        <View
-        style={{
-          flexDirection: 'row',
-          borderBottomColor: '#ccc',
-          borderBottomWidth: 1,
-          paddingBottom: 8,
-          marginBottom: 25,}}
-        >
-        <MaterialIcons
-            name="alternate-email"
-            size={20}
-            color="#9A52C7"
-            style={{marginRight: 5}}
-          />
-        <TextInput
-          name="email"
-          // label={'Email ID'}
-          placeholder={'Email ID'}
-          style={{flex: 1, paddingVertical: 0}}
-          keyboardType="email-address"
-          value={values.email}
-          // value={email}
-          // onChangeText={text => setEmail(text)}
-          onChangeText={handleChange('email')}
-          onBlur={handleBlur('email')}
-        />
-        
-          {(errors.email && touched.email) &&
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  borderBottomColor: '#ccc',
+                  borderBottomWidth: 1,
+                  paddingBottom: 8,
+                  marginBottom: 25,
+                }}
+              >
+                <MaterialIcons
+                  name="alternate-email"
+                  size={20}
+                  color="#1768AC"
+                  style={{ marginRight: 5 }}
+                />
+                <TextInput
+                  name="email"
+                  // label={'Email ID'}
+                  placeholder={'Email ID'}
+                  placeholderTextColor="grey"
+                  style={{ flex: 1, paddingVertical: 0, color: 'black' }}
+                  keyboardType="email-address"
+                  value={values.email}
+                  // value={email}
+                  // onChangeText={text => setEmail(text)}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                />
+
+                {(errors.email && touched.email) &&
                   <Text style={styles.errorText}>{errors.email}</Text>
-           }
-        </View>
-        <View
-         style={{
-          flexDirection: 'row',
-          borderBottomColor: '#ccc',
-          borderBottomWidth: 1,
-          paddingBottom: 8,
-          marginBottom: 25,}}
-         > 
-         <Ionicons
-            name="ios-lock-closed-outline"
-            size={20}
-            color="#9A52C7"
-            style={{marginRight: 5}}
-          />       
-       <TextInput
-          name="password"
-          placeholder={'Password'}
-          style={{flex: 1, paddingVertical: 0}}
-          inputType="password"
-          secureTextEntry={true}
-          fieldButtonLabel={"Forgot?"}
-          fieldButtonFunction={() => navigation.navigate('ForgetPassword')}
-          // value={password}
-          // onChangeText={text => setPassword(text)}
-          value={values.password}
-          onChangeText={handleChange('password')}
-          onBlur={handleBlur('password')}
-        />
-          
-        {(errors.password && touched.password) &&
+                }
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  borderBottomColor: '#ccc',
+                  borderBottomWidth: 1,
+                  paddingBottom: 8,
+                  marginBottom: 25,
+                }}
+              >
+                <Ionicons
+                  name="ios-lock-closed-outline"
+                  size={20}
+                  color="#1768AC"
+                  style={{ marginRight: 5 }}
+                />
+                <TextInput
+                  name="password"
+                  placeholder={'Password'}
+                  placeholderTextColor="grey"
+                  style={{ flex: 1, paddingVertical: 0, color: 'black' }}
+                  inputType="password"
+                  secureTextEntry={true}
+                  fieldButtonLabel={"Forgot?"}
+                  fieldButtonFunction={() => navigation.navigate('ForgetPassword')}
+                  // value={password}
+                  // onChangeText={text => setPassword(text)}
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                />
+
+                {(errors.password && touched.password) &&
                   <Text style={styles.errorText}>{errors.password}</Text>
                 }
-                </View>
+              </View>
 
-        <InputField
-          label={'Confirm Password'}
-          icon={
-            <Ionicons
-              name="ios-lock-closed-outline"
-              size={20}
-              color="#9A52C7"
-              style={{marginRight: 5}}
-            />
-          }
-          value={confirmPassword}
-          onChangeText={text => setConfirmPassword(text)}
-          inputType="password"
-        />
+              <InputField
+                label={'Confirm Password'}
+                icon={
+                  <Ionicons
+                    name="ios-lock-closed-outline"
+                    size={20}
+                    color="#1768AC"
+                    style={{ marginRight: 5 }}
+                  />
+                }
+                value={confirmPassword}
+                onChangeText={text => setConfirmPassword(text)}
+                inputType="password"
+              />
 
-<Dropdown
-          style={{
-            height: 40,
-            backgroundColor: 'rgba(52, 52, 52, 0.0)',
-            paddingBottom: 8,
-            marginBottom: 20,
-            paddingLeft: 0,
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            borderBottomWidth: 1,
-            borderBottomColor: '#ccc',
-            marginBottom: 40,
-          }}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
-          placeholderStyle={{
-            textAlign: 'left',
-            fontSize: 15,
-            color: '#999999'
-          }}
-          selectedTextStyle={{
-            fontSize: 15,
-            color: 'black'
-          }}
-          iconStyle={{
-            width: 20,
-            height: 20,
-            alignContent: 'flex-start'
-          }}
-          data={roles}
-          maxHeight={300}
-          labelField="label"
-          valueField="value"
-          placeholder={'Select User Role'}
-          value={value}
-          onChange={item => {
-            setRoleId(item.value);
-            setValue(item.value);
-            setIsFocus(false);
-            console.log(item.value);
-          }}
-          renderLeftIcon={() => (
-            <MaterialIcons
-            name="person-add"
-                size={20}
-                color="#9A52C7"
+              <Dropdown
                 style={{
-                  marginRight: 10,
+                  height: 40,
+                  backgroundColor: 'rgba(52, 52, 52, 0.0)',
+                  paddingBottom: 8,
+                  marginBottom: 20,
+                  paddingLeft: 0,
+                  shadowOffset: {
+                    width: 0,
+                    height: 1,
+                  },
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#ccc',
+                  marginBottom: 40,
                 }}
-            />
-          )}
-        />
+                itemTextStyle={{
+                  color: 'grey'
+                }}
+                containerStyle={{
+                  color: 'grey',
+                  backgroundColor: '#9fa1a6',
+                  borderRadius: 5
+                }}
+                activeColor="grey"
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                placeholderStyle={{
+                  textAlign: 'left',
+                  fontSize: 15,
+                  color: 'grey'
+                }}
+                selectedTextStyle={{
+                  fontSize: 15,
+                  color: 'black'
+                }}
+                iconStyle={{
+                  width: 20,
+                  height: 20,
+                  alignContent: 'flex-start'
+                }}
+                data={roles}
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={'Select User Role'}
+                value={value}
+                onChange={item => {
+                  setRoleId(item.value);
+                  setValue(item.value);
+                  setIsFocus(false);
+                  console.log(item.value);
+                }}
+                renderLeftIcon={() => (
+                  <MaterialIcons
+                    name="person-add"
+                    size={20}
+                    color="#1768AC"
+                    style={{
+                      marginRight: 10,
+                    }}
+                  />
+                )}
+              />
 
-        {/*<DropDownList/>
+              {/*<DropDownList/>
          <CustomButton label={'Register'} disabled={!isValid || values.email === ''} onPress={() => {register(firstName,lastName,values.email,values.password,profilePic,roleId);navigation.navigate('Login')}} /> */}
-        <TouchableOpacity
-      onPress={() => {if(values.password!=confirmPassword){setModal(true)}else{register(values.first_name,values.last_name,values.email,values.password,profilePic,roleId);navigation.navigate('EmailVerification');setModal(false)}}}
-      disabled={ !isValid || values.email === ''|| roleId==null}
-      style={{
-        backgroundColor: '#9A52C7',
-        padding: 20,
-        borderRadius: 10,
-        marginBottom: 20,
-      }}>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontWeight: '700',
-          fontSize: 16,
-          color: '#fff',
-        }}>
-        {"Register"}
-      </Text>
-    </TouchableOpacity>
-        </>
-        )}
-        
+              <TouchableOpacity
+                onPress={() => { if (values.password != confirmPassword) { setModal(true) } else { register(values.first_name, values.last_name, values.email, values.password, profilePic, roleId); navigation.navigate('EmailVerification'); setModal(false) } }}
+                disabled={!isValid || values.email === '' || roleId == null}
+                style={{
+                  backgroundColor: '#1768AC',
+                  padding: 20,
+                  borderRadius: 10,
+                  marginBottom: 20,
+                }}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontWeight: '700',
+                    fontSize: 16,
+                    color: '#fff',
+                  }}>
+                  {"Register"}
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
+
         </Formik>
         {
-            
-              renderModal()
-            
-         
+
+          renderModal()
+
+
         }
 
         <View
@@ -369,10 +371,14 @@ const RegisterScreen = ({navigation}) => {
             flexDirection: 'row',
             justifyContent: 'center',
             marginBottom: 30,
+            paddingTop: 10,
+            paddingBottom: 10,
+            borderRadius: 5,
+            backgroundColor: "#06BEE1"
           }}>
           <Text>Already registered?</Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={{color: '#AD40AF', fontWeight: '700'}}> Login</Text>
+            <Text style={{ color: '#1768AC', fontWeight: '700' }}> Login</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

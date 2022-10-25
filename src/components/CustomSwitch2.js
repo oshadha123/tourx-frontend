@@ -26,7 +26,7 @@ const {getFindTours}=useContext(AuthContext);
         width: '100%',
         backgroundColor: '#e4e4e4',
         borderRadius: 10,
-        borderColor: '#9A52C7',
+        borderColor: '#1768AC',
         flexDirection: 'row',
         justifyContent: 'center',
       }}>
@@ -35,14 +35,14 @@ const {getFindTours}=useContext(AuthContext);
         onPress={() => {updateSwitchData(1);getFindTours()}}
         style={{
           flex: 1,
-          backgroundColor: getSelectionMode == 1 ? '#9A52C7' : '#e4e4e4',
+          backgroundColor: getSelectionMode == 1 ? '#1768AC' : '#e4e4e4',
           borderRadius: 10,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
         <Text
           style={{
-            color: getSelectionMode == 1 ? 'white' : '#9A52C7',
+            color: getSelectionMode == 1 ? 'white' : '#1768AC',
             fontSize: 14,
             fontFamily: 'Roboto-Medium',
           }}>
@@ -54,14 +54,14 @@ const {getFindTours}=useContext(AuthContext);
         onPress={() => {updateSwitchData(2);getLeaderboard2() }}
         style={{
           flex: 1,
-          backgroundColor: getSelectionMode == 2 ? '#9A52C7' : '#e4e4e4',
+          backgroundColor: getSelectionMode == 2 ? '#1768AC' : '#e4e4e4',
           borderRadius: 10,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
         <Text
           style={{
-            color: getSelectionMode == 2 ? 'white' : '#9A52C7',
+            color: getSelectionMode == 2 ? 'white' : '#1768AC',
             fontSize: 14,
             fontFamily: 'Roboto-Medium',
           }}>

@@ -53,7 +53,7 @@ const ReportTourguide = ({ route, navigation }) => {
 
     return (
         <>
-            <Appbar.Header>
+            <Appbar.Header theme={{ colors: { primary: '#06BEE1' } }}>
                 <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
                 <Appbar.Content title="Report User" />
             </Appbar.Header>
@@ -88,12 +88,21 @@ const ReportTourguide = ({ route, navigation }) => {
                                     borderBottomColor: '#ccc',
                                     marginBottom: 40,
                                 }}
+                                itemTextStyle={{
+                                    color: 'grey'
+                                }}
+                                containerStyle={{
+                                    color: 'grey',
+                                    backgroundColor: '#9fa1a6',
+                                    borderRadius: 5
+                                }}
+                                activeColor="grey"
                                 onFocus={() => setIsFocus(true)}
                                 onBlur={() => setIsFocus(false)}
                                 placeholderStyle={{
                                     textAlign: 'left',
                                     fontSize: 15,
-                                    color: '#999999'
+                                    color: 'grey'
                                 }}
                                 selectedTextStyle={{
                                     fontSize: 15,
@@ -109,6 +118,7 @@ const ReportTourguide = ({ route, navigation }) => {
                                 labelField="label"
                                 valueField="value"
                                 placeholder={'Select Report Type'}
+                                placeholderTextColor="grey"
                                 value={value}
                                 onChange={item => {
                                     setReportId(item.value);
@@ -120,7 +130,7 @@ const ReportTourguide = ({ route, navigation }) => {
                                     <MaterialIcons
                                         name="report"
                                         size={20}
-                                        color="#666"
+                                        color="grey"
                                         style={{
                                             marginRight: 10,
                                         }}
@@ -142,7 +152,7 @@ const ReportTourguide = ({ route, navigation }) => {
                                     setDescription(description);
                                 })}
                             />
-                            <TouchableOpacity style={styles.commandButton} onPress={() => {{ report(UID, roleID, value, description) }; alert("User reported!"); navigation.navigate("Home")}}>
+                            <TouchableOpacity style={styles.commandButton} onPress={() => { { report(UID, roleID, value, description) }; alert("User reported!"); navigation.navigate("Home") }}>
                                 <Text style={styles.panelButtonTitle}>Report</Text>
                             </TouchableOpacity>
                         </View>
@@ -160,7 +170,7 @@ const styles = StyleSheet.create({
     commandButton: {
         padding: 15,
         borderRadius: 10,
-        backgroundColor: '#9A52C7',
+        backgroundColor: '#1768AC',
         alignItems: 'center',
         marginTop: 10,
     },

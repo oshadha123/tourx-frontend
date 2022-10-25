@@ -79,7 +79,7 @@ export default function HomeScreen({navigation}) {
     
     <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#fff'}}>
     
-        <ActivityIndicator size='large' color="#9A52C7"/>
+        <ActivityIndicator size='large' color="#1768AC"/>
         {/* <Bars size={10} color="#FDAAFF" /> */}
     
            
@@ -90,7 +90,7 @@ export default function HomeScreen({navigation}) {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-      <Appbar.Header style={{backgroundColor:"#9A52C7"}} >
+      <Appbar.Header style={{backgroundColor:"#1768AC"}} >
       {/* <Appbar.BackAction onPress={_goBack} /> */}
       <Appbar.Content title="Home" />
       <Appbar.Action icon="magnify" onPress={_handleSearch} />

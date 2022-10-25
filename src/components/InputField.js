@@ -26,8 +26,9 @@ export default function InputField({
       {inputType == 'password' ? (
         <TextInput
           placeholder={label}
+          placeholderTextColor="grey" 
           keyboardType={keyboardType}
-          style={{flex: 1, paddingVertical: 0}}
+          style={{flex: 1, paddingVertical: 0, color: 'black'}}
           secureTextEntry={true}
           value={value}
           onChangeText={onChangeText}
@@ -35,8 +36,9 @@ export default function InputField({
       ) : (
         <TextInput
           placeholder={label}
+          placeholderTextColor="grey"
           keyboardType={keyboardType}
-          style={{flex: 1, paddingVertical: 0}}
+          style={{flex: 1, paddingVertical: 0, color: 'black'}}
           value={value}
           onChangeText={onChangeText}
           multiline={multiline}
@@ -44,7 +46,7 @@ export default function InputField({
         />
       )}
       <TouchableOpacity onPress={fieldButtonFunction}>
-        <Text style={{color: '#AD40AF', fontWeight: '700'}}>{fieldButtonLabel}</Text>
+        <Text style={{color: '#1768AC', fontWeight: '700'}}>{fieldButtonLabel}</Text>
       </TouchableOpacity>
     </View>
   );

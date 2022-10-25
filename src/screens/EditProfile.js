@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
       commandButton: {
         padding: 15,
         borderRadius: 10,
-        backgroundColor: '#9A52C7',
+        backgroundColor: '#1768AC',
         alignItems: 'center',
         marginTop: 10,
       },
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
       panelButton: {
         padding: 13,
         borderRadius: 10,
-        backgroundColor: '#9A52C7',
+        backgroundColor: '#1768AC',
         alignItems: 'center',
         marginVertical: 7,
       },

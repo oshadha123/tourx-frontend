@@ -18,7 +18,7 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
   const starImgFilled = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartFilled_oqcs1v.png';
   const starImgCorner = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartOutline_qkghr6.png';
   const [currentImageIndex, setImageIndex] = useState(0);
-  const LeftContent = props => <Avatar.Icon {...props} icon="camera" />
+  const LeftContent = props => <Avatar.Icon {...props} icon="camera" theme={{ colors: { primary: '#06BEE1' } }}/>
   const RightContent = props => <CustomRatingBar />
 
   const CustomRatingBar = () => {
@@ -93,25 +93,25 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
           </Card.Content>
           <Card.Cover source={{ uri: path }} />
           <Card.Actions>
-            <View style={{ flex: 1 }}>
-              <Button icon="virtual-reality" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => setVisible(true)}>
+            <View style={{ flex: 1 }} >
+              <Button icon="virtual-reality" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => setVisible(true)} theme={{ colors: { primary: '#06BEE1' } }}>
                 View Photos
               </Button>
               <Button icon="map" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => navigation.navigate('MapView', {
                 latitude: latitude,
                 longitude: longitude,
-              })}>
+              })} theme={{ colors: { primary: '#06BEE1' } }}>
                 See on the Map
               </Button>
               <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => navigation.navigate('VisitWeather', {
                 latitude: latitude,
                 longitude: longitude,
-              })}>
+              })} theme={{ colors: { primary: '#06BEE1' } }}>
                 Weather
               </Button>
-              {title=="Sigiriya"?<Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hb?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')}>
+              {title=="Sigiriya"?<Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%"}} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hb?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
                 VR Photo Tour
-              </Button>: <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hW?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')}>
+              </Button>: <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hW?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
                 VR Photo Tour
               </Button>}
             </View>

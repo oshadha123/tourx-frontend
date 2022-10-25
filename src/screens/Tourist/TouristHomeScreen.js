@@ -84,7 +84,7 @@ export default function TouristHomeScreen({navigation}) {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-      <Appbar.Header style={{backgroundColor:"#9A52C7"}} >
+      <Appbar.Header style={{backgroundColor:"#1768AC"}} >
       {/* <Appbar.BackAction onPress={_goBack} /> */}
       <Appbar.Content title="Home" />
       <Appbar.Action icon="magnify" onPress={_handleSearch} />

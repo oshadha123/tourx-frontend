@@ -22,7 +22,7 @@ const AuthStack = () => {
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
-        drawerActiveBackgroundColor: '#9A52C7',
+        drawerActiveBackgroundColor: '#1768AC',
         drawerActiveTintColor: '#fff',
         drawerInactiveTintColor: '#333',
         drawerLabelStyle: {
