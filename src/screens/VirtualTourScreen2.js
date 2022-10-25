@@ -51,7 +51,7 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
             activeOpacity={0.7}
             onPress={() => setIsToggled(!isToggled)}
           >
-            {isToggled ? <MaterialIcons name="favorite-border" size={40} color="#1768AC" /> : <MaterialIcons name="favorite" size={40} color="#e34965" />}
+            {isToggled ? <MaterialIcons name="favorite" size={40} color="#e34965" /> : <MaterialIcons name="favorite-border" size={40} color="#1768AC" />}
           </TouchableOpacity>
         }
       </View>

@@ -1,9 +1,16 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import { Appbar } from 'react-native-paper';
 
-const BuyPremium = () => {
+const BuyPremium = ({ route, navigation }) => {
   return (
-    <Text>BuyPremium</Text>
+    <>
+      <Appbar.Header theme={{ colors: { primary: '#06BEE1' } }}>
+        <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
+        <Appbar.Content title="Buy Premium" />
+      </Appbar.Header>
+      <Text>BuyPremium</Text>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Text, Image, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from "../config";
@@ -10,18 +11,18 @@ const ProfileScreen = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
   const { userToken } = useContext(AuthContext);
 
-  const[proPicture, setImage]=useState(null);
-  const[fName, setFName]=useState(null);
-  const[lName, setLName]=useState(null);
-  const[contact, setContact]=useState(null);
-  const[bio, setBio]=useState(null);
-  const[refresh, setRefresh]=useState(false);
+  const [proPicture, setImage] = useState(null);
+  const [fName, setFName] = useState(null);
+  const [lName, setLName] = useState(null);
+  const [contact, setContact] = useState(null);
+  const [bio, setBio] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const pullMe = () => {
     setRefresh(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       setRefresh(false)
-    },2000)
+    }, 2000)
   }
 
   const token = {
@@ -45,13 +46,18 @@ const ProfileScreen = ({ navigation }) => {
     })
 
   return (
-    <View style={styles.screen}>
-        <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={()=>pullMe()}/>}>
+    <>
+      <Appbar.Header theme={{ colors: { primary: '#06BEE1' } }}>
+        <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
+        <Appbar.Content title="My Profile" />
+      </Appbar.Header>
+      <View style={styles.screen}>
+        <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
           <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
             style={styles.header} resizeMode='cover'
           />
           <View style={styles.meInfor}></View>
-          <Image source={{ uri : proPicture }}
+          <Image source={{ uri: proPicture }}
             style={styles.avatar} resizeMode='cover'
           />
           <View>
@@ -76,7 +82,8 @@ const ProfileScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </ScrollView>
-    </View>
+      </View>
+    </>
   );
 };
 

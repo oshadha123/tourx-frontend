@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Text, Image, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { AuthContext } from '../../context/AuthContext';
 import axios from "axios";
@@ -20,82 +21,94 @@ const ViewTourguide = ({ route, navigation }) => {
 
     if (packagee === "Premium") {
         return (
-            <View style={styles.screen}>
-                <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
-                    <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
-                        style={styles.header} resizeMode='cover'
-                    />
-                    <View style={styles.meInfor}></View>
-                    <Image source={{ uri: picture}}
-                        style={styles.avatar} resizeMode='cover'
-                    />
-                    <View>
-                        <Text style={styles.headerText}>{fName} {lName}</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.bio}>{bioo}</Text>
-                    </View>
-                    <View style={{ alignItems: 'center', marginTop: 10 }}>
-                        <View style={styles.container}>
-                            <FontAwesome name="phone" color='black' size={16} />
-                            <Text style={styles.textStyle}>{contact}</Text>
+            <>
+                <Appbar.Header theme={{ colors: { primary: '#06BEE1' } }}>
+                    <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
+                    <Appbar.Content title="View Tourguide" />
+                </Appbar.Header>
+                <View style={styles.screen}>
+                    <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
+                        <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
+                            style={styles.header} resizeMode='cover'
+                        />
+                        <View style={styles.meInfor}></View>
+                        <Image source={{ uri: picture }}
+                            style={styles.avatar} resizeMode='cover'
+                        />
+                        <View>
+                            <Text style={styles.headerText}>{fName} {lName}</Text>
                         </View>
-                        <View style={styles.container}>
-                            <FontAwesome name="star" color='red' size={26} />
-                            <Text style={styles.textStyle}>{points}</Text>
+                        <View>
+                            <Text style={styles.bio}>{bioo}</Text>
                         </View>
-                    </View>
-                    <View style={styles.buttonBack}>
-                        <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate('ReportTourguide', {
-                            fName: fName,
-                            lName: lName,
-                            UID: UID,
-                        })}>
-                            <Text style={styles.panelButtonTitle}>Report</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </View>
+                        <View style={{ alignItems: 'center', marginTop: 10 }}>
+                            <View style={styles.container}>
+                                <FontAwesome name="phone" color='black' size={16} />
+                                <Text style={styles.textStyle}>{contact}</Text>
+                            </View>
+                            <View style={styles.container}>
+                                <FontAwesome name="star" color='red' size={26} />
+                                <Text style={styles.textStyle}>{points}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.buttonBack}>
+                            <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate('ReportTourguide', {
+                                fName: fName,
+                                lName: lName,
+                                UID: UID,
+                            })}>
+                                <Text style={styles.panelButtonTitle}>Report</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </View>
+            </>
         );
     }
     else {
         return (
-            <View style={styles.screen}>
-                <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
-                    <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
-                        style={styles.header} resizeMode='cover'
-                    />
-                    <View style={styles.meInfor}></View>
-                    <Image source={{ uri: picture }}
-                        style={styles.avatar} resizeMode='cover'
-                    />
-                    <View>
-                        <Text style={styles.headerText}>{fName} {lName}</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.bio}>{bioo}</Text>
-                    </View>
-                    <View style={{ alignItems: 'center', marginTop: 10 }}>
-                        <View style={styles.container}>
-                            <FontAwesome name="phone" color='black' size={16} />
-                            <Text style={styles.textStyle}>{contact}</Text>
+            <>
+                <Appbar.Header theme={{ colors: { primary: '#06BEE1' } }}>
+                    <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
+                    <Appbar.Content title="View Tourguide" />
+                </Appbar.Header>
+                <View style={styles.screen}>
+                    <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
+                        <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
+                            style={styles.header} resizeMode='cover'
+                        />
+                        <View style={styles.meInfor}></View>
+                        <Image source={{ uri: picture }}
+                            style={styles.avatar} resizeMode='cover'
+                        />
+                        <View>
+                            <Text style={styles.headerText}>{fName} {lName}</Text>
                         </View>
-                        <View style={styles.container}>
-                            <FontAwesome name="star" color='black' size={16} />
-                            <Text style={styles.textStyle}>{points}</Text>
+                        <View>
+                            <Text style={styles.bio}>{bioo}</Text>
                         </View>
-                    </View>
-                    <View style={styles.buttonBack}>
-                        <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate('ReportTourguide', {
-                            fName: fName,
-                            lName: lName,
-                            UID: UID,
-                        })}>
-                            <Text style={styles.panelButtonTitle}>Report</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </View>
+                        <View style={{ alignItems: 'center', marginTop: 10 }}>
+                            <View style={styles.container}>
+                                <FontAwesome name="phone" color='black' size={16} />
+                                <Text style={styles.textStyle}>{contact}</Text>
+                            </View>
+                            <View style={styles.container}>
+                                <FontAwesome name="star" color='black' size={16} />
+                                <Text style={styles.textStyle}>{points}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.buttonBack}>
+                            <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate('ReportTourguide', {
+                                fName: fName,
+                                lName: lName,
+                                UID: UID,
+                            })}>
+                                <Text style={styles.panelButtonTitle}>Report</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </View>
+            </>
         );
     }
 }
