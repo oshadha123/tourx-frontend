@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView, Linking } from 'react-native'
 import ImageView from "react-native-image-viewing";
 import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
@@ -95,7 +95,7 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
           <Card.Actions>
             <View style={{ flex: 1 }}>
               <Button icon="virtual-reality" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => setVisible(true)}>
-                VR Photo Tour
+                View Photos
               </Button>
               <Button icon="map" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => navigation.navigate('MapView', {
                 latitude: latitude,
@@ -109,6 +109,11 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
               })}>
                 Weather
               </Button>
+              {title=="Sigiriya"?<Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hb?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')}>
+                VR Photo Tour
+              </Button>: <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hW?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')}>
+                VR Photo Tour
+              </Button>}
             </View>
           </Card.Actions>
         </Card>
