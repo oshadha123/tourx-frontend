@@ -1,15 +1,15 @@
 import React from 'react'
-import {useState} from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { useState } from 'react'
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import ImageView from "react-native-image-viewing";
 import ImageFooter from '../components/ImageFoter';
 import CustomButton from '../components/CustomButton';
-import { Avatar, Button, Card, Title, Paragraph,IconButton} from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const VirtualTourScreen2 = ({route,navigation}) => {
-  const {title,id,path,description,city,latitude,longitude}=route.params;
-  const [visible,setVisible] = useState(false)
+const VirtualTourScreen2 = ({ route, navigation }) => {
+  const { title, id, path, description, city, latitude, longitude } = route.params;
+  const [visible, setVisible] = useState(false)
   const onRequestClose = () => setVisible(false);
   const [isClick, setClick] = useState(false);
   const [defaultRating, setDefaultRating] = useState();
@@ -19,25 +19,26 @@ const VirtualTourScreen2 = ({route,navigation}) => {
   const starImgCorner = 'https://res.cloudinary.com/tourx/image/upload/v1666571489/HeartOutline_qkghr6.png';
   const [currentImageIndex, setImageIndex] = useState(0);
   const LeftContent = props => <Avatar.Icon {...props} icon="camera" />
-  const RightContent = props => <CustomRatingBar/>
+  const RightContent = props => <CustomRatingBar />
 
   const CustomRatingBar = () => {
-    return(
+    return (
+
       <View style={styles.customRatingBarStyle}>
         {
           maxRating.map((item, key) => {
-            return(
+            return (
               <TouchableOpacity
                 activeOpacity={0.7}
                 key={item}
-                onPress={() => {setDefaultRating(item); alert(defaultRating)}}
+                onPress={() => { setDefaultRating(item); alert(defaultRating) }}
               >
                 <Image
                   style={styles.starImageStyle}
                   source={
-                    item <= defaultRating 
-                    ? {uri: starImgFilled} 
-                    : {uri: starImgCorner}
+                    item <= defaultRating
+                      ? { uri: starImgFilled }
+                      : { uri: starImgCorner }
                   }
                 />
               </TouchableOpacity>
@@ -47,9 +48,9 @@ const VirtualTourScreen2 = ({route,navigation}) => {
       </View>
     )
   }
- 
+
   const images = [
-  	{
+    {
       uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Horton_Plains_National_Park_in_Sri_Lanka.jpg/1280px-Horton_Plains_National_Park_in_Sri_Lanka.jpg",
     },
     {
@@ -58,62 +59,63 @@ const VirtualTourScreen2 = ({route,navigation}) => {
     {
       uri: "https://www.timetravelturtle.com/wp-content/uploads/2015/01/Sri-Lanka-2014-679_feat.jpg",
     },
-	  {
+    {
       uri: "https://www.srilankaeconomytours.com/wp-content/uploads/2016/11/horton-plains-national-park.jpg",
     },
-	  {
+    {
       uri: "https://cdn.shopify.com/s/files/1/1762/3971/products/LK7301A000-01-E-1280-720.jpg?v=1624074587",
     },
   ];
 
- 
-  return (
-   
-    <View >
-        <ImageView
-        images={images}
-        // imageIndex={0}
-        imageIndex={currentImageIndex}
-        visible={visible}
-        animationType={'slide'}
-        doubleTapToZoomEnabled={true}
-        presentationStyle="overFullScreen"
-        
-        FooterComponent={({ imageIndex }) => (
-          <ImageFooter imageIndex={imageIndex} imagesCount={images.length} />
-        )}
-        onRequestClose={onRequestClose}
-        />
-      <Card style={{height:"100%"}}>
-      <Card.Title title={title} subtitle={city} left={LeftContent} right={RightContent}/>
-    <Card.Content>
-      {/* <Title>Bomburu Ella waterfall</Title> */}
-      <Paragraph>{description}</Paragraph>
-    </Card.Content>
-    <Card.Cover source={{ uri: path }} />
-    <Card.Actions>
-    <View style={{flex:1}}>
-  <Button icon="virtual-reality" mode="contained" style={{margin:"5%"}}  onPress={() => setVisible(true)}>
-    VR Photo Tour
-  </Button>
-  <Button icon="map" mode="contained" style={{margin:"5%"}} onPress={() => navigation.navigate('MapView',{
-    latitude:latitude,
-    longitude:longitude,
-  })}>
-    See on the Map
-  </Button>
-  <Button icon="cloud" mode="contained" style={{marginLeft:"5%",marginRight:"5%"}} onPress={() => navigation.navigate('VisitWeather',{
-    latitude:latitude,
-    longitude:longitude,
-  })}>
-    Weather
-  </Button>
-  </View>
-    </Card.Actions>
-  </Card>
- 
 
-  </View>
+  return (
+    <ScrollView>
+      <View >
+        <ImageView
+          images={images}
+          // imageIndex={0}
+          imageIndex={currentImageIndex}
+          visible={visible}
+          animationType={'slide'}
+          doubleTapToZoomEnabled={true}
+          presentationStyle="overFullScreen"
+
+          FooterComponent={({ imageIndex }) => (
+            <ImageFooter imageIndex={imageIndex} imagesCount={images.length} />
+          )}
+          onRequestClose={onRequestClose}
+        />
+        <Card style={{ height: "100%" }}>
+          <Card.Title title={title} subtitle={city} left={LeftContent} right={RightContent} />
+          <Card.Content>
+            {/* <Title>Bomburu Ella waterfall</Title> */}
+            <Paragraph>{description}</Paragraph>
+          </Card.Content>
+          <Card.Cover source={{ uri: path }} />
+          <Card.Actions>
+            <View style={{ flex: 1 }}>
+              <Button icon="virtual-reality" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => setVisible(true)}>
+                VR Photo Tour
+              </Button>
+              <Button icon="map" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => navigation.navigate('MapView', {
+                latitude: latitude,
+                longitude: longitude,
+              })}>
+                See on the Map
+              </Button>
+              <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => navigation.navigate('VisitWeather', {
+                latitude: latitude,
+                longitude: longitude,
+              })}>
+                Weather
+              </Button>
+            </View>
+          </Card.Actions>
+        </Card>
+
+
+      </View>
+    </ScrollView>
   )
 }
 

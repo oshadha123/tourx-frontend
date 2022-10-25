@@ -189,12 +189,18 @@ export default function TouristHomeScreen({navigation}) {
                   points={item.points}
                   isFree={'Yes'}
                   
-                  // onPress={() =>
-                  //   navigation.navigate('VirtualTour', {
-                  //     title: item.title,
-                  //     id: item.id,
-                  //   })
-                  // }
+                  onPress={() =>
+                    navigation.navigate('ViewTourguide', {
+                      UID:item.userId,
+                      fName:item.firstName,
+                      lName:item.lastName,
+                      bioo:item.bio,
+                      picture:item.profilePicture,
+                      points:item.points,
+                      packagee:item.package,
+                      contact:item.contactNumber,
+                    })
+                  }
                 />
               )
             }
@@ -208,12 +214,18 @@ export default function TouristHomeScreen({navigation}) {
                   points={item.points}
                   isFree={'Yes'}
                   
-                  // onPress={() =>
-                  //   navigation.navigate('VirtualTour', {
-                  //     title: item.title,
-                  //     id: item.id,
-                  //   })
-                  // }
+                  onPress={() =>
+                    navigation.navigate('ViewTourguide', {
+                      UID:item.userId,
+                      fName:item.firstName,
+                      lName:item.lastName,
+                      bioo:item.bio,
+                      picture:item.profilePicture,
+                      points:item.points,
+                      packagee:item.package,
+                      contact:item.contactNumber,
+                    })
+                  }
                 />
               )
             }

@@ -63,7 +63,6 @@ const EditProfile = ({navigation}) => {
            }, token)
            .then(res=>{
                console.log(res.data);
-               navigation.navigate("ProfileScreen");
            })
            .catch(e=>{
             
@@ -78,7 +77,6 @@ const EditProfile = ({navigation}) => {
            }, token)
            .then(res=>{
                console.log(res.data);
-               navigation.navigate("ProfileScreen");
            })
            .catch(e=>{
             
@@ -286,7 +284,7 @@ const EditProfile = ({navigation}) => {
               setBio(bioo);
             })}
           />
-          <TouchableOpacity style={styles.commandButton} onPress={() => {update(proPicture, fName, lName, contact, bio)}}>
+          <TouchableOpacity style={styles.commandButton} onPress={() => {{update(proPicture, fName, lName, contact, bio)}; alert("Profile successfully updated!"); navigation.navigate("Home")}}>
             <Text style={styles.panelButtonTitle}>Update</Text>
           </TouchableOpacity>
         </Animated.View>

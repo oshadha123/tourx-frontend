@@ -3,7 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import { windowWidth } from '../utils/Dimensions';
 import { AuthContext } from '../context/AuthContext';
 
-export default function ListItem3({key, photo, subTitle, isFree, onPress, title}) {
+export default function ListItem3({photo, subTitle, isFree, onPress, title}) {
   const {findToursInfo}=useContext(AuthContext);
 
   return (
@@ -14,7 +14,6 @@ export default function ListItem3({key, photo, subTitle, isFree, onPress, title}
       marginBottom: 20,
     }}>
       <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
-      {key}
         <Image
           source={photo}
           style={{width: 55, height: 55, borderRadius: 10, marginRight: 8}}

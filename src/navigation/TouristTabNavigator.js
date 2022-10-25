@@ -24,6 +24,8 @@ import MapViewScreen2 from '../screens/Tourist/MapViewScreen';
 import MapViewScreen3 from '../screens/Tourist/MapViewScreen';
 import MapViewScreen4 from '../screens/Tourist/MapViewScreen';
 import MapViewScreen5 from '../screens/Tourist/MapViewScreen';
+import ReportTourguide from '../screens/Tourist/ReportTourguide';
+import ViewTourguide from '../screens/Tourist/ViewTourguide';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -53,6 +55,16 @@ const HomeStack = () => {
       <Stack.Screen
         name="VisitWeather"
         component={VisitWeather}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ReportTourguide"
+        component={ReportTourguide}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ViewTourguide"
+        component={ViewTourguide}
         options={{headerShown: false}}
       />
       <Stack.Screen

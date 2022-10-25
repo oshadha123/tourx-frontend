@@ -50,7 +50,7 @@ const Foursquare = ({navigation}) => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'fsq3zqtvuc8goaVMAvU0aw+TpEkH5A5/9EYxrNlJDYiSzjg='
+          Authorization: 'fsq3wgfLQMlaOpJLKLCk0bTZ4dSHUSU3dXSzHshLAVOJaAQ='
         }
       };
     //   const [inf,setInf]=useState(null);

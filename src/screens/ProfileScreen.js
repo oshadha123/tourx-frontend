@@ -1,8 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Text, Image, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
-import Animated from 'react-native-reanimated';
-import BottomSheet from 'reanimated-bottom-sheet';
-import ImagePicker from 'react-native-image-crop-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from "../config";
@@ -47,73 +44,8 @@ const ProfileScreen = ({ navigation }) => {
       console.log(`Retrieving error ${e}`)
     })
 
-  bs = React.createRef();
-  fall = new Animated.Value(1);
-
-  const takePhotoFromCamera = () => {
-    ImagePicker.openCamera({
-      compressImageMaxWidth: 300,
-      compressImageMaxHeight: 300,
-      cropping: true,
-      compressImageQuality: 0.7
-    }).then(image => {
-      console.log(image);
-      bs.current.snapTo(1);
-    });
-  }
-
-  const choosePhotoFromLibrary = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 300,
-      cropping: true,
-      compressImageQuality: 0.7
-    }).then(image => {
-      console.log(image);
-      bs.current.snapTo(1);
-    });
-  }
-
-
-  renderInner = () => (
-    <View style={styles.panel}>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={styles.panelTitle}>Upload Photo</Text>
-        <Text style={styles.panelSubtitle}>Choose picture to upload</Text>
-      </View>
-      <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-        <Text style={styles.panelButtonTitle}>Take Photo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
-        <Text style={styles.panelButtonTitle}>Choose from files</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton} onPress={() => bs.current.snapTo(1)}>
-        <Text style={styles.panelButtonTitle}>Cancel</Text>
-      </TouchableOpacity>
-    </View>
-
-  );
-
-  renderHeader = () => (
-    <View style={styles.alertHeader}>
-      <View style={styles.panelHeader}>
-        <View style={styles.panelHandle}></View>
-      </View>
-    </View>
-  );
-
   return (
     <View style={styles.screen}>
-      <BottomSheet
-        ref={bs}
-        snapPoints={[330, 0]}
-        renderContent={renderInner}
-        renderHeader={renderHeader}
-        initialSnap={1}
-        callbackNode={fall}
-        enabledGestureInteraction={true}
-      />
-      <Animated.View style={{ opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)) }}>
         <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={()=>pullMe()}/>}>
           <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
             style={styles.header} resizeMode='cover'
@@ -142,12 +74,8 @@ const ProfileScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate("EditProfile")}>
               <Text style={styles.panelButtonTitle}>Edit Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.panelButton} onPress={() => bs.current.snapTo(0)}>
-              <Text style={styles.panelButtonTitle}>Upload Photos</Text>
-            </TouchableOpacity>
           </View>
         </ScrollView>
-      </Animated.View>
     </View>
   );
 };
