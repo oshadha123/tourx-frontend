@@ -24,6 +24,7 @@ import MapViewScreen2 from '../screens/Tourist/MapViewScreen';
 import MapViewScreen3 from '../screens/Tourist/MapViewScreen';
 import MapViewScreen4 from '../screens/Tourist/MapViewScreen';
 import MapViewScreen5 from '../screens/Tourist/MapViewScreen';
+import MapViewScreen6 from '../screens/Tourist/MapViewScreen';
 import ReportTourguide from '../screens/Tourist/ReportTourguide';
 import ViewTourguide from '../screens/Tourist/ViewTourguide';
 
@@ -106,6 +107,15 @@ const HomeStack = () => {
       <Stack.Screen
         name="MapView5"
         component={MapViewScreen5}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="map" size={22} color={color} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="MapView6"
+        component={MapViewScreen6}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="map" size={22} color={color} />

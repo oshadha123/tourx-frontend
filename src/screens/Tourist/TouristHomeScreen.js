@@ -173,6 +173,7 @@ export default function TouristHomeScreen({navigation}) {
                   longitude:item.longitude,
                   description: item.description,
                   city:item.villageName,
+                  vr:item.vrUrl
                 })
               }
             />

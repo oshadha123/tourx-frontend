@@ -76,7 +76,7 @@ getWeather({
   let hours =  date.getHours();
   console.log(hours)
   if (18<hours<24){
-    setType('Night')
+    setType('Day')
   }
 });
 

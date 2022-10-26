@@ -53,7 +53,7 @@ const ProfileScreen = ({ navigation }) => {
       </Appbar.Header>
       <View style={styles.screen}>
         <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
-          <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
+          <Image source={{ uri: 'https://res.cloudinary.com/tourx/image/upload/v1662643896/summer-camp-in-the-forest-landcape-background-free-vector_kxzuxz.jpg' }}
             style={styles.header} resizeMode='cover'
           />
           <View style={styles.meInfor}></View>

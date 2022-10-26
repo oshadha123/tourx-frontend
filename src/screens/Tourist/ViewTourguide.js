@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, Dimensions, TouchableOpacity, ScrollView
 import { Appbar } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { AuthContext } from '../../context/AuthContext';
+import call from 'react-native-phone-call';
 import axios from "axios";
 import { BASE_URL } from '../../config';
 
@@ -19,6 +20,12 @@ const ViewTourguide = ({ route, navigation }) => {
         }, 2000)
     }
 
+    const args = {
+        number: contact, // String value with the number to call
+        prompt: true, // Optional boolean property. Determines if the user should be prompted prior to the call 
+        skipCanOpen: false // Skip the canOpenURL check
+      }
+
     if (packagee === "Premium") {
         return (
             <>
@@ -28,7 +35,7 @@ const ViewTourguide = ({ route, navigation }) => {
                 </Appbar.Header>
                 <View style={styles.screen}>
                     <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />}>
-                        <Image source={{ uri: 'https://cdn.pixabay.com/photo/2016/05/22/19/15/background-1409028__340.png' }}
+                        <Image source={{ uri: 'https://res.cloudinary.com/tourx/image/upload/v1662643896/summer-camp-in-the-forest-landcape-background-free-vector_kxzuxz.jpg' }}
                             style={styles.header} resizeMode='cover'
                         />
                         <View style={styles.meInfor}></View>
@@ -52,7 +59,12 @@ const ViewTourguide = ({ route, navigation }) => {
                             </View>
                         </View>
                         <View style={styles.buttonBack}>
-                            <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate('ReportTourguide', {
+                            <TouchableOpacity style={styles.panelButton} onPress={() => call(args).catch(console.error)}>
+                                <Text style={styles.panelButtonTitle}>Call</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.buttonBack}>
+                            <TouchableOpacity style={styles.dangerButton} onPress={() => navigation.navigate('ReportTourguide', {
                                 fName: fName,
                                 lName: lName,
                                 UID: UID,
@@ -98,7 +110,12 @@ const ViewTourguide = ({ route, navigation }) => {
                             </View>
                         </View>
                         <View style={styles.buttonBack}>
-                            <TouchableOpacity style={styles.panelButton} onPress={() => navigation.navigate('ReportTourguide', {
+                            <TouchableOpacity style={styles.panelButton} onPress={() => call(args).catch(console.error)}>
+                                <Text style={styles.panelButtonTitle}>Call</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.buttonBack}>
+                            <TouchableOpacity style={styles.dangerButton} onPress={() => navigation.navigate('ReportTourguide', {
                                 fName: fName,
                                 lName: lName,
                                 UID: UID,
@@ -161,9 +178,19 @@ const styles = StyleSheet.create({
     panelButton: {
         padding: 13,
         borderRadius: 10,
+        backgroundColor: "#1768AC",
+        alignItems: 'center',
+        marginVertical: 7,
+    },
+    dangerButton: {
+        padding: 5,
+        borderRadius: 10,
         backgroundColor: "#E26D5C",
         alignItems: 'center',
         marginVertical: 7,
+        marginTop: 50,
+        marginLeft: 100,
+        marginRight: 100,
     },
     panelButtonTitle: {
         fontSize: 17,

@@ -10,7 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const VirtualTourScreen2 = ({ route, navigation }) => {
-  const { title, id, path, description, city, latitude, longitude } = route.params;
+  const { title, id, path, description, city, latitude, longitude, vr } = route.params;
   const [visible, setVisible] = useState(false)
   const onRequestClose = () => setVisible(false);
   const [isClick, setClick] = useState(false);
@@ -109,6 +109,7 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
               <Button icon="map" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => navigation.navigate('MapView', {
                 latitude: latitude,
                 longitude: longitude,
+                city: city,
               })} theme={{ colors: { primary: '#06BEE1' } }}>
                 See on the Map
               </Button>
@@ -118,15 +119,12 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
               })} theme={{ colors: { primary: '#06BEE1' } }}>
                 Weather
               </Button>
-              {title == "Sigiriya" ? <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hb?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
+              <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL(vr)} theme={{ colors: { primary: '#06BEE1' } }}>
                 VR Photo Tour
-              </Button> : <Button icon="cloud" mode="contained" style={{ marginLeft: "5%", marginRight: "5%", marginTop: "5%" }} onPress={() => Linking.openURL('https://kuula.co/share/collection/799hW?logo=1&info=1&fs=1&vr=0&zoom=1&autop=10&autopalt=1&thumbs=1')} theme={{ colors: { primary: '#06BEE1' } }}>
-                VR Photo Tour
-              </Button>}
+              </Button>
             </View>
           </Card.Actions>
         </Card>
-
 
       </View>
     </ScrollView>
