@@ -69,7 +69,7 @@ const VirtualTourScreen2 = ({ route, navigation }) => {
       uri: "https://www.timetravelturtle.com/wp-content/uploads/2015/01/Sri-Lanka-2014-679_feat.jpg",
     },
     {
-      uri: "https://www.srilankaeconomytours.com/wp-content/uploads/2016/11/horton-plains-national-park.jpg",
+      uri: "https://www.ceylonexpeditions.com/medias/media/big/153/4013494-orig-copy.jpg",
     },
     {
       uri: "https://cdn.shopify.com/s/files/1/1762/3971/products/LK7301A000-01-E-1280-720.jpg?v=1624074587",
