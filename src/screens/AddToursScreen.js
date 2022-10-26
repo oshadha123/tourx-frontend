@@ -26,6 +26,7 @@ const AddToursScreen = ({ navigation }) => {
     const [attractionId, setAttractionId] = useState(null);
     const [startId, setStartId] = useState(null);
     const [attractionTypeId, setAttractionTypeId] = useState([]);
+    const [image, setImage] = useState(null);
     const [value, setValue] = useState(null);
     const [value1, setValue1] = useState(null);
     const [value2, setValue2] = useState(null);
@@ -52,13 +53,39 @@ const AddToursScreen = ({ navigation }) => {
 
     const choosePhotoFromDevice = () => {
         ImagePicker.openPicker({
-            cropping: false,
-            multiple: true,
-            maxFiles: 5,
-            minFiles: 5,
-        }).then(images => {
-            console.log('Images : ', images);
+            width: 500,
+            height: 500,
+            cropping: true,
+            compressImageQuality: 0.7
+        }).then(image => {
+            setImage(image.path);
+            const uri = image.path;
+            const type = image.mime;
+            const name = image.path.split(".")[1];
+            const source = { uri, type, name }
+            handleUpload(source);
         }).catch(e => console.log(e));
+    }
+
+    const handleUpload = (image) => {
+        const data = new FormData()
+        data.append('file', image)
+        data.append('upload_preset', 'tourxApp')
+        data.append('cloud_name', 'tourx')
+
+        fetch("https://api.cloudinary.com/v1_1/tourx/image/upload", {
+
+            method: 'POST',
+            body: data
+
+        }).then(res => res.json()).
+            then(data => {
+                setImage(data.url);
+                console.log("Image URL : ", data.url);
+            })
+            .catch(e => {
+                console.log(`Uploading error ${e}`)
+            })
     }
 
     return (
