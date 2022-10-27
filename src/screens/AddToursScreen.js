@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import InputField from '../components/InputField'
@@ -8,8 +8,22 @@ import { Dropdown, MultiSelect } from 'react-native-element-dropdown';
 import UploadImgSVG from '../assets/images/misc/uploadimg.svg';
 import { Checkbox } from 'react-native-paper';
 import { Appbar } from 'react-native-paper';
+import { add } from 'react-native-reanimated';
+import { AuthContext } from '../context/AuthContext';
+import { BASE_URL } from "../config";
+
+import axios from "axios";
 
 const AddToursScreen = ({ navigation }) => {
+
+    const { userInfo } = useContext(AuthContext);
+    const { userToken } = useContext(AuthContext);
+    const token = {
+
+        headers: {
+            authorization: "Bearer " + userToken
+        }
+    }
 
     const attractions = [{ label: 'Bomuru Ella', value1: 1 }, { label: 'Hortain Plains', value1: 2 }, { label: 'Dunhinda Falls', value1: 3 }, { label: 'Ravana Falls', value1: 4 }, { label: 'Sigiriya', value1: 5 }, { label: 'Bopath Ella', value1: 6 }];
     const paths = [{ label: 'Path to Maskeliya', value: 1 }, { label: 'Path to Riverston', value: 2 }, { label: 'Path to Pitawala Pathana', value: 3 }, { label: 'Path to Kuruwita', value: 4 }, { label: 'Path to Mandaram Nuwara', value: 5 }, { label: 'Path to Meemure', value: 6 }];
@@ -32,9 +46,36 @@ const AddToursScreen = ({ navigation }) => {
     const [value2, setValue2] = useState(null);
 
     const [isFocus, setIsFocus] = useState(false);
+    let check = 0;
+
+    const add = (tourName, description, cost, days, nights, start, destination, hiddenPlace, vrUrl, photoPath, attractionType, attractionId) => {
+        axios.post(`${BASE_URL}/tour/add`, {
+
+            tourName,
+            description,
+            cost,
+            days,
+            nights,
+            start,
+            destination,
+            hiddenPlace,
+            vrUrl,
+            photoPath,
+            attractionType,
+            attractionId
+
+        }, token)
+            .then(res => {
+                console.log(res.data);
+
+            })
+            .catch(e => {
+
+                console.log(`Adding error ${e}`)
+            })
+    }
 
     const consoleWrite = () => {
-        let check = 0;
         if (checked == true) {
             check = 1;
         }
@@ -578,7 +619,7 @@ const AddToursScreen = ({ navigation }) => {
                     </ProgressStep>
                     <ProgressStep
                         label="Step 4"
-                        onSubmit={() => { alert('Tour will be created shortly!'); navigation.navigate("Home") }}
+                        onSubmit={() => { { add(tourName, tourDescription, tourCost, days, nights, startId, attractionId, check, vrURL, image, attractionTypeId, attractionId) }; alert('Tour will be created shortly!'); navigation.navigate("Home") }}
                         nextBtnStyle={styles.nextBtnStyle}
                         nextBtnTextStyle={styles.nextBtnTextStyle}
                         previousBtnStyle={styles.previousBtnStyle}
